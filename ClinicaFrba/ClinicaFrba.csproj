@@ -68,11 +68,29 @@
     <Compile Include="Abm Profesional\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Form1.cs">
+    <Compile Include="AbmRol\FormCrear.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\FormCrear.Designer.cs">
+      <DependentUpon>FormCrear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\FormElim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\FormElim.Designer.cs">
+      <DependentUpon>FormElim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\FormMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\FormMenu.Designer.cs">
+      <DependentUpon>FormMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\FormModif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\FormModif.Designer.cs">
+      <DependentUpon>FormModif.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Atencion\Form1.cs">
       <SubType>Form</SubType>
@@ -124,6 +142,18 @@
     <Compile Include="Registro Resultado\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AbmRol\FormCrear.resx">
+      <DependentUpon>FormCrear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\FormElim.resx">
+      <DependentUpon>FormElim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\FormMenu.resx">
+      <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\FormModif.resx">
+      <DependentUpon>FormModif.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

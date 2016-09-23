@@ -45,6 +45,7 @@
             this.button1.TabIndex = 25;
             this.button1.Text = "Crear Rol";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
@@ -68,6 +69,7 @@
             this.button3.TabIndex = 23;
             this.button3.Text = "Modificar Rol";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -80,6 +82,7 @@
             this.button2.TabIndex = 22;
             this.button2.Text = "Eliminar Rol";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormMenu
             // 
@@ -93,6 +96,7 @@
             this.Controls.Add(this.button2);
             this.Name = "FormMenu";
             this.Text = "FormMenu";
+            this.Load += new System.EventHandler(this.FormMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

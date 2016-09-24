@@ -1,3 +1,4 @@
+DELETE FROM CHAMBA.Rol_X_Usuario
 DELETE FROM CHAMBA.Bonos
 DELETE FROM CHAMBA.Compra_Bonos
 DBCC CHECKIDENT ('CHAMBA.Compra_Bonos', RESEED, 0)
@@ -7,13 +8,20 @@ DELETE FROM CHAMBA.Tipo_Especialidad_X_Profesional
 DELETE FROM CHAMBA.Profesionales
 DELETE FROM CHAMBA.Pacientes
 DELETE FROM CHAMBA.Usuarios
+DBCC CHECKIDENT ('CHAMBA.Usuarios', RESEED, 0)
 DELETE FROM CHAMBA.Planes
 DELETE FROM CHAMBA.Tipo_Especialidad
 DELETE FROM CHAMBA.Especialidades
 DELETE FROM CHAMBA.Roles
+DBCC CHECKIDENT ('CHAMBA.Roles', RESEED, 0)
+
 
 /* CREACION DE ROLES */
-INSERT INTO CHAMBA.Roles (Rol_Id, Rol_Nombre, Rol_Estado) VALUES (1, 'Administrador', 1), (2, 'Profesional', 1), (3, 'Paciente', 1)
+
+INSERT INTO CHAMBA.Roles (Rol_Nombre, Rol_Estado) VALUES ('Administrador', 1), ('Profesional', 1), ('Paciente', 1)
+
+INSERT INTO CHAMBA.Usuarios (Usua_Usuario, Usua_Clave, Usua_Nombre, Usua_Intentos) VALUES ('admin', 'w23e', 'Administrador General', 0)
+INSERT INTO CHAMBA.Rol_X_Usuario(Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (1, 1)
 
 /* MIGRACION DE ESPECIALIDADES */
 
@@ -40,18 +48,18 @@ FROM gd_esquema.Maestra
 WHERE Plan_Med_Codigo IS NOT NULL
 
 
-/* DECLARACION DE CURSOR DE PACIENTES */
-
-DECLARE cursorPacientes CURSOR FOR SELECT DISTINCT(Paciente_DNI), Paciente_Nombre, Paciente_Apellido, Paciente_Direccion, Paciente_Telefono, Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo
-FROM gd_esquema.Maestra
-WHERE Paciente_DNI IS NOT NULL
-
-
 /* DECLARACION DE VARIABLES PARA CURSORES */
 
 DECLARE @DNI numeric(18,0), @Nombre varchar(255), @Apellido varchar(255), @Direccion varchar(255), @Telefono numeric(18,0), @Mail varchar(255), @Fecha_Nac datetime
 DECLARE @Plan numeric(18,0)
-DECLARE @Existe INT
+DECLARE @Existe numeric(18,0)
+
+/* DECLARACION DE CURSOR DE PACIENTES */
+
+DECLARE cursorPacientes CURSOR FOR SELECT DISTINCT Paciente_DNI, Paciente_Nombre, Paciente_Apellido, Paciente_Direccion, Paciente_Telefono, Paciente_Mail, Paciente_Fecha_Nac, Plan_Med_Codigo
+FROM gd_esquema.Maestra
+WHERE Paciente_DNI IS NOT NULL
+
 
 /* MIGRACION DE PACIENTES */
 
@@ -60,13 +68,20 @@ FETCH NEXT FROM cursorPacientes INTO @DNI, @Nombre, @Apellido, @Direccion, @Tele
 WHILE @@FETCH_STATUS=0
 BEGIN
 
-SELECT @Existe = COUNT(*) FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
+SET @Existe = NULL
 
-IF (@Existe = 0)
-	INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo)
-	VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M')
+SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 
-INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Plan) VALUES (@DNI, @Plan)
+IF (@Existe IS NULL) 
+	BEGIN
+		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
+		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, @DNI, 0)
+		SET @Existe = @@IDENTITY
+	END
+
+INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Plan) VALUES (@Existe, @Plan)
+
+INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, 3)
 
 FETCH NEXT FROM cursorPacientes INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, @Plan
 END
@@ -75,7 +90,7 @@ DEALLOCATE cursorPacientes
 
 /* DECLARACION DE CURSOR DE PROFESIONALES */
 
-DECLARE cursorMedicos CURSOR FOR SELECT DISTINCT(Medico_DNI), Medico_Nombre, Medico_Apellido, Medico_Direccion, Medico_Telefono, Medico_Mail, Medico_Fecha_Nac
+DECLARE cursorMedicos CURSOR FOR SELECT DISTINCT Medico_DNI, Medico_Nombre, Medico_Apellido, Medico_Direccion, Medico_Telefono, Medico_Mail, Medico_Fecha_Nac
 FROM gd_esquema.Maestra
 WHERE Medico_DNI IS NOT NULL
 
@@ -87,13 +102,20 @@ FETCH NEXT FROM cursorMedicos INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefo
 WHILE @@FETCH_STATUS=0
 BEGIN
 
-SELECT @Existe = COUNT(*) FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
+SET @Existe = NULL
 
-IF (@Existe = 0)
-	INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo)
-	VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M')
+SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 
-INSERT INTO CHAMBA.Profesionales (Prof_Usuario) VALUES (@DNI)
+IF (@Existe IS NULL)
+	BEGIN
+		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
+		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, @DNI, 0)
+		SET @Existe = @@IDENTITY
+	END
+
+INSERT INTO CHAMBA.Profesionales (Prof_Usuario) VALUES (@Existe)
+
+INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, 2)
 
 
 FETCH NEXT FROM cursorMedicos INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac
@@ -105,7 +127,7 @@ DEALLOCATE cursorMedicos
 /* MIGRACION DE TIPO_ESPECIALIDAD_X_PROFESIONAL */
 
 INSERT INTO CHAMBA.Tipo_Especialidad_X_Profesional (Tipo_Espec_X_Pof_Tipo_Especialidad, Tipo_Espec_X_Prof_Profesional)
-SELECT CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0)), Medico_DNI FROM
+SELECT CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0)), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI) FROM
 (SELECT DISTINCT Especialidad_Codigo, Tipo_Especialidad_Codigo, Medico_DNI
 FROM gd_esquema.Maestra
 WHERE Tipo_Especialidad_Codigo IS NOT NULL) AS S1
@@ -114,7 +136,7 @@ WHERE Tipo_Especialidad_Codigo IS NOT NULL) AS S1
 /* MIGRACION DE TURNOS */
 
 INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Fecha, Turn_Paciente, Turn_Profesional)
-SELECT DISTINCT Turno_Numero, Turno_Fecha, Paciente_Dni, Medico_DNI
+SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI)
 FROM gd_esquema.Maestra
 WHERE Turno_Numero IS NOT NULL
 
@@ -130,6 +152,18 @@ WHERE Consulta_Sintomas IS NOT NULL
 /* MIGRACION DE COMPRA DE BONOS */
 
 INSERT INTO CHAMBA.Compra_Bonos(Comp_Bono_Fecha, Comp_Bono_Paciente, Comp_Bono_Plan)
-SELECT DISTINCT Compra_Bono_Fecha, Paciente_DNI, Plan_Med_Codigo
+SELECT DISTINCT Compra_Bono_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), Plan_Med_Codigo
 FROM gd_esquema.Maestra
 WHERE Compra_Bono_Fecha IS NOT NULL
+
+/* MIGRACION DE BONOS */
+
+INSERT INTO CHAMBA.Bonos(Bono_Compra, Bono_Numero, Bono_Valor, Bono_Fecha_Impresion)
+SELECT DISTINCT (SELECT Comp_Bono_Id FROM CHAMBA.Compra_Bonos WHERE Comp_Bono_Fecha = Compra_Bono_Fecha AND Comp_Bono_Paciente = (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI) AND Comp_Bono_Plan = Plan_Med_Codigo), Bono_Consulta_Numero, Plan_Med_Precio_Bono_Consulta, Bono_Consulta_Fecha_Impresion
+FROM gd_esquema.Maestra
+WHERE Compra_Bono_Fecha IS NOT NULL
+
+UPDATE CHAMBA.Bonos SET Bono_Turno_Uso = i.Turno_Numero, Bono_Paciente_Uso = (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = i.Paciente_DNI)
+FROM 
+	(SELECT Turno_Numero, Paciente_DNI, Bono_Consulta_Numero FROM gd_esquema.Maestra) AS i 
+WHERE CHAMBA.Bonos.Bono_Numero = i.Bono_Consulta_Numero 

@@ -35,7 +35,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblResultado = new System.Windows.Forms.Label();
-            this.btnRegistrarse = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label6
@@ -53,7 +52,7 @@
             // 
             this.btnIniciar.BackColor = System.Drawing.Color.MintCream;
             this.btnIniciar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciar.Location = new System.Drawing.Point(53, 257);
+            this.btnIniciar.Location = new System.Drawing.Point(230, 257);
             this.btnIniciar.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(272, 62);
@@ -116,18 +115,6 @@
             this.lblResultado.TabIndex = 36;
             this.lblResultado.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btnRegistrarse
-            // 
-            this.btnRegistrarse.BackColor = System.Drawing.Color.MintCream;
-            this.btnRegistrarse.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarse.Location = new System.Drawing.Point(407, 257);
-            this.btnRegistrarse.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRegistrarse.Name = "btnRegistrarse";
-            this.btnRegistrarse.Size = new System.Drawing.Size(272, 62);
-            this.btnRegistrarse.TabIndex = 3;
-            this.btnRegistrarse.Text = "Registrarse";
-            this.btnRegistrarse.UseVisualStyleBackColor = false;
-            // 
             // FormLogin
             // 
             this.AcceptButton = this.btnIniciar;
@@ -135,7 +122,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(732, 345);
-            this.Controls.Add(this.btnRegistrarse);
             this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnIniciar);
@@ -161,7 +147,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblResultado;
-        private System.Windows.Forms.Button btnRegistrarse;
     }
 }
 

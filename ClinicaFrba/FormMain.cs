@@ -48,7 +48,7 @@ namespace ClinicaFrba
 
             if (tabla.Rows.Count == 1)
             {
-                lblUsuario.Text = "Usuario: " + tabla.Rows[0]["Usua_Nombre"].ToString() + tabla.Rows[0]["Usua_Apellido"].ToString();
+                lblUsuario.Text = "Usuario: " + tabla.Rows[0]["Usua_Nombre"].ToString() + " " + tabla.Rows[0]["Usua_Apellido"].ToString();
             }
         }
 
@@ -92,7 +92,34 @@ namespace ClinicaFrba
         private void abrirABM(object sender, System.EventArgs e)
         {
             Button botonClickeado = sender as Button;
-            MessageBox.Show(botonClickeado.Tag.ToString());
+
+            switch ((int)botonClickeado.Tag)
+            {
+                case 1:
+                    //ABRIR ABM ROLES
+                    break;
+                case 2:
+                    //ABRIR ABM AFILIADOS
+                    break;
+                case 3:
+                    //ABRIR COMPRA BONOS
+                    break;
+                case 4:
+                    //ABRIR PEDIDO DE TURNOS
+                    break;
+                case 5:
+                    //ABRIR REGISTRO DE LLEGADA
+                    break;
+                case 6:
+                    //ABRIR REGISTRO DE RESULTADOS
+                    break;
+                case 7:
+                    //ABRIR CANCELACION DE TURNOS
+                    break;
+                case 8:
+                    //ABRIR ESTADISTICAS
+                    break;
+            }
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)

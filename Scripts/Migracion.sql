@@ -14,16 +14,32 @@ GO
 DELETE FROM CHAMBA.Planes
 DELETE FROM CHAMBA.Tipo_Especialidad
 DELETE FROM CHAMBA.Especialidades
+DELETE FROM CHAMBA.Funcionalidad_X_Rol
+DELETE FROM CHAMBA.Funcionalidades
 DELETE FROM CHAMBA.Roles
 DBCC CHECKIDENT ('CHAMBA.Roles', RESEED, 0)
 GO
 /* CREACION DE ROLES */
 
-INSERT INTO CHAMBA.Roles (Rol_Nombre, Rol_Estado) VALUES ('Administrador', 1), ('Profesional', 1), ('Paciente', 1)
+INSERT INTO CHAMBA.Roles (Rol_Nombre, Rol_Estado) VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
 
 INSERT INTO CHAMBA.Usuarios (Usua_Usuario, Usua_Clave, Usua_Nombre, Usua_Intentos) VALUES ('admin', 'w23e', 'Administrador General', 0)
 
-INSERT INTO CHAMBA.Rol_X_Usuario(Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES ((SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_Usuario = 'admin'), (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrador'))
+INSERT INTO CHAMBA.Rol_X_Usuario(Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES ((SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_Usuario = 'admin'), (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo'))
+
+/* CREACION DE FUNCIONALIDADES */
+INSERT INTO CHAMBA.Funcionalidades (Func_Id, Func_Descripcion) VALUES (1, 'Gestionar roles'), (2, 'Gestionar afiliados'), (3, 'Comprar bonos'), (4, 'Pedir turnos'), (5, 'Registrar llegada para atencion'), (6, 'Registrar resultado de atencion'), (7, 'Cancelar turnos'), (8, 'Estadisticas')
+
+/* ASIGNACION DE FUNCIONALIDADES A ROLES*/
+DECLARE @Rol numeric(18,0) = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo')
+
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 5), (@Rol, 8)
+
+SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Profesional')
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 6), (@Rol, 7)
+
+SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Afiliado')
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 3), (@Rol, 4), (@Rol, 7)
 
 /* MIGRACION DE ESPECIALIDADES */
 
@@ -55,7 +71,6 @@ WHERE Plan_Med_Codigo IS NOT NULL
 DECLARE @DNI numeric(18,0), @Nombre varchar(255), @Apellido varchar(255), @Direccion varchar(255), @Telefono numeric(18,0), @Mail varchar(255), @Fecha_Nac datetime
 DECLARE @Plan numeric(18,0)
 DECLARE @Existe numeric(18,0)
-DECLARE @Rol numeric(18,0)
 
 /* DECLARACION DE CURSOR DE PACIENTES */
 
@@ -66,7 +81,7 @@ WHERE Paciente_DNI IS NOT NULL
 
 /* MIGRACION DE PACIENTES */
 
-SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Paciente')
+SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Afiliado')
 
 OPEN cursorPacientes
 FETCH NEXT FROM cursorPacientes INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, @Plan
@@ -86,7 +101,7 @@ IF (@Existe IS NULL)
 
 INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Plan) VALUES (@Existe, @Plan)
 
-INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, 2)
+INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, @Rol)
 
 FETCH NEXT FROM cursorPacientes INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, @Plan
 END
@@ -122,7 +137,7 @@ IF (@Existe IS NULL)
 
 INSERT INTO CHAMBA.Profesionales (Prof_Usuario) VALUES (@Existe)
 
-INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, 1)
+INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, @Rol)
 
 
 FETCH NEXT FROM cursorMedicos INTO @DNI, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac

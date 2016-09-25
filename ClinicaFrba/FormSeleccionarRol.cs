@@ -24,6 +24,15 @@ namespace ClinicaFrba
         private void FormSeleccionarRol_Load(object sender, EventArgs e)
         {
             conexion.Open();
+
+            cargarRoles();            
+
+            conexion.Close();
+        }
+
+        private void cargarRoles()
+        {
+
             String query = "SELECT Rol_Id, Rol_Nombre FROM CHAMBA.Roles JOIN CHAMBA.Rol_X_Usuario ON Rol_Id = Rol_X_Usua_Rol WHERE Rol_Estado = 1 AND Rol_X_Usua_Usuario = '" + Configuraciones.usuario + "'";
 
             SqlCommand listar = new SqlCommand(query, conexion);
@@ -36,8 +45,6 @@ namespace ClinicaFrba
             cboRol.DataSource = tabla;
             cboRol.DisplayMember = "Rol_Nombre";
             cboRol.ValueMember = "Rol_Id";
-
-            conexion.Close();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

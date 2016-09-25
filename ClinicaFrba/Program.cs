@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClinicaFrba
-{
+{    
+
     static class Program
     {
         /// <summary>

@@ -28,9 +28,9 @@ namespace ClinicaFrba
         {
             lblResultado.Text = "Iniciando sesion...";
             modificarEstadoControles(false);
-            if (txtUsuario.Text != "" && txtClave.Text != "")
+            if (validarCamposVacios())
             {
-                
+
                 conexion.Open();
                 String query = "SELECT Usua_Id, Usua_Clave, Usua_Intentos FROM CHAMBA.Usuarios where Usua_Usuario = '" + txtUsuario.Text + "'";
 
@@ -66,10 +66,12 @@ namespace ClinicaFrba
                         }
                     }
                     establecerIntentosLogin(intentos++);
-                }else{
+                }
+                else
+                {
                     lblResultado.Text = "El usuario no existe";
                 }
-                
+
                 conexion.Close();
             }
             else
@@ -96,7 +98,23 @@ namespace ClinicaFrba
 
         private void establecerIntentosLogin(int intentos)
         {
-            
+
         }
+
+        private Boolean validarCamposVacios()
+        {
+            if (string.IsNullOrEmpty(txtUsuario.Text) | string.IsNullOrEmpty(txtClave.Text))
+            {
+                String mensaje = "Los campos Username y Password son obligatorios";
+                String caption = "Ingrese Username y Password";
+                MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
+                return false;
+            }
+            else
+            {
+
+               return true;
+            }
+       }
     }
 }

@@ -26,48 +26,50 @@ namespace ClinicaFrba
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
+
             lblResultado.Text = "Iniciando sesion...";
             modificarEstadoControles(false);
             if (txtUsuario.Text != "" && txtClave.Text != "")
             {
                 
                 conexion.Open();
-                String query = "SELECT Usua_Id, Usua_Clave, Usua_Intentos FROM CHAMBA.Usuarios where Usua_Usuario = '" + txtUsuario.Text + "'";
 
-                SqlCommand listar = new SqlCommand(query, conexion);
+                SqlCommand verificarLogin = new SqlCommand("CHAMBA.VerificarLogin", conexion);
 
-                DataTable tabla = new DataTable();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = listar;
-                adapter.Fill(tabla);
+                verificarLogin.CommandType = CommandType.StoredProcedure;
+                verificarLogin.Parameters.Add("@Usuario", SqlDbType.VarChar).Value = txtUsuario.Text;
+                verificarLogin.Parameters.Add("@Clave", SqlDbType.VarChar).Value = txtClave.Text;
+                verificarLogin.Parameters.Add("@MaxIntentos", SqlDbType.Int).Value = Configuraciones.cantMaxIntentosLogin;
 
-                if (tabla.Rows.Count == 1)
+                var resultado = verificarLogin.Parameters.Add("@Resultado", SqlDbType.Int);
+                var idUsuario = verificarLogin.Parameters.Add("@Id", SqlDbType.Int);
+                resultado.Direction = ParameterDirection.Output;
+                idUsuario.Direction = ParameterDirection.Output;
+
+                SqlDataReader data = verificarLogin.ExecuteReader();
+                data.Close();
+
+                switch (Convert.ToInt32(resultado.Value))
                 {
-                    int intentos = Convert.ToInt32(tabla.Rows[0]["Usua_Intentos"]);
-
-                    if (intentos > Configuraciones.cantMaxIntentosLogin)
-                    {
+                    /* 0: El usuario no existe
+                     * 1: Intentos excedidos
+                     * 2: Clave incorrecta
+                     * 3: Login exitoso
+                    */
+                    case 0: case 2:
+                        lblResultado.Text = "Los datos ingresados son incorrectos";
+                        break;
+                    case 1:
                         lblResultado.Text = "Intentos fallidos excedidos";
-                    }
-                    else
-                    {
-                        if (txtClave.Text == tabla.Rows[0]["Usua_Clave"].ToString())
-                        {
-                            Configuraciones.usuario = Convert.ToInt32(tabla.Rows[0]["Usua_Id"]);
-                            lblResultado.Text = "";
-                            establecerIntentosLogin(0);
-                            FormSeleccionarRol form = new FormSeleccionarRol();
-                            form.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            lblResultado.Text = "La clave es incorrecta";
-                        }
-                    }
-                    establecerIntentosLogin(intentos++);
-                }else{
-                    lblResultado.Text = "El usuario no existe";
+                        break;
+                    case 3:
+                        Configuraciones.usuario = Convert.ToInt32(idUsuario.Value);
+                        lblResultado.Text = "";
+                        FormSeleccionarRol form = new FormSeleccionarRol();
+                        form.Show();
+                        this.Hide();
+                        break;
+
                 }
                 
                 conexion.Close();
@@ -92,11 +94,6 @@ namespace ClinicaFrba
         {
             txtUsuario.Text = "";
             txtClave.Text = "";
-        }
-
-        private void establecerIntentosLogin(int intentos)
-        {
-            
         }
     }
 }

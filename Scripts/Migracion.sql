@@ -23,7 +23,7 @@ GO
 
 INSERT INTO CHAMBA.Roles (Rol_Nombre, Rol_Estado) VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
 
-INSERT INTO CHAMBA.Usuarios (Usua_Usuario, Usua_Clave, Usua_Nombre, Usua_Intentos) VALUES ('admin', 'w23e', 'Administrador General', 0)
+INSERT INTO CHAMBA.Usuarios (Usua_Usuario, Usua_Clave, Usua_Nombre, Usua_Intentos) VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 'Administrador General', 0)
 
 INSERT INTO CHAMBA.Rol_X_Usuario(Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES ((SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_Usuario = 'admin'), (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo'))
 
@@ -95,7 +95,7 @@ SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 IF (@Existe IS NULL) 
 	BEGIN
 		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
-		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, @DNI, 0)
+		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
 		SET @Existe = @@IDENTITY
 	END
 
@@ -131,7 +131,7 @@ SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 IF (@Existe IS NULL)
 	BEGIN
 		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
-		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, @DNI, 0)
+		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
 		SET @Existe = @@IDENTITY
 	END
 

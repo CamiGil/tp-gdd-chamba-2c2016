@@ -29,9 +29,9 @@ namespace ClinicaFrba
 
             lblResultado.Text = "Iniciando sesion...";
             modificarEstadoControles(false);
-            if (txtUsuario.Text != "" && txtClave.Text != "")
+            if (validarCamposVacios())
             {
-                
+
                 conexion.Open();
 
                 SqlCommand verificarLogin = new SqlCommand("CHAMBA.VerificarLogin", conexion);
@@ -69,14 +69,10 @@ namespace ClinicaFrba
                         form.Show();
                         this.Hide();
                         break;
-
                 }
-                
                 conexion.Close();
-            }
-            else
-            {
-                lblResultado.Text = "Complete los datos solicitados";
+            }else{
+               lblResultado.Text = "Complete los datos solicitados";
             }
             limpiarDatosDeControles();
             modificarEstadoControles(true);
@@ -94,6 +90,20 @@ namespace ClinicaFrba
         {
             txtUsuario.Text = "";
             txtClave.Text = "";
+        }
+
+        private void establecerIntentosLogin(int intentos)
+        {
+
+        }
+
+        private Boolean validarCamposVacios()
+        {
+            if (!string.IsNullOrEmpty(txtUsuario.Text) || !string.IsNullOrEmpty(txtClave.Text))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

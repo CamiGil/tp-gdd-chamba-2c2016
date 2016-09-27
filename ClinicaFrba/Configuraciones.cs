@@ -14,5 +14,10 @@ namespace ClinicaFrba
         public static int cantMaxIntentosLogin = 3;
         public static int usuario;
         public static int rol;
+
+        public static void validarCierreVentana(Object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            if (System.Windows.Forms.Application.OpenForms.Count == 1 && formLogin.Visible == false) System.Windows.Forms.Application.Exit();
+        }
     }
 }

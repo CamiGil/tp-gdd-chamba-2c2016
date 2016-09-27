@@ -21,6 +21,7 @@ namespace ClinicaFrba
         {
             InitializeComponent();
             conexion = new SqlConnection(@Configuraciones.datosConexion);
+            this.FormClosed += Configuraciones.validarCierreVentana;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -123,9 +124,9 @@ namespace ClinicaFrba
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
-            this.Close();
+        {            
             Configuraciones.formLogin.Show();
+            this.Close();
         }
 
     }

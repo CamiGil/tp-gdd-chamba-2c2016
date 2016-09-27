@@ -19,6 +19,7 @@ namespace ClinicaFrba
         {
             InitializeComponent();
             conexion = new SqlConnection(@Configuraciones.datosConexion);
+            this.FormClosed += Configuraciones.validarCierreVentana;
         }
 
         private void FormSeleccionarRol_Load(object sender, EventArgs e)

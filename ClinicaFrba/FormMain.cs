@@ -101,6 +101,8 @@ namespace ClinicaFrba
                     break;
                 case 2:
                     //ABRIR ABM AFILIADOS
+                    Abm_Afiliado.FormAfiliados form = new Abm_Afiliado.FormAfiliados();
+                    form.ShowDialog();
                     break;
                 case 3:
                     //ABRIR COMPRA BONOS

@@ -79,7 +79,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormSeleccionarRol";
-            this.Text = "Seleccion de rol";
+            this.Text = "Hospital - Seleccion de rol";
             this.Load += new System.EventHandler(this.FormSeleccionarRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

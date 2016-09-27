@@ -132,7 +132,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormLogin";
-            this.Text = "Login";
+            this.Text = "Hospital - Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

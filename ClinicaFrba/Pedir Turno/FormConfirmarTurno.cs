@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Pedir_Turno
 {
-    public partial class Form1 : Form
+    public partial class FormConfirmarTurno : Form
     {
-        public Form1()
+        public FormConfirmarTurno()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

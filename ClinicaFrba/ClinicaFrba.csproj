@@ -141,11 +141,23 @@
     <Compile Include="Listados\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.cs">
+    <Compile Include="Pedir Turno\FormConfirmarTurno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pedir Turno\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Pedir Turno\FormConfirmarTurno.Designer.cs">
+      <DependentUpon>FormConfirmarTurno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pedir Turno\FormIngresarBono.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedir Turno\FormIngresarBono.Designer.cs">
+      <DependentUpon>FormIngresarBono.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pedir Turno\FormSeleccionProf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pedir Turno\FormSeleccionProf.Designer.cs">
+      <DependentUpon>FormSeleccionProf.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -196,6 +208,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionarRol.resx">
       <DependentUpon>FormSeleccionarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\FormConfirmarTurno.resx">
+      <DependentUpon>FormConfirmarTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\FormIngresarBono.resx">
+      <DependentUpon>FormIngresarBono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pedir Turno\FormSeleccionProf.resx">
+      <DependentUpon>FormSeleccionProf.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

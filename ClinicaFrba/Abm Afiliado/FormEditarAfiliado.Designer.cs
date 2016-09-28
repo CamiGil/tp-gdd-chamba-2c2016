@@ -53,6 +53,8 @@
             this.cboEstadoCivil = new System.Windows.Forms.ComboBox();
             this.nudHijos = new System.Windows.Forms.NumericUpDown();
             this.cboPlan = new System.Windows.Forms.ComboBox();
+            this.btnHijo = new System.Windows.Forms.Button();
+            this.btnConyuge = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHijos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,7 +229,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(144, 224);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(176, 41);
-            this.btnGuardar.TabIndex = 12;
+            this.btnGuardar.TabIndex = 14;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -240,7 +242,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(468, 224);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(176, 41);
-            this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -314,6 +316,28 @@
             this.cboPlan.Size = new System.Drawing.Size(182, 21);
             this.cboPlan.TabIndex = 11;
             // 
+            // btnHijo
+            // 
+            this.btnHijo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnHijo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHijo.Location = new System.Drawing.Point(597, 164);
+            this.btnHijo.Name = "btnHijo";
+            this.btnHijo.Size = new System.Drawing.Size(159, 26);
+            this.btnHijo.TabIndex = 13;
+            this.btnHijo.Text = "Agregar hijo";
+            this.btnHijo.UseVisualStyleBackColor = true;
+            // 
+            // btnConyuge
+            // 
+            this.btnConyuge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnConyuge.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConyuge.Location = new System.Drawing.Point(411, 164);
+            this.btnConyuge.Name = "btnConyuge";
+            this.btnConyuge.Size = new System.Drawing.Size(160, 26);
+            this.btnConyuge.TabIndex = 12;
+            this.btnConyuge.Text = "Agregar conyuge";
+            this.btnConyuge.UseVisualStyleBackColor = true;
+            // 
             // FormEditarAfiliado
             // 
             this.AcceptButton = this.btnGuardar;
@@ -322,6 +346,8 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(789, 277);
+            this.Controls.Add(this.btnConyuge);
+            this.Controls.Add(this.btnHijo);
             this.Controls.Add(this.cboPlan);
             this.Controls.Add(this.nudHijos);
             this.Controls.Add(this.cboEstadoCivil);
@@ -385,5 +411,7 @@
         private System.Windows.Forms.ComboBox cboEstadoCivil;
         private System.Windows.Forms.NumericUpDown nudHijos;
         private System.Windows.Forms.ComboBox cboPlan;
+        private System.Windows.Forms.Button btnHijo;
+        private System.Windows.Forms.Button btnConyuge;
     }
 }

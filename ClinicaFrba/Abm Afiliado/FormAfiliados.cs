@@ -84,7 +84,20 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Eliminar afiliado " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            
+            DialogResult dialogResult = MessageBox.Show("Está seguro que desea eliminar al afiliado", "Hospital", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                conexion.Open();
+                SqlCommand cargar = new SqlCommand("CHAMBA.EliminarAfiliado", conexion);
+                cargar.CommandType = CommandType.StoredProcedure;
+                cargar.Parameters.Add("@Afiliado", SqlDbType.Int).Value = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                cargar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
+                cargar.ExecuteNonQuery();
+                conexion.Close();                
+                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+                MessageBox.Show("Afiliado eliminado exitosamente");
+            }
         }
 
         private void btnAñadir_Click(object sender, EventArgs e)

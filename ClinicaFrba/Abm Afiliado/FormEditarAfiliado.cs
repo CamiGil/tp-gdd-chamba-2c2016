@@ -15,6 +15,9 @@ namespace ClinicaFrba.Abm_Afiliado
     {
 
         SqlConnection conexion;
+        int afiliado = 0;
+        DataGridViewSelectedRowCollection seleccionado;
+
         public FormEditarAfiliado()
         {
             InitializeComponent();
@@ -32,6 +35,8 @@ namespace ClinicaFrba.Abm_Afiliado
             cboPlan.DataSource = tabla;
             cboPlan.DisplayMember = "Plan_Descripcion";
             cboPlan.ValueMember = "Plan_Codigo";
+
+            dtpNacimiento.Text = Configuraciones.fecha;
         }
 
         private void FormEditarAfiliado_Load(object sender, EventArgs e)
@@ -41,6 +46,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
         public void cargarDatos(int numeroAfiliado)
         {
+            afiliado = numeroAfiliado;
             String query = "SELECT * FROM CHAMBA.Pacientes JOIN CHAMBA.Usuarios ON Paci_Usuario = Usua_Id JOIN CHAMBA.Planes ON Plan_Codigo = Paci_Plan WHERE Paci_Numero = " + numeroAfiliado;
 
             SqlCommand listar = new SqlCommand(query, conexion);
@@ -74,7 +80,86 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("GUADAR DATOS");
+            if (camposCompletos())
+            {
+                if (afiliado == 0)
+                {
+                    MessageBox.Show("Alta sin funcionamiento");
+                    return;
+                }
+
+                conexion.Open();
+                SqlCommand guardar;
+                guardar = new SqlCommand("CHAMBA.ModificarAfiliado", conexion);  
+                guardar.CommandType = CommandType.StoredProcedure;
+                guardar.Parameters.Add("@Afiliado", SqlDbType.Int).Value = afiliado;
+                guardar.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = txtNombre.Text;
+                guardar.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = txtApellido.Text;
+                guardar.Parameters.Add("@TipoDocumento", SqlDbType.Int).Value = cboTipoDocumento.SelectedIndex;
+                guardar.Parameters.Add("@Documento", SqlDbType.Int).Value = txtDocumento.Text;
+                guardar.Parameters.Add("@Domicilio", SqlDbType.VarChar).Value = txtDomicilio.Text;
+                guardar.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = txtTelefono.Text;
+                guardar.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
+                guardar.Parameters.Add("@FechaNac", SqlDbType.DateTime).Value = dtpNacimiento.Text;
+                guardar.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = cboSexo.Text;
+                guardar.Parameters.Add("@EstadoCivil", SqlDbType.Int).Value = cboEstadoCivil.SelectedIndex;
+                guardar.Parameters.Add("@CantHijos", SqlDbType.Int).Value = nudHijos.Value;
+                guardar.Parameters.Add("@Plan", SqlDbType.Int).Value = cboPlan.SelectedValue;
+                guardar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
+                guardar.ExecuteNonQuery();
+                conexion.Close();
+                MessageBox.Show("Datos guardados exitosamente");
+                this.Close();
+            }
+        }
+
+        private bool camposCompletos()
+        {
+            if (txtNombre.Text == "")
+            {
+                MessageBox.Show("Complete el nombre");
+            }
+            else if(txtApellido.Text == "")
+            {
+                MessageBox.Show("Complete el apellido");
+            }
+            else if (cboTipoDocumento.Text == "")
+            {
+                MessageBox.Show("Complete el tipo de documento");
+            }
+            else if (txtDocumento.Text == "")
+            {
+                MessageBox.Show("Complete el documento");
+            }
+            else if (txtDomicilio.Text == "")
+            {
+                MessageBox.Show("Complete el domicilio");
+            }
+            else if (txtTelefono.Text == "")
+            {
+                MessageBox.Show("Complete el telefono");
+            }
+            else if (txtEmail.Text == "")
+            {
+                MessageBox.Show("Complete el email");
+            }
+            else if (cboSexo.Text == "")
+            {
+                MessageBox.Show("Complete el sexo");
+            }
+            else if (cboEstadoCivil.Text == "")
+            {
+                MessageBox.Show("Complete el estado civil");
+            }
+            else if (cboPlan.Text == "")
+            {
+                MessageBox.Show("Complete el plan medico");
+            }
+            else
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

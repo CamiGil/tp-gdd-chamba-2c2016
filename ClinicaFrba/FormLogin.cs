@@ -54,15 +54,19 @@ namespace ClinicaFrba
                     /* 0: El usuario no existe
                      * 1: Intentos excedidos
                      * 2: Clave incorrecta
-                     * 3: Login exitoso
+                     * 3: No hay roles disponibles
+                     * 4: Login exitoso
                     */
                     case 0: case 2:
                         lblResultado.Text = "Los datos ingresados son incorrectos";
                         break;
+                    case 3:
+                        lblResultado.Text = "No tiene roles asignados";
+                        break;
                     case 1:
                         lblResultado.Text = "Intentos fallidos excedidos";
                         break;
-                    case 3:
+                    case 4:
                         Configuraciones.usuario = Convert.ToInt32(idUsuario.Value);
                         lblResultado.Text = "";
                         FormSeleccionarRol form = new FormSeleccionarRol();

@@ -34,7 +34,7 @@ namespace ClinicaFrba
         private void cargarRoles()
         {
 
-            String query = "SELECT Rol_Id, Rol_Nombre FROM CHAMBA.Roles JOIN CHAMBA.Rol_X_Usuario ON Rol_Id = Rol_X_Usua_Rol WHERE Rol_Estado = 1 AND Rol_X_Usua_Usuario = '" + Configuraciones.usuario + "'";
+            String query = "SELECT Rol_Id, Rol_Nombre FROM CHAMBA.RolesActivos(" + Configuraciones.usuario + ")";
 
             SqlCommand listar = new SqlCommand(query, conexion);
 

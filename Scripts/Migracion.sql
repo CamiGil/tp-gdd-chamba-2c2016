@@ -95,11 +95,11 @@ SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 IF (@Existe IS NULL) 
 	BEGIN
 		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
-		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
+		VALUES (@DNI, 0, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
 		SET @Existe = @@IDENTITY
 	END
 
-INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Plan) VALUES (@Existe, @Existe, @Plan)
+INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Estado_Civil, Paci_Cant_Hijos, Paci_Plan) VALUES (@Existe, @Existe, 0, 0, @Plan)
 
 INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, @Rol)
 
@@ -131,7 +131,7 @@ SELECT @Existe = Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = @DNI
 IF (@Existe IS NULL)
 	BEGIN
 		INSERT INTO CHAMBA.Usuarios (Usua_DNI, Usua_TipoDNI, Usua_Nombre, Usua_Apellido, Usua_Direccion, Usua_Telefono, Usua_Mail, Usua_Fecha_Nac, Usua_Sexo, Usua_Usuario, Usua_Clave, Usua_Intentos)
-		VALUES (@DNI, 1, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
+		VALUES (@DNI, 0, @Nombre, @Apellido, @Direccion, @Telefono, @Mail, @Fecha_Nac, 'M', @Mail, HASHBYTES('SHA2_256', CAST(@DNI AS VARCHAR(18))), 0)
 		SET @Existe = @@IDENTITY
 	END
 

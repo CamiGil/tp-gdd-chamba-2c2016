@@ -77,7 +77,9 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Editar afiliado " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            FormEditarAfiliado form = new FormEditarAfiliado();
+            form.cargarDatos(int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+            form.ShowDialog();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -87,7 +89,8 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void btnAñadir_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Añadir");
+            FormEditarAfiliado form = new FormEditarAfiliado();
+            form.ShowDialog();
         }
     }
 }

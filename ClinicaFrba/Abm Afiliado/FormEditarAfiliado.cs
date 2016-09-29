@@ -98,7 +98,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 guardar.Parameters.Add("@TipoDocumento", SqlDbType.Int).Value = cboTipoDocumento.SelectedIndex;
                 guardar.Parameters.Add("@Documento", SqlDbType.Int).Value = txtDocumento.Text;
                 guardar.Parameters.Add("@Domicilio", SqlDbType.VarChar).Value = txtDomicilio.Text;
-                guardar.Parameters.Add("@Telefono", SqlDbType.VarChar).Value = txtTelefono.Text;
+                guardar.Parameters.Add("@Telefono", SqlDbType.Int).Value = txtTelefono.Text;
                 guardar.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
                 guardar.Parameters.Add("@FechaNac", SqlDbType.DateTime).Value = dtpNacimiento.Text;
                 guardar.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = cboSexo.Text;
@@ -126,10 +126,14 @@ namespace ClinicaFrba.Abm_Afiliado
             else if (cboTipoDocumento.Text == "")
             {
                 MessageBox.Show("Complete el tipo de documento");
-            }
+            }            
             else if (txtDocumento.Text == "")
             {
                 MessageBox.Show("Complete el documento");
+            }
+            else if (!esNumerico(txtDocumento.Text))
+            {
+                MessageBox.Show("El documento debe contener solo numeros");
             }
             else if (txtDomicilio.Text == "")
             {
@@ -138,6 +142,10 @@ namespace ClinicaFrba.Abm_Afiliado
             else if (txtTelefono.Text == "")
             {
                 MessageBox.Show("Complete el telefono");
+            }
+            else if (!esNumerico(txtTelefono.Text))
+            {
+                MessageBox.Show("El telefono debe contener solo numeros");
             }
             else if (txtEmail.Text == "")
             {
@@ -160,6 +168,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 return true;
             }
             return false;
+        }
+
+        private bool esNumerico(String cadena)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(cadena, @"^\d+$");
         }
     }
 }

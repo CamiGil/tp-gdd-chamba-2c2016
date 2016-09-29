@@ -80,6 +80,7 @@ namespace ClinicaFrba.Abm_Afiliado
             FormEditarAfiliado form = new FormEditarAfiliado();
             form.cargarDatos(int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
             form.ShowDialog();
+            cargarAfiliados();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

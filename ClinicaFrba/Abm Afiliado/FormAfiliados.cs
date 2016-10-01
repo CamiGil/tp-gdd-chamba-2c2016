@@ -78,7 +78,8 @@ namespace ClinicaFrba.Abm_Afiliado
         private void btnEditar_Click(object sender, EventArgs e)
         {
             FormEditarAfiliado form = new FormEditarAfiliado();
-            form.cargarDatos(int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+            form.Tag = "Editar";
+            form.cargarDatos(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             form.ShowDialog();
             cargarAfiliados();
         }
@@ -92,7 +93,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 conexion.Open();
                 SqlCommand cargar = new SqlCommand("CHAMBA.EliminarAfiliado", conexion);
                 cargar.CommandType = CommandType.StoredProcedure;
-                cargar.Parameters.Add("@Afiliado", SqlDbType.Int).Value = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                cargar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 cargar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
                 cargar.ExecuteNonQuery();
                 conexion.Close();                
@@ -104,6 +105,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private void btnAñadir_Click(object sender, EventArgs e)
         {
             FormEditarAfiliado form = new FormEditarAfiliado();
+            form.Tag = "Agregar";
             form.ShowDialog();
         }
     }

@@ -103,7 +103,7 @@ IF (@Existe IS NULL)
 		SET @Existe = @@IDENTITY
 	END
 
-INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Estado_Civil, Paci_Cant_Hijos, Paci_Plan) VALUES (@Existe, @Existe, 0, 0, @Plan)
+INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Estado_Civil, Paci_Cant_Hijos, Paci_Plan) VALUES (@Existe, FORMAT(@Existe,'000000000#') + '01', 0, 0, @Plan)
 
 INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, @Rol)
 

@@ -50,12 +50,6 @@
     <Compile Include="Abm Afiliado\FormAfiliados.Designer.cs">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Afiliado\FormAgregarFamiliar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Afiliado\FormAgregarFamiliar.Designer.cs">
-      <DependentUpon>FormAgregarFamiliar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Afiliado\FormEditarAfiliado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,9 +175,6 @@
     </Compile>
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Afiliado\FormAgregarFamiliar.resx">
-      <DependentUpon>FormAgregarFamiliar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\FormEditarAfiliado.resx">
       <DependentUpon>FormEditarAfiliado.cs</DependentUpon>

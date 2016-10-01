@@ -15,8 +15,10 @@ namespace ClinicaFrba.Abm_Afiliado
     {
 
         SqlConnection conexion;
-        int afiliado = 0;
+        String afiliado;
         DataGridViewSelectedRowCollection seleccionado;
+        List<FormEditarAfiliado> afiliadosAsociados = new List<FormEditarAfiliado>();
+
 
         public FormEditarAfiliado()
         {
@@ -41,13 +43,17 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void FormEditarAfiliado_Load(object sender, EventArgs e)
         {
-
+            if (this.Tag.ToString() == "Conyuge" || this.Tag.ToString() == "Hijo")
+            {
+                this.btnConyuge.Visible = false;
+                this.btnHijo.Visible = false;
+            }
         }
 
-        public void cargarDatos(int numeroAfiliado)
+        public void cargarDatos(String numeroAfiliado)
         {
             afiliado = numeroAfiliado;
-            String query = "SELECT * FROM CHAMBA.Pacientes JOIN CHAMBA.Usuarios ON Paci_Usuario = Usua_Id JOIN CHAMBA.Planes ON Plan_Codigo = Paci_Plan WHERE Paci_Numero = " + numeroAfiliado;
+            String query = "SELECT * FROM CHAMBA.Pacientes JOIN CHAMBA.Usuarios ON Paci_Usuario = Usua_Id JOIN CHAMBA.Planes ON Plan_Codigo = Paci_Plan WHERE Paci_Numero = '" + numeroAfiliado + "'";
 
             SqlCommand listar = new SqlCommand(query, conexion);
 
@@ -82,35 +88,103 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (camposCompletos())
             {
-                if (afiliado == 0)
+                if (this.Tag.ToString() == "Hijo" || this.Tag.ToString() == "Conyuge")
                 {
-                    MessageBox.Show("Alta sin funcionamiento");
-                    return;
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    guardarDatos();
+                    MessageBox.Show("Datos guardados exitosamente");
+                    this.Close();
+                }
+                
+            }
+        }
+
+        private SqlCommand generarComandoSQL()
+        {
+            SqlCommand guardar;
+            guardar = new SqlCommand();
+            guardar.CommandType = CommandType.StoredProcedure;
+
+            guardar.CommandText = "CHAMBA.ModificarAfiliado";
+
+            guardar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = afiliado;
+            guardar.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = txtNombre.Text;
+            guardar.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = txtApellido.Text;
+            guardar.Parameters.Add("@TipoDocumento", SqlDbType.Int).Value = cboTipoDocumento.SelectedIndex;
+            guardar.Parameters.Add("@Documento", SqlDbType.Int).Value = txtDocumento.Text;
+            guardar.Parameters.Add("@Domicilio", SqlDbType.VarChar).Value = txtDomicilio.Text;
+            guardar.Parameters.Add("@Telefono", SqlDbType.Int).Value = txtTelefono.Text;
+            guardar.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
+            guardar.Parameters.Add("@FechaNac", SqlDbType.DateTime).Value = dtpNacimiento.Text;
+            guardar.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = cboSexo.Text;
+            guardar.Parameters.Add("@EstadoCivil", SqlDbType.Int).Value = cboEstadoCivil.SelectedIndex;
+            guardar.Parameters.Add("@CantHijos", SqlDbType.Int).Value = nudHijos.Value;
+            guardar.Parameters.Add("@Plan", SqlDbType.Int).Value = cboPlan.SelectedValue;
+            guardar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
+
+            return guardar;
+        }
+
+        private void guardarDatos()
+        {
+            conexion.Open();
+
+
+            if (this.Tag.ToString() == "Agregar")
+            {
+                SqlCommand nuevoIdPaciente = new SqlCommand("CHAMBA.ObtenerNuevoIdPaciente", conexion);
+                nuevoIdPaciente.CommandType = CommandType.StoredProcedure;
+
+                var nuevoId = nuevoIdPaciente.Parameters.Add("@id", SqlDbType.VarChar, 12);
+                nuevoId.Direction = ParameterDirection.Output;
+                SqlDataReader data = nuevoIdPaciente.ExecuteReader();
+                data.Close();
+                afiliado = nuevoId.Value.ToString();
+            }
+
+
+            SqlTransaction transaccion;
+
+            transaccion = conexion.BeginTransaction("Transaccion");
+
+            SqlCommand comando = generarComandoSQL();
+            comando.Connection = conexion;
+            comando.Transaction = transaccion;
+
+
+            int i = 3;
+            foreach (FormEditarAfiliado formAfiliado in afiliadosAsociados)
+            {
+                formAfiliado.afiliado = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
+                if (formAfiliado.Tag.ToString() == "Conyuge")
+                {
+                    formAfiliado.afiliado += "02";
+                }
+                else
+                {
+                    formAfiliado.afiliado += i.ToString("0#");
+                    i++;
                 }
 
-                conexion.Open();
-                SqlCommand guardar;
-                guardar = new SqlCommand("CHAMBA.ModificarAfiliado", conexion);  
-                guardar.CommandType = CommandType.StoredProcedure;
-                guardar.Parameters.Add("@Afiliado", SqlDbType.Int).Value = afiliado;
-                guardar.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = txtNombre.Text;
-                guardar.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = txtApellido.Text;
-                guardar.Parameters.Add("@TipoDocumento", SqlDbType.Int).Value = cboTipoDocumento.SelectedIndex;
-                guardar.Parameters.Add("@Documento", SqlDbType.Int).Value = txtDocumento.Text;
-                guardar.Parameters.Add("@Domicilio", SqlDbType.VarChar).Value = txtDomicilio.Text;
-                guardar.Parameters.Add("@Telefono", SqlDbType.Int).Value = txtTelefono.Text;
-                guardar.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
-                guardar.Parameters.Add("@FechaNac", SqlDbType.DateTime).Value = dtpNacimiento.Text;
-                guardar.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = cboSexo.Text;
-                guardar.Parameters.Add("@EstadoCivil", SqlDbType.Int).Value = cboEstadoCivil.SelectedIndex;
-                guardar.Parameters.Add("@CantHijos", SqlDbType.Int).Value = nudHijos.Value;
-                guardar.Parameters.Add("@Plan", SqlDbType.Int).Value = cboPlan.SelectedValue;
-                guardar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
-                guardar.ExecuteNonQuery();
-                conexion.Close();
-                MessageBox.Show("Datos guardados exitosamente");
-                this.Close();
+                SqlCommand comandoFamiliares = formAfiliado.generarComandoSQL();
+                comandoFamiliares.Connection = conexion;
+                comandoFamiliares.Transaction = transaccion;
+                comandoFamiliares.ExecuteNonQuery();
+
             }
+
+            comando.ExecuteNonQuery();
+
+            transaccion.Commit();
+            conexion.Close();
+        }
+
+        private String obtenerNumeroAfiliadoSinIdFamilia(String cadena)
+        {
+            return cadena.Substring(0, cadena.Length - 2);
         }
 
         private bool camposCompletos()
@@ -173,6 +247,30 @@ namespace ClinicaFrba.Abm_Afiliado
         private bool esNumerico(String cadena)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(cadena, @"^\d+$");
+        }
+
+        private void btnConyuge_Click(object sender, EventArgs e)
+        {
+            FormEditarAfiliado form= new FormEditarAfiliado();
+            form.Tag = "Conyuge";
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                afiliadosAsociados.Add(form);
+                btnConyuge.Enabled = false;
+            }
+
+        }
+
+        private void btnHijo_Click(object sender, EventArgs e)
+        {
+            FormEditarAfiliado form = new FormEditarAfiliado();
+            form.Tag = "Hijo";
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                afiliadosAsociados.Add(form);
+            }
         }
     }
 }

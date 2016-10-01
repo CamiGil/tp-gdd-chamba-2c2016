@@ -326,6 +326,7 @@
             this.btnHijo.TabIndex = 13;
             this.btnHijo.Text = "Agregar hijo";
             this.btnHijo.UseVisualStyleBackColor = true;
+            this.btnHijo.Click += new System.EventHandler(this.btnHijo_Click);
             // 
             // btnConyuge
             // 
@@ -337,6 +338,7 @@
             this.btnConyuge.TabIndex = 12;
             this.btnConyuge.Text = "Agregar conyuge";
             this.btnConyuge.UseVisualStyleBackColor = true;
+            this.btnConyuge.Click += new System.EventHandler(this.btnConyuge_Click);
             // 
             // FormEditarAfiliado
             // 

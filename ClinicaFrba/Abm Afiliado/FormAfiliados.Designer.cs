@@ -43,6 +43,7 @@
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnHistorialPlanes = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -177,7 +178,7 @@
             this.btnAñadir.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAñadir.Location = new System.Drawing.Point(13, 314);
             this.btnAñadir.Name = "btnAñadir";
-            this.btnAñadir.Size = new System.Drawing.Size(176, 32);
+            this.btnAñadir.Size = new System.Drawing.Size(150, 32);
             this.btnAñadir.TabIndex = 2;
             this.btnAñadir.Text = "Añadir";
             this.btnAñadir.UseVisualStyleBackColor = true;
@@ -188,9 +189,9 @@
             this.btnEditar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnEditar.Enabled = false;
             this.btnEditar.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(240, 314);
+            this.btnEditar.Location = new System.Drawing.Point(176, 314);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(176, 32);
+            this.btnEditar.Size = new System.Drawing.Size(150, 32);
             this.btnEditar.TabIndex = 3;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
@@ -201,10 +202,10 @@
             this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEliminar.Enabled = false;
             this.btnEliminar.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(468, 314);
+            this.btnEliminar.Location = new System.Drawing.Point(494, 314);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(176, 32);
-            this.btnEliminar.TabIndex = 4;
+            this.btnEliminar.Size = new System.Drawing.Size(150, 32);
+            this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -228,6 +229,19 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // btnHistorialPlanes
+            // 
+            this.btnHistorialPlanes.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnHistorialPlanes.Enabled = false;
+            this.btnHistorialPlanes.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistorialPlanes.Location = new System.Drawing.Point(336, 314);
+            this.btnHistorialPlanes.Name = "btnHistorialPlanes";
+            this.btnHistorialPlanes.Size = new System.Drawing.Size(150, 32);
+            this.btnHistorialPlanes.TabIndex = 4;
+            this.btnHistorialPlanes.Text = "Ver cambios de plan";
+            this.btnHistorialPlanes.UseVisualStyleBackColor = true;
+            this.btnHistorialPlanes.Click += new System.EventHandler(this.btnHistorialPlanes_Click);
+            // 
             // FormAfiliados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +250,7 @@
             this.ClientSize = new System.Drawing.Size(656, 354);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnHistorialPlanes);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAñadir);
             this.Controls.Add(this.panel1);
@@ -267,5 +282,6 @@
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnHistorialPlanes;
     }
 }

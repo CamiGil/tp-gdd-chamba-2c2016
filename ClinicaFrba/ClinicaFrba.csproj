@@ -50,11 +50,23 @@
     <Compile Include="Abm Afiliado\FormAfiliados.Designer.cs">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\FormCambioPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\FormCambioPlan.Designer.cs">
+      <DependentUpon>FormCambioPlan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Afiliado\FormEditarAfiliado.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Afiliado\FormEditarAfiliado.Designer.cs">
       <DependentUpon>FormEditarAfiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\FormHistorialCambiosPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\FormHistorialCambiosPlan.Designer.cs">
+      <DependentUpon>FormHistorialCambiosPlan.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Especialidades Medicas\Form1.cs">
       <SubType>Form</SubType>
@@ -176,8 +188,14 @@
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\FormCambioPlan.resx">
+      <DependentUpon>FormCambioPlan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\FormEditarAfiliado.resx">
       <DependentUpon>FormEditarAfiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\FormHistorialCambiosPlan.resx">
+      <DependentUpon>FormHistorialCambiosPlan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormCrear.resx">
       <DependentUpon>FormCrear.cs</DependentUpon>
@@ -218,6 +236,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -231,7 +250,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

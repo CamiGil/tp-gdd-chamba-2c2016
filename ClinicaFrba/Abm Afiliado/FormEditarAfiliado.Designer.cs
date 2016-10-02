@@ -55,6 +55,7 @@
             this.cboPlan = new System.Windows.Forms.ComboBox();
             this.btnHijo = new System.Windows.Forms.Button();
             this.btnConyuge = new System.Windows.Forms.Button();
+            this.btnCambiarPlan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudHijos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -229,7 +230,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(144, 224);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(176, 41);
-            this.btnGuardar.TabIndex = 14;
+            this.btnGuardar.TabIndex = 15;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -242,12 +243,13 @@
             this.btnCancelar.Location = new System.Drawing.Point(468, 224);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(176, 41);
-            this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.TabIndex = 16;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // dtpNacimiento
             // 
+            this.dtpNacimiento.CalendarFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNacimiento.Location = new System.Drawing.Point(573, 22);
             this.dtpNacimiento.Name = "dtpNacimiento";
@@ -257,32 +259,35 @@
             // cboTipoDocumento
             // 
             this.cboTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoDocumento.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoDocumento.FormattingEnabled = true;
             this.cboTipoDocumento.Items.AddRange(new object[] {
             "DNI",
             "CI",
             "LC",
             "LD"});
-            this.cboTipoDocumento.Location = new System.Drawing.Point(178, 77);
+            this.cboTipoDocumento.Location = new System.Drawing.Point(178, 78);
             this.cboTipoDocumento.Name = "cboTipoDocumento";
-            this.cboTipoDocumento.Size = new System.Drawing.Size(70, 21);
+            this.cboTipoDocumento.Size = new System.Drawing.Size(70, 24);
             this.cboTipoDocumento.TabIndex = 2;
             // 
             // cboSexo
             // 
             this.cboSexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSexo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboSexo.FormattingEnabled = true;
             this.cboSexo.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cboSexo.Location = new System.Drawing.Point(574, 50);
+            this.cboSexo.Location = new System.Drawing.Point(574, 48);
             this.cboSexo.Name = "cboSexo";
-            this.cboSexo.Size = new System.Drawing.Size(181, 21);
+            this.cboSexo.Size = new System.Drawing.Size(181, 24);
             this.cboSexo.TabIndex = 8;
             // 
             // cboEstadoCivil
             // 
             this.cboEstadoCivil.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstadoCivil.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboEstadoCivil.FormattingEnabled = true;
             this.cboEstadoCivil.Items.AddRange(new object[] {
             "Soltero/a",
@@ -290,30 +295,32 @@
             "Viudo/a",
             "Concubinato",
             "Divorciado/a"});
-            this.cboEstadoCivil.Location = new System.Drawing.Point(573, 79);
+            this.cboEstadoCivil.Location = new System.Drawing.Point(574, 77);
             this.cboEstadoCivil.Name = "cboEstadoCivil";
-            this.cboEstadoCivil.Size = new System.Drawing.Size(182, 21);
+            this.cboEstadoCivil.Size = new System.Drawing.Size(182, 24);
             this.cboEstadoCivil.TabIndex = 9;
             // 
             // nudHijos
             // 
-            this.nudHijos.Location = new System.Drawing.Point(574, 109);
+            this.nudHijos.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudHijos.Location = new System.Drawing.Point(574, 106);
             this.nudHijos.Maximum = new decimal(new int[] {
             99,
             0,
             0,
             0});
             this.nudHijos.Name = "nudHijos";
-            this.nudHijos.Size = new System.Drawing.Size(181, 20);
+            this.nudHijos.Size = new System.Drawing.Size(181, 23);
             this.nudHijos.TabIndex = 10;
             // 
             // cboPlan
             // 
             this.cboPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPlan.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPlan.FormattingEnabled = true;
-            this.cboPlan.Location = new System.Drawing.Point(574, 137);
+            this.cboPlan.Location = new System.Drawing.Point(573, 135);
             this.cboPlan.Name = "cboPlan";
-            this.cboPlan.Size = new System.Drawing.Size(182, 21);
+            this.cboPlan.Size = new System.Drawing.Size(142, 24);
             this.cboPlan.TabIndex = 11;
             // 
             // btnHijo
@@ -323,7 +330,7 @@
             this.btnHijo.Location = new System.Drawing.Point(597, 164);
             this.btnHijo.Name = "btnHijo";
             this.btnHijo.Size = new System.Drawing.Size(159, 26);
-            this.btnHijo.TabIndex = 13;
+            this.btnHijo.TabIndex = 14;
             this.btnHijo.Text = "Agregar hijo";
             this.btnHijo.UseVisualStyleBackColor = true;
             this.btnHijo.Click += new System.EventHandler(this.btnHijo_Click);
@@ -335,10 +342,23 @@
             this.btnConyuge.Location = new System.Drawing.Point(411, 164);
             this.btnConyuge.Name = "btnConyuge";
             this.btnConyuge.Size = new System.Drawing.Size(160, 26);
-            this.btnConyuge.TabIndex = 12;
+            this.btnConyuge.TabIndex = 13;
             this.btnConyuge.Text = "Agregar conyuge";
             this.btnConyuge.UseVisualStyleBackColor = true;
             this.btnConyuge.Click += new System.EventHandler(this.btnConyuge_Click);
+            // 
+            // btnCambiarPlan
+            // 
+            this.btnCambiarPlan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCambiarPlan.Enabled = false;
+            this.btnCambiarPlan.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCambiarPlan.Location = new System.Drawing.Point(721, 135);
+            this.btnCambiarPlan.Name = "btnCambiarPlan";
+            this.btnCambiarPlan.Size = new System.Drawing.Size(35, 24);
+            this.btnCambiarPlan.TabIndex = 12;
+            this.btnCambiarPlan.Text = "✎";
+            this.btnCambiarPlan.UseVisualStyleBackColor = true;
+            this.btnCambiarPlan.Click += new System.EventHandler(this.btnCambiarPlan_Click);
             // 
             // FormEditarAfiliado
             // 
@@ -348,6 +368,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(789, 277);
+            this.Controls.Add(this.btnCambiarPlan);
             this.Controls.Add(this.btnConyuge);
             this.Controls.Add(this.btnHijo);
             this.Controls.Add(this.cboPlan);
@@ -415,5 +436,6 @@
         private System.Windows.Forms.ComboBox cboPlan;
         private System.Windows.Forms.Button btnHijo;
         private System.Windows.Forms.Button btnConyuge;
+        private System.Windows.Forms.Button btnCambiarPlan;
     }
 }

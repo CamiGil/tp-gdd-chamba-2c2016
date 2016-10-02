@@ -16,14 +16,15 @@ namespace ClinicaFrba.Abm_Afiliado
 
         SqlConnection conexion;
         String afiliado;
-        DataGridViewSelectedRowCollection seleccionado;
         List<FormEditarAfiliado> afiliadosAsociados = new List<FormEditarAfiliado>();
-
+        int proximoIdFamiliar = 2;
+        FormCambioPlan planCambiado = null;
 
         public FormEditarAfiliado()
         {
             InitializeComponent();
             conexion = new SqlConnection(@Configuraciones.datosConexion);
+            conexion.Open();
 
             String query = "SELECT Plan_Codigo, Plan_Descripcion FROM CHAMBA.Planes";
 
@@ -33,6 +34,8 @@ namespace ClinicaFrba.Abm_Afiliado
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = listar;
             adapter.Fill(tabla);
+
+            conexion.Close();
 
             cboPlan.DataSource = tabla;
             cboPlan.DisplayMember = "Plan_Descripcion";
@@ -48,11 +51,40 @@ namespace ClinicaFrba.Abm_Afiliado
                 this.btnConyuge.Visible = false;
                 this.btnHijo.Visible = false;
             }
+
+            if (this.Tag.ToString() == "Editar")
+            {
+                cboPlan.Enabled = false;
+                btnCambiarPlan.Enabled = true;
+            }
         }
 
         public void cargarDatos(String numeroAfiliado)
         {
             afiliado = numeroAfiliado;
+
+            conexion.Open();
+
+            SqlCommand proximoId = new SqlCommand("CHAMBA.ObtenerProximoIdFamiliar", conexion);
+            proximoId.CommandType = CommandType.StoredProcedure;
+
+            proximoId.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
+            var nuevoIdFamiliar = proximoId.Parameters.Add("@id", SqlDbType.Int);
+            nuevoIdFamiliar.Direction = ParameterDirection.Output;
+            SqlDataReader data = proximoId.ExecuteReader();
+            data.Close();
+            proximoIdFamiliar = int.Parse(nuevoIdFamiliar.Value.ToString());
+
+            if (proximoIdFamiliar > 2)
+            {
+                this.btnConyuge.Visible = false;
+            }
+
+            if (obtenerIdFamilia(afiliado) != "01" && obtenerIdFamilia(afiliado) != "02")
+            {
+                this.btnHijo.Visible = false;
+            }
+
             String query = "SELECT * FROM CHAMBA.Pacientes JOIN CHAMBA.Usuarios ON Paci_Usuario = Usua_Id JOIN CHAMBA.Planes ON Plan_Codigo = Paci_Plan WHERE Paci_Numero = '" + numeroAfiliado + "'";
 
             SqlCommand listar = new SqlCommand(query, conexion);
@@ -81,18 +113,15 @@ namespace ClinicaFrba.Abm_Afiliado
             nudHijos.Value = int.Parse(tabla.Rows[0]["Paci_Cant_Hijos"].ToString());
             cboPlan.Text = tabla.Rows[0]["Plan_Descripcion"].ToString();
 
-            
+            conexion.Close();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (camposCompletos())
             {
-                if (this.Tag.ToString() == "Hijo" || this.Tag.ToString() == "Conyuge")
-                {
-                    this.DialogResult = DialogResult.OK;
-                }
-                else
+                this.DialogResult = DialogResult.OK;
+                if (this.Tag.ToString() != "Hijo" && this.Tag.ToString() != "Conyuge")
                 {
                     guardarDatos();
                     MessageBox.Show("Datos guardados exitosamente");
@@ -102,7 +131,7 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private SqlCommand generarComandoSQL()
+        public SqlCommand generarComandoSQL()
         {
             SqlCommand guardar;
             guardar = new SqlCommand();
@@ -123,7 +152,6 @@ namespace ClinicaFrba.Abm_Afiliado
             guardar.Parameters.Add("@EstadoCivil", SqlDbType.Int).Value = cboEstadoCivil.SelectedIndex;
             guardar.Parameters.Add("@CantHijos", SqlDbType.Int).Value = nudHijos.Value;
             guardar.Parameters.Add("@Plan", SqlDbType.Int).Value = cboPlan.SelectedValue;
-            guardar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
 
             return guardar;
         }
@@ -140,11 +168,10 @@ namespace ClinicaFrba.Abm_Afiliado
 
                 var nuevoId = nuevoIdPaciente.Parameters.Add("@id", SqlDbType.VarChar, 12);
                 nuevoId.Direction = ParameterDirection.Output;
-                SqlDataReader data = nuevoIdPaciente.ExecuteReader();
-                data.Close();
+                SqlDataReader dataId = nuevoIdPaciente.ExecuteReader();
+                dataId.Close();
                 afiliado = nuevoId.Value.ToString();
             }
-
 
             SqlTransaction transaccion;
 
@@ -154,8 +181,8 @@ namespace ClinicaFrba.Abm_Afiliado
             comando.Connection = conexion;
             comando.Transaction = transaccion;
 
+            if (proximoIdFamiliar == 2) proximoIdFamiliar++;
 
-            int i = 3;
             foreach (FormEditarAfiliado formAfiliado in afiliadosAsociados)
             {
                 formAfiliado.afiliado = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
@@ -165,8 +192,8 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
                 else
                 {
-                    formAfiliado.afiliado += i.ToString("0#");
-                    i++;
+                    formAfiliado.afiliado += proximoIdFamiliar.ToString("0#");
+                    proximoIdFamiliar++;
                 }
 
                 SqlCommand comandoFamiliares = formAfiliado.generarComandoSQL();
@@ -174,6 +201,14 @@ namespace ClinicaFrba.Abm_Afiliado
                 comandoFamiliares.Transaction = transaccion;
                 comandoFamiliares.ExecuteNonQuery();
 
+            }
+
+            if (planCambiado != null)
+            {
+                SqlCommand comandoCambioPlan = planCambiado.generarComandoSQL();
+                comandoCambioPlan.Connection = conexion;
+                comandoCambioPlan.Transaction = transaccion;
+                comandoCambioPlan.ExecuteNonQuery();
             }
 
             comando.ExecuteNonQuery();
@@ -184,7 +219,16 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private String obtenerNumeroAfiliadoSinIdFamilia(String cadena)
         {
-            return cadena.Substring(0, cadena.Length - 2);
+            if (cadena.Length > 2)
+                return cadena.Substring(0, cadena.Length - 2);
+            return "";
+        }
+
+        private String obtenerIdFamilia(String cadena)
+        {
+            if (cadena.Length > 2)
+                return cadena.Substring(cadena.Length - 2, 2);
+            return "";
         }
 
         private bool camposCompletos()
@@ -270,6 +314,18 @@ namespace ClinicaFrba.Abm_Afiliado
             if (form.DialogResult == DialogResult.OK)
             {
                 afiliadosAsociados.Add(form);
+            }
+        }
+
+        private void btnCambiarPlan_Click(object sender, EventArgs e)
+        {
+            FormCambioPlan form = new FormCambioPlan();
+            form.afiliado = afiliado;
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                planCambiado = form;
+                cboPlan.Text = planCambiado.nuevoPlan;
             }
         }
     }

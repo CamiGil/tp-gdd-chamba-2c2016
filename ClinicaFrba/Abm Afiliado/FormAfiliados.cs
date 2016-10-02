@@ -66,11 +66,13 @@ namespace ClinicaFrba.Abm_Afiliado
             if (dataGridView1.SelectedRows.Count == 1)
             {
                 btnEditar.Enabled = true;
+                btnHistorialPlanes.Enabled = true;
                 btnEliminar.Enabled = true;
             }
             else
             {
                 btnEditar.Enabled = false;
+                btnHistorialPlanes.Enabled = false;
                 btnEliminar.Enabled = false;
             }
         }
@@ -81,7 +83,8 @@ namespace ClinicaFrba.Abm_Afiliado
             form.Tag = "Editar";
             form.cargarDatos(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             form.ShowDialog();
-            cargarAfiliados();
+            if (form.DialogResult == DialogResult.OK)
+                cargarAfiliados();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -106,6 +109,15 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             FormEditarAfiliado form = new FormEditarAfiliado();
             form.Tag = "Agregar";
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+                cargarAfiliados();
+        }
+
+        private void btnHistorialPlanes_Click(object sender, EventArgs e)
+        {
+            FormHistorialCambiosPlan form = new FormHistorialCambiosPlan();
+            form.cargarDatos(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             form.ShowDialog();
         }
     }

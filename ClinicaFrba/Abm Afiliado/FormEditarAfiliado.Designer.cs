@@ -139,7 +139,7 @@
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTelefono.Location = new System.Drawing.Point(178, 135);
-            this.txtTelefono.MaxLength = 255;
+            this.txtTelefono.MaxLength = 18;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(182, 23);
             this.txtTelefono.TabIndex = 5;

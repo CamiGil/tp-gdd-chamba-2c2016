@@ -37,7 +37,7 @@ INSERT INTO CHAMBA.Funcionalidades (Func_Id, Func_Descripcion) VALUES (1, 'Gesti
 /* ASIGNACION DE FUNCIONALIDADES A ROLES*/
 DECLARE @Rol numeric(18,0) = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo')
 
-INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 5), (@Rol, 8)
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 3), (@Rol, 5), (@Rol, 8)
 
 SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Profesional')
 INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 6), (@Rol, 7)
@@ -103,7 +103,7 @@ IF (@Existe IS NULL)
 		SET @Existe = @@IDENTITY
 	END
 
-INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Estado_Civil, Paci_Cant_Hijos, Paci_Plan) VALUES (@Existe, FORMAT(@Existe,'000000000#') + '01', 0, 0, @Plan)
+INSERT INTO CHAMBA.Pacientes (Paci_Usuario, Paci_Numero, Paci_Estado_Civil, Paci_Cant_Hijos, Paci_Plan) VALUES (@Existe, CAST(CAST(@Existe as varchar(16)) + '01' AS numeric(18,0)), 0, 0, @Plan)
 
 INSERT INTO CHAMBA.Rol_X_Usuario (Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES (@Existe, @Rol)
 

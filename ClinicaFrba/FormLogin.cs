@@ -42,14 +42,14 @@ namespace ClinicaFrba
                 verificarLogin.Parameters.Add("@MaxIntentos", SqlDbType.Int).Value = Configuraciones.cantMaxIntentosLogin;
 
                 var resultado = verificarLogin.Parameters.Add("@Resultado", SqlDbType.Int);
-                var idUsuario = verificarLogin.Parameters.Add("@Id", SqlDbType.Int);
+                var idUsuario = verificarLogin.Parameters.Add("@Id", SqlDbType.Decimal);
                 resultado.Direction = ParameterDirection.Output;
                 idUsuario.Direction = ParameterDirection.Output;
 
                 SqlDataReader data = verificarLogin.ExecuteReader();
                 data.Close();
 
-                switch (Convert.ToInt32(resultado.Value))
+                switch (int.Parse(resultado.Value.ToString()))
                 {
                     /* 0: El usuario no existe
                      * 1: Intentos excedidos
@@ -67,7 +67,7 @@ namespace ClinicaFrba
                         lblResultado.Text = "Intentos fallidos excedidos";
                         break;
                     case 4:
-                        Configuraciones.usuario = Convert.ToInt32(idUsuario.Value);
+                        Configuraciones.usuario = decimal.Parse(idUsuario.Value.ToString());
                         lblResultado.Text = "";
                         FormSeleccionarRol form = new FormSeleccionarRol();
                         form.Show();
@@ -94,11 +94,6 @@ namespace ClinicaFrba
         {
             txtUsuario.Text = "";
             txtClave.Text = "";
-        }
-
-        private void establecerIntentosLogin(int intentos)
-        {
-
         }
 
         private Boolean validarCamposVacios()

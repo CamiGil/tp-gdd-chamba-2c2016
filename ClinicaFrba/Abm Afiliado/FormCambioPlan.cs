@@ -15,7 +15,7 @@ namespace ClinicaFrba.Abm_Afiliado
     {
 
         SqlConnection conexion;
-        public String afiliado;
+        public decimal afiliado;
         public String nuevoPlan;
 
         public FormCambioPlan()
@@ -61,8 +61,8 @@ namespace ClinicaFrba.Abm_Afiliado
 
             guardar.CommandText = "CHAMBA.ModificarPlan";
 
-            guardar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = afiliado;
-            guardar.Parameters.Add("@NuevoPlan", SqlDbType.Int).Value = cboPlan.SelectedValue;            
+            guardar.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = afiliado;
+            guardar.Parameters.Add("@NuevoPlan", SqlDbType.Decimal).Value = cboPlan.SelectedValue;            
             guardar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
             guardar.Parameters.Add("@Razon", SqlDbType.VarChar).Value = txtRazon.Text;
 

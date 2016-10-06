@@ -15,7 +15,7 @@ namespace ClinicaFrba.Abm_Afiliado
     {
 
         SqlConnection conexion;
-        String afiliado;
+        decimal afiliado;
         List<FormEditarAfiliado> afiliadosAsociados = new List<FormEditarAfiliado>();
         int proximoIdFamiliar = 2;
         FormCambioPlan planCambiado = null;
@@ -59,7 +59,7 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        public void cargarDatos(String numeroAfiliado)
+        public void cargarDatos(decimal numeroAfiliado)
         {
             afiliado = numeroAfiliado;
 
@@ -69,7 +69,7 @@ namespace ClinicaFrba.Abm_Afiliado
             proximoId.CommandType = CommandType.StoredProcedure;
 
             proximoId.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
-            var nuevoIdFamiliar = proximoId.Parameters.Add("@id", SqlDbType.Int);
+            var nuevoIdFamiliar = proximoId.Parameters.Add("@id", SqlDbType.Decimal);
             nuevoIdFamiliar.Direction = ParameterDirection.Output;
             SqlDataReader data = proximoId.ExecuteReader();
             data.Close();
@@ -139,19 +139,19 @@ namespace ClinicaFrba.Abm_Afiliado
 
             guardar.CommandText = "CHAMBA.ModificarAfiliado";
 
-            guardar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = afiliado;
+            guardar.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = afiliado;
             guardar.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = txtNombre.Text;
             guardar.Parameters.Add("@Apellido", SqlDbType.VarChar).Value = txtApellido.Text;
             guardar.Parameters.Add("@TipoDocumento", SqlDbType.Int).Value = cboTipoDocumento.SelectedIndex;
-            guardar.Parameters.Add("@Documento", SqlDbType.Int).Value = txtDocumento.Text;
+            guardar.Parameters.Add("@Documento", SqlDbType.Decimal).Value = txtDocumento.Text;
             guardar.Parameters.Add("@Domicilio", SqlDbType.VarChar).Value = txtDomicilio.Text;
-            guardar.Parameters.Add("@Telefono", SqlDbType.Int).Value = txtTelefono.Text;
+            guardar.Parameters.Add("@Telefono", SqlDbType.Decimal).Value = txtTelefono.Text;
             guardar.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmail.Text;
             guardar.Parameters.Add("@FechaNac", SqlDbType.DateTime).Value = dtpNacimiento.Text;
             guardar.Parameters.Add("@Sexo", SqlDbType.VarChar).Value = cboSexo.Text;
             guardar.Parameters.Add("@EstadoCivil", SqlDbType.Int).Value = cboEstadoCivil.SelectedIndex;
             guardar.Parameters.Add("@CantHijos", SqlDbType.Int).Value = nudHijos.Value;
-            guardar.Parameters.Add("@Plan", SqlDbType.Int).Value = cboPlan.SelectedValue;
+            guardar.Parameters.Add("@Plan", SqlDbType.Decimal).Value = cboPlan.SelectedValue;
 
             return guardar;
         }
@@ -166,11 +166,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 SqlCommand nuevoIdPaciente = new SqlCommand("CHAMBA.ObtenerNuevoIdPaciente", conexion);
                 nuevoIdPaciente.CommandType = CommandType.StoredProcedure;
 
-                var nuevoId = nuevoIdPaciente.Parameters.Add("@id", SqlDbType.VarChar, 12);
+                var nuevoId = nuevoIdPaciente.Parameters.Add("@id", SqlDbType.Decimal);
                 nuevoId.Direction = ParameterDirection.Output;
                 SqlDataReader dataId = nuevoIdPaciente.ExecuteReader();
                 dataId.Close();
-                afiliado = nuevoId.Value.ToString();
+                afiliado = decimal.Parse(nuevoId.Value.ToString());
             }
 
             SqlTransaction transaccion;
@@ -188,11 +188,11 @@ namespace ClinicaFrba.Abm_Afiliado
                 formAfiliado.afiliado = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
                 if (formAfiliado.Tag.ToString() == "Conyuge")
                 {
-                    formAfiliado.afiliado += "02";
+                    formAfiliado.afiliado = decimal.Parse(formAfiliado.afiliado.ToString() + "02");
                 }
                 else
                 {
-                    formAfiliado.afiliado += proximoIdFamiliar.ToString("0#");
+                    formAfiliado.afiliado = decimal.Parse(formAfiliado.afiliado.ToString() +  proximoIdFamiliar.ToString("0#"));
                     proximoIdFamiliar++;
                 }
 
@@ -217,17 +217,17 @@ namespace ClinicaFrba.Abm_Afiliado
             conexion.Close();
         }
 
-        private String obtenerNumeroAfiliadoSinIdFamilia(String cadena)
+        private decimal obtenerNumeroAfiliadoSinIdFamilia(decimal id)
         {
-            if (cadena.Length > 2)
-                return cadena.Substring(0, cadena.Length - 2);
-            return "";
+            if (id.ToString().Length > 2)
+                return decimal.Parse(id.ToString().Substring(0, id.ToString().Length - 2));
+            return 0;
         }
 
-        private String obtenerIdFamilia(String cadena)
+        private String obtenerIdFamilia(decimal id)
         {
-            if (cadena.Length > 2)
-                return cadena.Substring(cadena.Length - 2, 2);
+            if (id.ToString().Length > 2)
+                return id.ToString().Substring(id.ToString().Length - 2, 2);
             return "";
         }
 

@@ -81,7 +81,7 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             FormEditarAfiliado form = new FormEditarAfiliado();
             form.Tag = "Editar";
-            form.cargarDatos(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            form.cargarDatos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
             form.ShowDialog();
             if (form.DialogResult == DialogResult.OK)
                 cargarAfiliados();
@@ -96,7 +96,7 @@ namespace ClinicaFrba.Abm_Afiliado
                 conexion.Open();
                 SqlCommand cargar = new SqlCommand("CHAMBA.EliminarAfiliado", conexion);
                 cargar.CommandType = CommandType.StoredProcedure;
-                cargar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                cargar.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 cargar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
                 cargar.ExecuteNonQuery();
                 conexion.Close();                
@@ -117,7 +117,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private void btnHistorialPlanes_Click(object sender, EventArgs e)
         {
             FormHistorialCambiosPlan form = new FormHistorialCambiosPlan();
-            form.cargarDatos(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            form.cargarDatos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
             form.ShowDialog();
         }
     }

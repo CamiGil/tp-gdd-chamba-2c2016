@@ -65,11 +65,11 @@ namespace ClinicaFrba
 
             for (int i = 0; i < tabla.Rows.Count; i++)
             {
-                panelControles.Controls.Add(crearBoton(tabla.Rows[i]["Func_Descripcion"].ToString(), i, Convert.ToInt32(tabla.Rows[i]["Func_Id"])));
+                panelControles.Controls.Add(crearBoton(tabla.Rows[i]["Func_Descripcion"].ToString(), i, decimal.Parse(tabla.Rows[i]["Func_Id"].ToString())));
             }
         }
 
-        private Button crearBoton(String descripcion, int numero, int funcionalidad)
+        private Button crearBoton(String descripcion, int numero, decimal funcionalidad)
         {
             Button boton = new Button();
             boton.Text = descripcion;
@@ -94,18 +94,20 @@ namespace ClinicaFrba
         {
             Button botonClickeado = sender as Button;
 
-            switch ((int)botonClickeado.Tag)
+            switch ((int.Parse(botonClickeado.Tag.ToString())))
             {
                 case 1:
                     //ABRIR ABM ROLES
                     break;
                 case 2:
                     //ABRIR ABM AFILIADOS
-                    Abm_Afiliado.FormAfiliados form = new Abm_Afiliado.FormAfiliados();
-                    form.ShowDialog();
+                    Abm_Afiliado.FormAfiliados form2 = new Abm_Afiliado.FormAfiliados();
+                    form2.ShowDialog();
                     break;
                 case 3:
                     //ABRIR COMPRA BONOS
+                    Compra_Bono.FormCompraBonos form3 = new Compra_Bono.FormCompraBonos();
+                    form3.ShowDialog();
                     break;
                 case 4:
                     //ABRIR PEDIDO DE TURNOS

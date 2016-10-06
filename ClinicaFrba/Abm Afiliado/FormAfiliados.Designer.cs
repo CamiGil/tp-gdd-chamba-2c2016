@@ -97,6 +97,7 @@
             this.txtDni.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.txtDni.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDni.Location = new System.Drawing.Point(428, 46);
+            this.txtDni.MaxLength = 18;
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(182, 23);
             this.txtDni.TabIndex = 4;
@@ -117,6 +118,7 @@
             this.txtApellido.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtApellido.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApellido.Location = new System.Drawing.Point(119, 46);
+            this.txtApellido.MaxLength = 255;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(182, 23);
             this.txtApellido.TabIndex = 1;
@@ -126,6 +128,7 @@
             this.txtAfiliado.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.txtAfiliado.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAfiliado.Location = new System.Drawing.Point(428, 17);
+            this.txtAfiliado.MaxLength = 18;
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.Size = new System.Drawing.Size(182, 23);
             this.txtAfiliado.TabIndex = 2;
@@ -135,6 +138,7 @@
             this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtNombre.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(119, 17);
+            this.txtNombre.MaxLength = 255;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(182, 23);
             this.txtNombre.TabIndex = 0;

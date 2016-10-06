@@ -12,8 +12,8 @@ namespace ClinicaFrba
         public static FormLogin formLogin;
         public static String datosConexion = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2016;Persist Security Info=True;User ID=gd;Password=gd2016";
         public static int cantMaxIntentosLogin = 3;
-        public static int usuario;
-        public static int rol;
+        public static decimal usuario;
+        public static decimal rol;
         public static String fecha = "2012-01-20";
 
         public static void validarCierreVentana(Object sender, System.Windows.Forms.FormClosedEventArgs e)

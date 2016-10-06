@@ -25,12 +25,12 @@ namespace ClinicaFrba.Abm_Afiliado
 
         }
 
-        public void cargarDatos(String afiliado)
+        public void cargarDatos(decimal afiliado)
         {
             conexion.Open();
             SqlCommand cargar = new SqlCommand("CHAMBA.HistorialCambiosPlan", conexion);
             cargar.CommandType = CommandType.StoredProcedure;
-            cargar.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = afiliado;
+            cargar.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = afiliado;
             SqlDataAdapter adapter = new SqlDataAdapter(cargar);
             DataTable table = new DataTable();
             adapter.Fill(table);

@@ -116,11 +116,17 @@
     <Compile Include="Cancelar Atencion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra Bono\Form1.cs">
+    <Compile Include="Compra Bono\FormCompraBonos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra Bono\FormCompraBonos.Designer.cs">
+      <DependentUpon>FormCompraBonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra Bono\FormConfirmar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra Bono\FormConfirmar.Designer.cs">
+      <DependentUpon>FormConfirmar.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuraciones.cs" />
     <Compile Include="FormLogin.cs">
@@ -187,45 +193,66 @@
     </Compile>
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\FormCambioPlan.resx">
       <DependentUpon>FormCambioPlan.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\FormEditarAfiliado.resx">
       <DependentUpon>FormEditarAfiliado.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\FormHistorialCambiosPlan.resx">
       <DependentUpon>FormHistorialCambiosPlan.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormCrear.resx">
       <DependentUpon>FormCrear.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormElim.resx">
       <DependentUpon>FormElim.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\FormModif.resx">
       <DependentUpon>FormModif.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra Bono\FormCompraBonos.resx">
+      <DependentUpon>FormCompraBonos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra Bono\FormConfirmar.resx">
+      <DependentUpon>FormConfirmar.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSeleccionarRol.resx">
       <DependentUpon>FormSeleccionarRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\FormConfirmarTurno.resx">
       <DependentUpon>FormConfirmarTurno.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\FormIngresarBono.resx">
       <DependentUpon>FormIngresarBono.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\FormSeleccionProf.resx">
       <DependentUpon>FormSeleccionProf.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

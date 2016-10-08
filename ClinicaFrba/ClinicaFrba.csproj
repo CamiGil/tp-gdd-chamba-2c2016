@@ -110,11 +110,17 @@
     <Compile Include="AbmRol\FormModif.Designer.cs">
       <DependentUpon>FormModif.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Atencion\Form1.cs">
+    <Compile Include="Cancelar Atencion\FormCrearCancelaciónProfesional.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Cancelar Atencion\FormCrearCancelaciónProfesional.Designer.cs">
+      <DependentUpon>FormCrearCancelaciónProfesional.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cancelar Atencion\FormCrearCancelaciónPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\FormCrearCancelaciónPaciente.Designer.cs">
+      <DependentUpon>FormCrearCancelaciónPaciente.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra Bono\FormCompraBonos.cs">
       <SubType>Form</SubType>
@@ -222,6 +228,12 @@
     <EmbeddedResource Include="AbmRol\FormModif.resx">
       <DependentUpon>FormModif.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\FormCrearCancelaciónPaciente.resx">
+      <DependentUpon>FormCrearCancelaciónPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\FormCrearCancelaciónProfesional.resx">
+      <DependentUpon>FormCrearCancelaciónProfesional.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra Bono\FormCompraBonos.resx">
       <DependentUpon>FormCompraBonos.cs</DependentUpon>

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Registrar_Agenta_Medico
 {
-    public partial class Form1 : Form
+    public partial class FormAlta : Form
     {
-        public Form1()
+        public FormAlta()
         {
             InitializeComponent();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

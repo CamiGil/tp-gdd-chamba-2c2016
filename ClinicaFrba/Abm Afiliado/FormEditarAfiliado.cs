@@ -65,17 +65,27 @@ namespace ClinicaFrba.Abm_Afiliado
 
             conexion.Open();
 
+            SqlCommand tieneConyuge = new SqlCommand("CHAMBA.TieneConyuge", conexion);
+            tieneConyuge.CommandType = CommandType.StoredProcedure;
+
+            tieneConyuge.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
+            var existeConyuge = tieneConyuge.Parameters.Add("@Existe", SqlDbType.Decimal);
+            existeConyuge.Direction = ParameterDirection.Output;
+            SqlDataReader data = tieneConyuge.ExecuteReader();
+            data.Close();
+            int deshabilitarConyuge = int.Parse(existeConyuge.Value.ToString());
+
             SqlCommand proximoId = new SqlCommand("CHAMBA.ObtenerProximoIdFamiliar", conexion);
             proximoId.CommandType = CommandType.StoredProcedure;
 
             proximoId.Parameters.Add("@Afiliado", SqlDbType.VarChar).Value = obtenerNumeroAfiliadoSinIdFamilia(afiliado);
             var nuevoIdFamiliar = proximoId.Parameters.Add("@id", SqlDbType.Decimal);
             nuevoIdFamiliar.Direction = ParameterDirection.Output;
-            SqlDataReader data = proximoId.ExecuteReader();
+            data = proximoId.ExecuteReader();
             data.Close();
             proximoIdFamiliar = int.Parse(nuevoIdFamiliar.Value.ToString());
 
-            if (proximoIdFamiliar > 2)
+            if (deshabilitarConyuge==1)
             {
                 this.btnConyuge.Visible = false;
             }
@@ -180,8 +190,6 @@ namespace ClinicaFrba.Abm_Afiliado
             SqlCommand comando = generarComandoSQL();
             comando.Connection = conexion;
             comando.Transaction = transaccion;
-
-            if (proximoIdFamiliar == 2) proximoIdFamiliar++;
 
             foreach (FormEditarAfiliado formAfiliado in afiliadosAsociados)
             {

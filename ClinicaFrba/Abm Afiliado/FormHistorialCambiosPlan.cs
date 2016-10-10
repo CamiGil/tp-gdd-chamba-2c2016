@@ -20,11 +20,6 @@ namespace ClinicaFrba.Abm_Afiliado
             conexion = new SqlConnection(@Configuraciones.datosConexion);
         }
 
-        private void FormHistorialCambiosPlan_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public void cargarDatos(decimal afiliado)
         {
             conexion.Open();

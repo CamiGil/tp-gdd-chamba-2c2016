@@ -68,24 +68,6 @@
     <Compile Include="Abm Afiliado\FormHistorialCambiosPlan.Designer.cs">
       <DependentUpon>FormHistorialCambiosPlan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Planes\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Planes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Profesional\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Profesional\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="AbmRol\FormCrear.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,11 +135,41 @@
     <Compile Include="FormSeleccionarRol.Designer.cs">
       <DependentUpon>FormSeleccionarRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Form1.cs">
+    <Compile Include="Listados\FormAfiliadosBonos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listados\FormAfiliadosBonos.Designer.cs">
+      <DependentUpon>FormAfiliadosBonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\FormEspecialidadesBonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\FormEspecialidadesBonos.Designer.cs">
+      <DependentUpon>FormEspecialidadesBonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\FormEspecialidadesCanceladas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\FormEspecialidadesCanceladas.Designer.cs">
+      <DependentUpon>FormEspecialidadesCanceladas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\FormEstadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\FormEstadisticas.Designer.cs">
+      <DependentUpon>FormEstadisticas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\FormProfesionalesConsultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\FormProfesionalesConsultados.Designer.cs">
+      <DependentUpon>FormProfesionalesConsultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\FormProfesionalesHoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\FormProfesionalesHoras.Designer.cs">
+      <DependentUpon>FormProfesionalesHoras.cs</DependentUpon>
     </Compile>
     <Compile Include="Pedir Turno\FormConfirmarTurno.cs">
       <SubType>Form</SubType>
@@ -179,28 +191,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registrar Agenta Medico\FormModificación.cs">
+    <Compile Include="Registro resultado\FormModificación.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Agenta Medico\FormModificación.Designer.cs">
+    <Compile Include="Registro resultado\FormModificación.Designer.cs">
       <DependentUpon>FormModificación.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registrar Agenta Medico\FormAlta.cs">
+    <Compile Include="Registro resultado\FormAlta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Agenta Medico\FormAlta.Designer.cs">
+    <Compile Include="Registro resultado\FormAlta.Designer.cs">
       <DependentUpon>FormAlta.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Llegada\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Registro Llegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro Resultado\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro Resultado\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
@@ -260,6 +266,24 @@
     <EmbeddedResource Include="FormSeleccionarRol.resx">
       <DependentUpon>FormSeleccionarRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormAfiliadosBonos.resx">
+      <DependentUpon>FormAfiliadosBonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormEspecialidadesBonos.resx">
+      <DependentUpon>FormEspecialidadesBonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormEspecialidadesCanceladas.resx">
+      <DependentUpon>FormEspecialidadesCanceladas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormEstadisticas.resx">
+      <DependentUpon>FormEstadisticas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormProfesionalesConsultados.resx">
+      <DependentUpon>FormProfesionalesConsultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\FormProfesionalesHoras.resx">
+      <DependentUpon>FormProfesionalesHoras.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pedir Turno\FormConfirmarTurno.resx">
       <DependentUpon>FormConfirmarTurno.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -281,10 +305,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Registrar Agenta Medico\FormAlta.resx">
+    <EmbeddedResource Include="Registro resultado\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Agenta Medico\FormModificación.resx">
+    <EmbeddedResource Include="Registro resultado\FormModificación.resx">
       <DependentUpon>FormModificación.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

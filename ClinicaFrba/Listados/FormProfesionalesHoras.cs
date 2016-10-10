@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicaFrba.Registro_Resultado
+namespace ClinicaFrba.Listados
 {
-    public partial class Form1 : Form
+    public partial class FormProfesionalesHoras : Form
     {
-        public Form1()
+        public FormProfesionalesHoras()
         {
             InitializeComponent();
         }

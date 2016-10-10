@@ -123,6 +123,8 @@ namespace ClinicaFrba
                     break;
                 case 8:
                     //ABRIR ESTADISTICAS
+                    Listados.FormEstadisticas form8 = new Listados.FormEstadisticas();
+                    form8.ShowDialog();
                     break;
             }
         }

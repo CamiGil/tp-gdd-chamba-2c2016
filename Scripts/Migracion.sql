@@ -161,8 +161,8 @@ WHERE Tipo_Especialidad_Codigo IS NOT NULL) AS S1
 
 /* MIGRACION DE TURNOS */
 
-INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Fecha, Turn_Paciente, Turn_Profesional)
-SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI)
+INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Fecha, Turn_Paciente, Turn_Profesional, Turn_Tipo_Especialidad)
+SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
 FROM gd_esquema.Maestra
 WHERE Turno_Numero IS NOT NULL
 

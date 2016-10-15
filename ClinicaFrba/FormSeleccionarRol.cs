@@ -55,5 +55,10 @@ namespace ClinicaFrba
             form.Show();
             this.Close();
         }
+
+        private void cboRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

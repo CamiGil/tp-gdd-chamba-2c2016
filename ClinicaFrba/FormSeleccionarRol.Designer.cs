@@ -42,6 +42,7 @@
             this.cboRol.Name = "cboRol";
             this.cboRol.Size = new System.Drawing.Size(229, 31);
             this.cboRol.TabIndex = 0;
+            this.cboRol.SelectedIndexChanged += new System.EventHandler(this.cboRol_SelectedIndexChanged);
             // 
             // btnAceptar
             // 

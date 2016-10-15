@@ -103,6 +103,7 @@
             this.label2.Size = new System.Drawing.Size(121, 29);
             this.label2.TabIndex = 27;
             this.label2.Text = "Username";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblResultado
             // 

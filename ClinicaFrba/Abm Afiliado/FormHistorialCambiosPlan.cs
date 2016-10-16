@@ -32,5 +32,10 @@ namespace ClinicaFrba.Abm_Afiliado
             dataGridView1.DataSource = table;
             conexion.Close();
         }
+
+        private void FormHistorialCambiosPlan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

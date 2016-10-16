@@ -203,11 +203,11 @@
     <Compile Include="Registro resultado\FormAlta.Designer.cs">
       <DependentUpon>FormAlta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.cs">
+    <Compile Include="Registro Llegada\FormRegistroLlegada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada\FormRegistroLlegada.Designer.cs">
+      <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
@@ -305,6 +305,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro Llegada\FormRegistroLlegada.resx">
+      <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro resultado\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>
     </EmbeddedResource>

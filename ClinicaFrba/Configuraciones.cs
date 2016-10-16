@@ -14,7 +14,7 @@ namespace ClinicaFrba
         public static int cantMaxIntentosLogin = 3;
         public static decimal usuario;
         public static decimal rol;
-        public static String fecha = "2012-01-20";
+        public static String fecha = "2015-02-10";
 
         public static void validarCierreVentana(Object sender, System.Windows.Forms.FormClosedEventArgs e)
         {

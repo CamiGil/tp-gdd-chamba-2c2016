@@ -114,6 +114,8 @@ namespace ClinicaFrba
                     break;
                 case 5:
                     //ABRIR REGISTRO DE LLEGADA
+                    Registro_Llegada.FormRegistroLlegada form5 = new Registro_Llegada.FormRegistroLlegada();
+                    form5.ShowDialog();
                     break;
                 case 6:
                     //ABRIR REGISTRO DE RESULTADOS

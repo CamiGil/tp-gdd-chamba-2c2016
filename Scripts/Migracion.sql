@@ -1,28 +1,31 @@
-DELETE FROM CHAMBA.Cambio_Plan
-DELETE FROM CHAMBA.Rol_X_Usuario
 DELETE FROM CHAMBA.Bonos
+DELETE FROM CHAMBA.Cambio_Plan
 DELETE FROM CHAMBA.Compra_Bonos
 DBCC CHECKIDENT ('CHAMBA.Compra_Bonos', RESEED, 0)
 GO
 DELETE FROM CHAMBA.Consultas
-DELETE FROM CHAMBA.Turnos
-DELETE FROM CHAMBA.Cancelaciones
-DELETE FROM CHAMBA.Tipo_Especialidad_X_Profesional
-DELETE FROM CHAMBA.Ausencia
-DELETE FROM CHAMBA.Agenda
-DELETE FROM CHAMBA.Profesionales
-DELETE FROM CHAMBA.Pacientes
-DELETE FROM CHAMBA.Usuarios
-DBCC CHECKIDENT ('CHAMBA.Usuarios', RESEED, 0)
-GO
-DELETE FROM CHAMBA.Planes
-DELETE FROM CHAMBA.Tipo_Especialidad
-DELETE FROM CHAMBA.Especialidades
 DELETE FROM CHAMBA.Funcionalidad_X_Rol
 DELETE FROM CHAMBA.Funcionalidades
+DELETE FROM CHAMBA.Rol_X_Usuario
 DELETE FROM CHAMBA.Roles
 DBCC CHECKIDENT ('CHAMBA.Roles', RESEED, 0)
 GO
+DELETE FROM CHAMBA.Tipo_Especialidad_X_Profesional
+DELETE FROM CHAMBA.Turnos
+DELETE FROM CHAMBA.Agenda
+DBCC CHECKIDENT ('CHAMBA.Agenda', RESEED, 0)
+GO
+DELETE FROM CHAMBA.Cancelaciones
+DELETE FROM CHAMBA.Pacientes
+DELETE FROM CHAMBA.Profesionales
+DELETE FROM CHAMBA.Planes
+DELETE FROM CHAMBA.Usuarios
+DBCC CHECKIDENT ('CHAMBA.Usuarios', RESEED, 0)
+GO
+DELETE FROM CHAMBA.Tipo_Especialidad
+DELETE FROM CHAMBA.Especialidades
+
+
 /* CREACION DE ROLES */
 
 INSERT INTO CHAMBA.Roles (Rol_Nombre, Rol_Estado) VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
@@ -159,13 +162,40 @@ FROM gd_esquema.Maestra
 WHERE Tipo_Especialidad_Codigo IS NOT NULL) AS S1
 
 
-/* MIGRACION DE TURNOS */
+/* MIGRACION DE AGENDA Y TURNOS */
+/*DECLARE @Fecha datetime, @Profesional numeric(18,0), 
+@Paciente numeric(18,0), @TipoEspecialidad numeric(18,0),
+@TurnoNumero numeric(18,0)
 
-INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Fecha, Turn_Paciente, Turn_Profesional, Turn_Tipo_Especialidad)
-SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
+DECLARE cursorAgenda CURSOR FOR SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
 FROM gd_esquema.Maestra
 WHERE Turno_Numero IS NOT NULL
 
+OPEN cursorAgenda
+FETCH NEXT FROM cursorAgenda INTO @TurnoNumero, @Fecha, @Paciente, @Profesional, @TipoEspecialidad
+WHILE @@FETCH_STATUS=0
+BEGIN
+
+INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Tipo_Especialidad) VALUES (@Fecha, @Profesional, @TipoEspecialidad)
+INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Paciente, Turn_Agenda) VALUES (@TurnoNumero, @Paciente, @@IDENTITY)
+
+FETCH NEXT FROM cursorAgenda INTO @TurnoNumero, @Fecha, @Paciente, @Profesional, @TipoEspecialidad
+END
+CLOSE cursorAgenda
+DEALLOCATE cursorAgenda*/
+
+
+INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Tipo_Especialidad)
+SELECT DISTINCT Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
+FROM gd_esquema.Maestra
+WHERE Turno_Numero IS NOT NULL
+
+INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Paciente, Turn_Agenda)
+SELECT DISTINCT Turno_Numero, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Agen_Id FROM CHAMBA.Agenda WHERE 
+Agen_Fecha = Turno_Fecha AND Agen_Profesional = (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI) AND Agen_Tipo_Especialidad = CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
+)
+FROM gd_esquema.Maestra
+WHERE Turno_Numero IS NOT NULL
 
 /* MIGRACION DE CONSULTAS */
 

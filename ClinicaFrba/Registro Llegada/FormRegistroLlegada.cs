@@ -121,9 +121,8 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FormSeleccionarBono form = new FormSeleccionarBono();
-            form.cargarBonos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
-            form.ShowDialog();
+            FormSeleccionarBono form = new FormSeleccionarBono();            
+            form.cargarBonos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));            
             if (form.DialogResult == DialogResult.OK)
                 cargarTurnos();
         }

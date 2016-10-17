@@ -68,7 +68,7 @@ namespace ClinicaFrba.Registro_Llegada
                     "JOIN CHAMBA.Profesionales ON Usua_Id = Prof_Usuario " +
                     "JOIN CHAMBA.Tipo_Especialidad_X_Profesional ON Tipo_Espec_X_Prof_Profesional = Prof_Usuario " +
                     "JOIN CHAMBA.Tipo_Especialidad ON Tipo_Espe_Codigo = Tipo_Espec_X_Pof_Tipo_Especialidad " +
-                    "WHERE Tipo_Espe_Especialidad = " + cboEspecialidad.SelectedValue;
+                    "WHERE Tipo_Espe_Especialidad = " + cboEspecialidad.SelectedValue + " UNION SELECT 'Todos', 0";
                 SqlCommand listar = new SqlCommand(query, conexion);
 
                 DataTable tabla = new DataTable();
@@ -121,7 +121,16 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            FormSeleccionarBono form = new FormSeleccionarBono();
+            form.cargarBonos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+                cargarTurnos();
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            habilitarBotones();
         }
     }
 }

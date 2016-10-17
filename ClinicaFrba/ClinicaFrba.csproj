@@ -191,6 +191,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro Llegada\FormSeleccionarBono.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro Llegada\FormSeleccionarBono.Designer.cs">
+      <DependentUpon>FormSeleccionarBono.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro resultado\FormModificación.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +313,9 @@
     </Compile>
     <EmbeddedResource Include="Registro Llegada\FormRegistroLlegada.resx">
       <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada\FormSeleccionarBono.resx">
+      <DependentUpon>FormSeleccionarBono.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro resultado\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>

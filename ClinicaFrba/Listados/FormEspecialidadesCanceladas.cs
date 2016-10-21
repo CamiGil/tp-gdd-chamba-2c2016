@@ -41,5 +41,10 @@ namespace ClinicaFrba.Listados
                 MessageBox.Show("Complete los criterios de busqueda");
             }
         }
+
+        private void FormEspecialidadesCanceladas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

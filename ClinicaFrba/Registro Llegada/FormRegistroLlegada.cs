@@ -22,7 +22,7 @@ namespace ClinicaFrba.Registro_Llegada
             conexion = new SqlConnection(@Configuraciones.datosConexion);    
             conexion.Open();
 
-            String query = "SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades";
+            String query = "SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades ORDER BY Espe_Descripcion";
 
             SqlCommand listar = new SqlCommand(query, conexion);
 

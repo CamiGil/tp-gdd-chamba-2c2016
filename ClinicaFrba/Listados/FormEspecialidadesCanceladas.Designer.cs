@@ -50,7 +50,7 @@
             "Profesionales"});
             this.cboDe.Location = new System.Drawing.Point(169, 12);
             this.cboDe.Name = "cboDe";
-            this.cboDe.Size = new System.Drawing.Size(182, 24);
+            this.cboDe.Size = new System.Drawing.Size(160, 24);
             this.cboDe.TabIndex = 0;
             // 
             // label10
@@ -67,9 +67,9 @@
             // btnBuscar
             // 
             this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnBuscar.Location = new System.Drawing.Point(385, 12);
+            this.btnBuscar.Location = new System.Drawing.Point(32, 72);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(169, 54);
+            this.btnBuscar.Size = new System.Drawing.Size(520, 28);
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -93,7 +93,7 @@
             "2018",
             "2019",
             "2020"});
-            this.cboAño.Location = new System.Drawing.Point(259, 42);
+            this.cboAño.Location = new System.Drawing.Point(460, 42);
             this.cboAño.Name = "cboAño";
             this.cboAño.Size = new System.Drawing.Size(92, 24);
             this.cboAño.TabIndex = 2;
@@ -103,7 +103,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(209, 42);
+            this.label1.Location = new System.Drawing.Point(410, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 19);
             this.label1.TabIndex = 28;
@@ -143,13 +143,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 72);
+            this.dataGridView1.Location = new System.Drawing.Point(32, 106);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.ShowEditingIcon = false;
-            this.dataGridView1.Size = new System.Drawing.Size(517, 238);
+            this.dataGridView1.Size = new System.Drawing.Size(520, 204);
             this.dataGridView1.TabIndex = 4;
             // 
             // FormEspecialidadesCanceladas
@@ -169,6 +169,7 @@
             this.Controls.Add(this.label10);
             this.Name = "FormEspecialidadesCanceladas";
             this.Text = "Hospital - Estadisticas";
+            this.Load += new System.EventHandler(this.FormEspecialidadesCanceladas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

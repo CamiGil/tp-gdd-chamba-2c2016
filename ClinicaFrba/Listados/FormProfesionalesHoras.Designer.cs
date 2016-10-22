@@ -36,6 +36,8 @@
             this.cboAño = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.cboMes = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +53,7 @@
             this.cboEspecialidad.Location = new System.Drawing.Point(136, 9);
             this.cboEspecialidad.Name = "cboEspecialidad";
             this.cboEspecialidad.Size = new System.Drawing.Size(160, 24);
-            this.cboEspecialidad.TabIndex = 42;
+            this.cboEspecialidad.TabIndex = 0;
             // 
             // label4
             // 
@@ -80,7 +82,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(520, 204);
-            this.dataGridView1.TabIndex = 46;
+            this.dataGridView1.TabIndex = 5;
             // 
             // cboSemestre
             // 
@@ -94,7 +96,8 @@
             this.cboSemestre.Location = new System.Drawing.Point(115, 42);
             this.cboSemestre.Name = "cboSemestre";
             this.cboSemestre.Size = new System.Drawing.Size(63, 24);
-            this.cboSemestre.TabIndex = 43;
+            this.cboSemestre.TabIndex = 1;
+            this.cboSemestre.SelectedIndexChanged += new System.EventHandler(this.cboSemestre_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -128,7 +131,7 @@
             this.cboAño.Location = new System.Drawing.Point(461, 42);
             this.cboAño.Name = "cboAño";
             this.cboAño.Size = new System.Drawing.Size(92, 24);
-            this.cboAño.TabIndex = 44;
+            this.cboAño.TabIndex = 3;
             // 
             // label1
             // 
@@ -147,10 +150,32 @@
             this.btnBuscar.Location = new System.Drawing.Point(33, 72);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(520, 28);
-            this.btnBuscar.TabIndex = 45;
+            this.btnBuscar.TabIndex = 4;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // cboMes
+            // 
+            this.cboMes.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cboMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMes.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboMes.FormattingEnabled = true;
+            this.cboMes.Location = new System.Drawing.Point(265, 42);
+            this.cboMes.Name = "cboMes";
+            this.cboMes.Size = new System.Drawing.Size(101, 24);
+            this.cboMes.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(217, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 19);
+            this.label3.TabIndex = 52;
+            this.label3.Text = "Mes:";
             // 
             // FormProfesionalesHoras
             // 
@@ -159,6 +184,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(583, 322);
+            this.Controls.Add(this.cboMes);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cboEspecialidad);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dataGridView1);
@@ -186,5 +213,7 @@
         private System.Windows.Forms.ComboBox cboAño;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.ComboBox cboMes;
+        private System.Windows.Forms.Label label3;
     }
 }

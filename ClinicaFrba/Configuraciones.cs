@@ -10,11 +10,11 @@ namespace ClinicaFrba
     class Configuraciones
     {
         public static FormLogin formLogin;
-        public static String datosConexion = "Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2016;Persist Security Info=True;User ID=gd;Password=gd2016";
-        public static int cantMaxIntentosLogin = 3;
+        public static String datosConexion = Properties.Settings.Default.GD2C2016ConnectionString;
+        public static int cantMaxIntentosLogin = Properties.Settings.Default.intentosLogin;
         public static decimal usuario;
         public static decimal rol;
-        public static String fecha = "2015-02-10";
+        public static DateTime fecha = Properties.Settings.Default.fecha;
 
         public static void validarCierreVentana(Object sender, System.Windows.Forms.FormClosedEventArgs e)
         {

@@ -22,5 +22,33 @@ namespace ClinicaFrba.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("02/10/2015 08:00:00")]
+        public global::System.DateTime fecha {
+            get {
+                return ((global::System.DateTime)(this["fecha"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2016;Persist Security Inf" +
+            "o=True;User ID=gd;Password=gd2016")]
+        public string GD2C2016ConnectionString {
+            get {
+                return ((string)(this["GD2C2016ConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int intentosLogin {
+            get {
+                return ((int)(this["intentosLogin"]));
+            }
+        }
     }
 }

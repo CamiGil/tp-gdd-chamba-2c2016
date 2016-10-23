@@ -41,7 +41,7 @@ namespace ClinicaFrba.Abm_Afiliado
             cboPlan.DisplayMember = "Plan_Descripcion";
             cboPlan.ValueMember = "Plan_Codigo";
 
-            dtpNacimiento.Text = Configuraciones.fecha;
+            dtpNacimiento.Value = Configuraciones.fecha;
         }
 
         private void FormEditarAfiliado_Load(object sender, EventArgs e)

@@ -66,8 +66,8 @@ namespace ClinicaFrba.Registro_Llegada
                 String query = "SELECT (Usua_Nombre + ' ' + Usua_Apellido) AS Nombre, Prof_Usuario " +
                     "FROM CHAMBA.Usuarios " +
                     "JOIN CHAMBA.Profesionales ON Usua_Id = Prof_Usuario " +
-                    "JOIN CHAMBA.Tipo_Especialidad_X_Profesional ON Tipo_Espec_X_Prof_Profesional = Prof_Usuario " +
-                    "JOIN CHAMBA.Tipo_Especialidad ON Tipo_Espe_Codigo = Tipo_Espec_X_Pof_Tipo_Especialidad " +
+                    "JOIN CHAMBA.Tipo_Especialidad_X_Profesional ON Tipo_Espe_X_Prof_Profesional = Prof_Usuario " +
+                    "JOIN CHAMBA.Tipo_Especialidad ON Tipo_Espe_Codigo = Tipo_Espe_X_Prof_Tipo_Especialidad " +
                     "WHERE Tipo_Espe_Especialidad = " + cboEspecialidad.SelectedValue + " UNION SELECT 'Todos', 0";
                 SqlCommand listar = new SqlCommand(query, conexion);
 

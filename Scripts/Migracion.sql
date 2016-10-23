@@ -155,7 +155,7 @@ DEALLOCATE cursorMedicos
 
 /* MIGRACION DE TIPO_ESPECIALIDAD_X_PROFESIONAL */
 
-INSERT INTO CHAMBA.Tipo_Especialidad_X_Profesional (Tipo_Espec_X_Pof_Tipo_Especialidad, Tipo_Espec_X_Prof_Profesional)
+INSERT INTO CHAMBA.Tipo_Especialidad_X_Profesional (Tipo_Espe_X_Prof_Tipo_Especialidad, Tipo_Espe_X_Prof_Profesional)
 SELECT CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0)), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI) FROM
 (SELECT DISTINCT Especialidad_Codigo, Tipo_Especialidad_Codigo, Medico_DNI
 FROM gd_esquema.Maestra

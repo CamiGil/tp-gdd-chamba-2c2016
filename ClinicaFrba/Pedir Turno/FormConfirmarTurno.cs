@@ -36,7 +36,7 @@ namespace ClinicaFrba.Pedir_Turno
         /*-------------------------------------------INICIALIES----------------------------------------------*/
         public void obtener_datos(string afiliado, string numero_bono,string nombre, string apellido, string tipo_especialidad, string especialidad)
         {
-            this.nombre_especialidad = nombre;
+            this.nombre_profesional = nombre;
             this.apellido_profesional = apellido;
             this.tipo_especialidad = tipo_especialidad;
             this.nombre_especialidad = especialidad;

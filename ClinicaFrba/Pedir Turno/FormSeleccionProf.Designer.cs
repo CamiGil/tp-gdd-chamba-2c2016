@@ -28,28 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Info = new System.Windows.Forms.DataGridView();
             this.lblNombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Nombre_profesional = new System.Windows.Forms.TextBox();
+            this.Apellido_profesional = new System.Windows.Forms.TextBox();
+            this.Especialidades_profesional = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.Buscar = new System.Windows.Forms.Button();
+            this.Limpiar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.Info)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // Info
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 118);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(646, 233);
-            this.dataGridView1.TabIndex = 0;
+            this.Info.AllowUserToAddRows = false;
+            this.Info.AllowUserToDeleteRows = false;
+            this.Info.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Info.Location = new System.Drawing.Point(12, 118);
+            this.Info.Name = "Info";
+            this.Info.ReadOnly = true;
+            this.Info.Size = new System.Drawing.Size(646, 233);
+            this.Info.TabIndex = 0;
             // 
             // lblNombre
             // 
@@ -87,31 +89,31 @@
             this.label2.Text = "Apellido del profesional";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // txtNombre
+            // Nombre_profesional
             // 
-            this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtNombre.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(195, 5);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(182, 23);
-            this.txtNombre.TabIndex = 4;
+            this.Nombre_profesional.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Nombre_profesional.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nombre_profesional.Location = new System.Drawing.Point(195, 5);
+            this.Nombre_profesional.Name = "Nombre_profesional";
+            this.Nombre_profesional.Size = new System.Drawing.Size(182, 23);
+            this.Nombre_profesional.TabIndex = 4;
             // 
-            // textBox1
+            // Apellido_profesional
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(195, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(182, 23);
-            this.textBox1.TabIndex = 5;
+            this.Apellido_profesional.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Apellido_profesional.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Apellido_profesional.Location = new System.Drawing.Point(195, 43);
+            this.Apellido_profesional.Name = "Apellido_profesional";
+            this.Apellido_profesional.Size = new System.Drawing.Size(182, 23);
+            this.Apellido_profesional.TabIndex = 5;
             // 
-            // comboBox1
+            // Especialidades_profesional
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(141, 80);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(236, 21);
-            this.comboBox1.TabIndex = 6;
+            this.Especialidades_profesional.FormattingEnabled = true;
+            this.Especialidades_profesional.Location = new System.Drawing.Point(141, 80);
+            this.Especialidades_profesional.Name = "Especialidades_profesional";
+            this.Especialidades_profesional.Size = new System.Drawing.Size(236, 21);
+            this.Especialidades_profesional.TabIndex = 6;
             // 
             // button1
             // 
@@ -122,6 +124,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -132,6 +135,29 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Buscar
+            // 
+            this.Buscar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Buscar.Location = new System.Drawing.Point(478, 12);
+            this.Buscar.Name = "Buscar";
+            this.Buscar.Size = new System.Drawing.Size(142, 45);
+            this.Buscar.TabIndex = 9;
+            this.Buscar.Text = "Buscar";
+            this.Buscar.UseVisualStyleBackColor = true;
+            this.Buscar.Click += new System.EventHandler(this.Buscar_Click);
+            // 
+            // Limpiar
+            // 
+            this.Limpiar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Limpiar.Location = new System.Drawing.Point(478, 67);
+            this.Limpiar.Name = "Limpiar";
+            this.Limpiar.Size = new System.Drawing.Size(142, 45);
+            this.Limpiar.TabIndex = 10;
+            this.Limpiar.Text = "Limpiar";
+            this.Limpiar.UseVisualStyleBackColor = true;
+            this.Limpiar.Click += new System.EventHandler(this.Limpiar_Click);
             // 
             // FormSeleccionProf
             // 
@@ -139,18 +165,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(675, 435);
+            this.Controls.Add(this.Limpiar);
+            this.Controls.Add(this.Buscar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.Especialidades_profesional);
+            this.Controls.Add(this.Apellido_profesional);
+            this.Controls.Add(this.Nombre_profesional);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.Info);
             this.Name = "FormSeleccionProf";
             this.Text = "Hospital - Reserva de turnos";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Info)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,14 +186,16 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView Info;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox Nombre_profesional;
+        private System.Windows.Forms.TextBox Apellido_profesional;
+        private System.Windows.Forms.ComboBox Especialidades_profesional;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Buscar;
+        private System.Windows.Forms.Button Limpiar;
     }
 }

@@ -336,5 +336,10 @@ namespace ClinicaFrba.Abm_Afiliado
                 cboPlan.Text = planCambiado.nuevoPlan;
             }
         }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

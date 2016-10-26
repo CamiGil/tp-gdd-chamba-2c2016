@@ -185,14 +185,14 @@ CLOSE cursorAgenda
 DEALLOCATE cursorAgenda*/
 
 
-INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Tipo_Especialidad)
-SELECT DISTINCT Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
+INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Especialidad)
+SELECT DISTINCT Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), Especialidad_Codigo
 FROM gd_esquema.Maestra
 WHERE Turno_Numero IS NOT NULL
 
 INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Paciente, Turn_Agenda)
 SELECT DISTINCT Turno_Numero, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Agen_Id FROM CHAMBA.Agenda WHERE 
-Agen_Fecha = Turno_Fecha AND Agen_Profesional = (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI) AND Agen_Tipo_Especialidad = CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
+Agen_Fecha = Turno_Fecha AND Agen_Profesional = (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI) AND Agen_Especialidad = Especialidad_Codigo
 )
 FROM gd_esquema.Maestra
 WHERE Turno_Numero IS NOT NULL

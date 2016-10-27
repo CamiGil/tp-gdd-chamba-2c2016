@@ -17,6 +17,7 @@ namespace ClinicaFrba.Pedir_Turno
         private string afiliado;
         private string bono;
         private SqlConnection conexion;
+        private string tipo_busqueda;
 
         /*-------------------------------------------CONSTRUCTOR---------------------------------------------*/
         public FormSeleccionProf()
@@ -31,9 +32,9 @@ namespace ClinicaFrba.Pedir_Turno
         private void button1_Click(object sender, EventArgs e)
         {
             modificar_estado_labels(false);
-            if (validar_labels_vacios())
+            if (Info.SelectedRows  == null)
             {
-                MessageBox.Show("Rellene todos los campos");
+                MessageBox.Show("Seleccione la fila que contiene los datos requeridos");
             }
             else
             {
@@ -45,22 +46,38 @@ namespace ClinicaFrba.Pedir_Turno
         {
             FormConfirmarTurno confirmacion = new FormConfirmarTurno();
 
-            DataGridViewRow row= Info.SelectedRows[0];
-            string especialidad = row.Cells[3].ToString(); // <-- la tercera columna es la correspondiente a la especialidad
+            DataGridViewRow row = Info.SelectedRows[0];
+            string id_profesional = row.Cells[0].Value.ToString(); // <-- la primera columna es la correspondiente al ID_Prof
+            string especialidad = row.Cells[3].Value.ToString(); // <-- la cuarta columna es la correspondiente al ID_Espe
 
-            if(Especialidades_profesional.SelectedItem == null)
+            if (tipo_busqueda == "solo_especialidad")
             {
-                string tipo_especialidad = row.Cells[2].ToString(); // <-- la segunda columna es la correspondiente al tipo de especialidad
-                confirmacion.obtener_datos(this.afiliado,this.bono,Nombre_profesional.Text.ToString(), Apellido_profesional.Text.ToString(), tipo_especialidad, especialidad);
+                string nombre_profesional = row.Cells[1].Value.ToString();
+                string apellido_profesional = row.Cells[2].Value.ToString();
+                string nombre_y_apellido = nombre_profesional + ' ' + apellido_profesional;
+                confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad,nombre_y_apellido,Especialidades_profesional.SelectedItem.ToString());
+                
             }
             else
             {
-                confirmacion.obtener_datos(this.afiliado,this.bono,Nombre_profesional.Text.ToString(),Apellido_profesional.Text.ToString(),Especialidades_profesional.SelectedItem.ToString(),especialidad);
+                string nombre_y_apellido = Nombre_profesional.Text.ToString() + ' '+ Apellido_profesional.Text.ToString();
+                if (tipo_busqueda == "con_datos_y_especialidad")
+                {
+                    confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad, nombre_y_apellido, Especialidades_profesional.SelectedItem.ToString());
+                }
+                else
+                {
+                    string especialidad_descipcion = row.Cells[4].Value.ToString();
+                    confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad, nombre_y_apellido, especialidad_descipcion);
+                }
+                
             }
+
             confirmacion.Show();
             this.Hide();
         }
 
+        
         private void modificar_estado_labels(Boolean estado)
         {
             Nombre_profesional.Enabled = estado;
@@ -82,25 +99,50 @@ namespace ClinicaFrba.Pedir_Turno
         private void Buscar_Click(object sender, EventArgs e)
         {
             this.modificarEstadoControles(false);
-            if (validarCamposVacios())
-            {
-                if (Especialidades_profesional.SelectedItem == null)
-                {
-                    this.buscar_profesional_sin_refinamiento();
-                }
-                else
-                {
-                    this.buscar_profesional_refinado_por_tipo();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Rellene todos los campos para poder continuar");
-            }
+
+           if (Especialidades_profesional.SelectedItem == null)
+           {
+               if (validarCamposVacios())
+               {
+                   this.buscar_profesional_sin_refinamiento();
+               }
+               else { MessageBox.Show("Rellene los campos de nombre y apellido"); }
+           }
+           else
+           {
+               if (validarCamposVacios())
+               {
+                   this.buscar_profesional_refinado_por_tipo();
+               }
+               else
+               {
+                   this.buscar_profesionales_solo_por_especialidad();
+               }
+           }
+          }
+
+        private void buscar_profesionales_solo_por_especialidad()
+        {
+            this.tipo_busqueda = "solo_especialidad";
+
+            conexion.Open();
+
+            SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.PROFESIONALES_POR_ESPECIALIDAD", conexion);
+
+            busqueda_profesional_especialidades.CommandType = CommandType.StoredProcedure;
+            busqueda_profesional_especialidades.Parameters.Add("@Especialidad_descripcion", SqlDbType.VarChar).Value = Especialidades_profesional.SelectedItem.ToString();
+
+            SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
+            rellenar_tabla_informacion(adapter);
+
+            this.modificarEstadoControles(true);
+
+            conexion.Close();
         }
 
         private void buscar_profesional_refinado_por_tipo()
         {
+            this.tipo_busqueda = "con_datos_y_especialidad";
             conexion.Open();
 
             SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.BUSQUEDA_PROFESIONAL_REFINADO_POR_TIPO", conexion);
@@ -108,19 +150,21 @@ namespace ClinicaFrba.Pedir_Turno
             busqueda_profesional_especialidades.CommandType = CommandType.StoredProcedure;
             busqueda_profesional_especialidades.Parameters.Add("@Nombre_profesional", SqlDbType.VarChar).Value = Nombre_profesional.Text.ToString();
             busqueda_profesional_especialidades.Parameters.Add("@Apellido_profesional", SqlDbType.VarChar).Value = Apellido_profesional.Text.ToString();
-            busqueda_profesional_especialidades.Parameters.Add("@Tipo_Especialidad", SqlDbType.VarChar).Value = Especialidades_profesional.SelectedItem.ToString();
+            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.VarChar).Value = Especialidades_profesional.SelectedItem.ToString();
 
-            busqueda_profesional_especialidades.ExecuteNonQuery();
+            //busqueda_profesional_especialidades.ExecuteNonQuery();
 
             SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
 
             rellenar_tabla_informacion(adapter);
-
+            this.modificarEstadoControles(true);
             conexion.Close();
         }
 
         private void buscar_profesional_sin_refinamiento()
         {
+            this.tipo_busqueda = "solo_datos";
+
             conexion.Open();
 
             SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.BUSQUEDA_PROFESIONAL_ESPECIALIDADES", conexion);
@@ -132,7 +176,7 @@ namespace ClinicaFrba.Pedir_Turno
             SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
 
             rellenar_tabla_informacion(adapter);
-            
+            this.modificarEstadoControles(true);
             conexion.Close();
         }
 
@@ -163,7 +207,7 @@ namespace ClinicaFrba.Pedir_Turno
         {
             conexion.Open();
 
-            String query = "Select DISTINCT(e.Tipo_Espe_Descripcion) from CHAMBA.Tipo_Especialidad e";
+            String query = "SELECT DISTINCT(e.Espe_Descripcion) as 'Tipo' FROM CHAMBA.Especialidades e";
             SqlCommand listar = new SqlCommand(query, conexion);
 
             DataTable tabla = new DataTable();
@@ -174,7 +218,7 @@ namespace ClinicaFrba.Pedir_Turno
             int indeeex = 0;
             while (indeeex < tabla.Rows.Count)
             {
-                Especialidades_profesional.Items.Add(tabla.Rows[indeeex]["tipo"].ToString());
+                Especialidades_profesional.Items.Add(tabla.Rows[indeeex]["Tipo"].ToString());
                 indeeex++;
             }
 
@@ -198,6 +242,7 @@ namespace ClinicaFrba.Pedir_Turno
         {
             Nombre_profesional.Clear();
             Apellido_profesional.Clear();
+            this.modificarEstadoControles(true);
         }
         /*-------------------------------------------NO RELEVANTES--------------------------------------------*/
         public void obtener_datos(string numero_afiliado, string numero_bono)

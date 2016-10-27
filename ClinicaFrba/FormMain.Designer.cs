@@ -43,6 +43,7 @@
             this.panelControles.Name = "panelControles";
             this.panelControles.Size = new System.Drawing.Size(813, 397);
             this.panelControles.TabIndex = 0;
+            this.panelControles.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControles_Paint);
             // 
             // lblUsuario
             // 

@@ -15,11 +15,11 @@ namespace ClinicaFrba.Pedir_Turno
     {
         /*-------------------------------------------ATRIBUTOS-----------------------------------------------*/
         private SqlConnection conexion;
+        private decimal profesional;
         private string nombre_profesional;
-        private string apellido_profesional;
-        private string tipo_especialidad;
         private string nombre_especialidad;
-        private string afiliado;
+        private decimal especialidad;
+        private decimal afiliado;
         private string bono;
 
         /*-------------------------------------------CONSTRUCTOR---------------------------------------------*/
@@ -29,25 +29,27 @@ namespace ClinicaFrba.Pedir_Turno
             this.conexion = new SqlConnection(@Configuraciones.datosConexion);
             this.FormClosed += Configuraciones.validarCierreVentana;
 
+        }
+
+        /*-------------------------------------------INICIALIES----------------------------------------------*/
+        public void obtener_datos(string afiliado, string numero_bono,string id_profesional, string id_especialidad, string nombre_profesional, string especialidad)
+        {
+
+            this.profesional = decimal.Parse(id_profesional);
+            this.nombre_profesional = nombre_profesional;
+            this.nombre_especialidad = especialidad;
+            this.especialidad = decimal.Parse(id_especialidad);
+            this.afiliado = decimal.Parse(afiliado);
+            this.bono = numero_bono;
+
             mostrar_datos_del_profesional();
             mostrar_dias_disponibles_iniciales();
         }
 
-        /*-------------------------------------------INICIALIES----------------------------------------------*/
-        public void obtener_datos(string afiliado, string numero_bono,string nombre, string apellido, string tipo_especialidad, string especialidad)
-        {
-            this.nombre_profesional = nombre;
-            this.apellido_profesional = apellido;
-            this.tipo_especialidad = tipo_especialidad;
-            this.nombre_especialidad = especialidad;
-            this.afiliado = afiliado;
-            this.bono = numero_bono;
-        }
-
         private void mostrar_datos_del_profesional()
         {
-            Nombre_del_profesional.Text = this.nombre_profesional + this.apellido_profesional;
-            Especialidad_del_profesional.Text = this.tipo_especialidad + ',' + this.nombre_especialidad;
+            Nombre_del_profesional.Text = this.nombre_profesional;
+            Especialidad_del_profesional.Text = this.nombre_especialidad;
         }
 
         private void mostrar_dias_disponibles_iniciales()
@@ -65,10 +67,8 @@ namespace ClinicaFrba.Pedir_Turno
             SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.DIAS_DISPONIBLES_PROFESIONAL_POR_ESPECIALDIAD", conexion);
 
             busqueda_profesional_especialidades.CommandType = CommandType.StoredProcedure;
-            busqueda_profesional_especialidades.Parameters.Add("@Nombre_profesional", SqlDbType.VarChar).Value = this.Nombre_del_profesional;
-            busqueda_profesional_especialidades.Parameters.Add("@Apellido_profesional", SqlDbType.VarChar).Value = this.apellido_profesional;
-            busqueda_profesional_especialidades.Parameters.Add("@Tipo_especialidad", SqlDbType.VarChar).Value = this.tipo_especialidad;
-            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.VarChar).Value = this.Especialidad_del_profesional;
+            busqueda_profesional_especialidades.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
+            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
             busqueda_profesional_especialidades.Parameters.Add("@Numero_mes", SqlDbType.Int).Value = int.Parse(mes);
             busqueda_profesional_especialidades.Parameters.Add("@Anio", SqlDbType.Int).Value = int.Parse(anio);
 
@@ -97,10 +97,8 @@ namespace ClinicaFrba.Pedir_Turno
             SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.HORARIOS_DISPONIBLES_EN_AGENDA_PROFESIONAL", conexion);
 
             busqueda_profesional_especialidades.CommandType = CommandType.StoredProcedure;
-            busqueda_profesional_especialidades.Parameters.Add("@Nombre_profesional", SqlDbType.VarChar).Value = this.Nombre_del_profesional;
-            busqueda_profesional_especialidades.Parameters.Add("@Apellido_profesional", SqlDbType.VarChar).Value = this.apellido_profesional;
-            busqueda_profesional_especialidades.Parameters.Add("@Tipo_especialidad", SqlDbType.VarChar).Value = this.tipo_especialidad;
-            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.VarChar).Value = this.Especialidad_del_profesional;
+            busqueda_profesional_especialidades.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
+            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
             busqueda_profesional_especialidades.Parameters.Add("@Dia", SqlDbType.Int).Value = int.Parse(dia);
             busqueda_profesional_especialidades.Parameters.Add("@Numero_mes", SqlDbType.Int).Value = int.Parse(mes);
             busqueda_profesional_especialidades.Parameters.Add("@Anio", SqlDbType.Int).Value = int.Parse(anio);
@@ -119,16 +117,8 @@ namespace ClinicaFrba.Pedir_Turno
         private void button1_Click(object sender, EventArgs e)
         {
 
-            /* OBTENCION DE DIA, MES Y AÑO SELECCIONADO */
-            SelectionRange fecha = Calendario.SelectionRange;
-            string mes = fecha.Start.Month.ToString();
-            string anio = fecha.Start.Year.ToString();
-            string dia = fecha.Start.Day.ToString();
-
-            /* OBTENCION DE HORA ESPECIFICA SELECCIONADO */
-            DataGridViewRow row= Info.SelectedRows[0];
-            string hora = row.Cells[1].ToString();
-            string minutos = row.Cells[2].ToString();
+            DataGridViewRow row = Info.SelectedRows[0];
+            string id_agenda= row.Cells[2].Value.ToString(); // <-- la tercera columna es la correspondiente al ID_Agenda
 
             /* OPERACION */
             conexion.Open();
@@ -136,19 +126,19 @@ namespace ClinicaFrba.Pedir_Turno
             SqlCommand reserva = new SqlCommand("CHAMBA.RESERVA_DE_TURNO", conexion);
 
             reserva.CommandType = CommandType.StoredProcedure;
-            reserva.Parameters.Add("@Nombre_profesional", SqlDbType.VarChar).Value = this.Nombre_del_profesional;
-            reserva.Parameters.Add("@Apellido_profesional", SqlDbType.VarChar).Value = this.apellido_profesional;
-            reserva.Parameters.Add("@Tipo_especialidad", SqlDbType.VarChar).Value = this.tipo_especialidad;
-            reserva.Parameters.Add("@Especialidad", SqlDbType.VarChar).Value = this.Especialidad_del_profesional;
-            reserva.Parameters.Add("@Dia", SqlDbType.Int).Value = int.Parse(dia);
-            reserva.Parameters.Add("@Numero_mes", SqlDbType.Int).Value = int.Parse(mes);
-            reserva.Parameters.Add("@Anio", SqlDbType.Int).Value = int.Parse(anio);
-            reserva.Parameters.Add("@Hora", SqlDbType.Int).Value = int.Parse(hora);
-            reserva.Parameters.Add("@Minuto", SqlDbType.Int).Value = int.Parse(minutos);
+            reserva.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = this.afiliado;
+            reserva.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
+            reserva.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
+            reserva.Parameters.Add("@Agenda_id", SqlDbType.Decimal).Value = decimal.Parse(id_agenda);
 
             reserva.ExecuteNonQuery();
+
             conexion.Close();
+
+            MessageBox.Show("Turno reservado con éxito");
+            this.Hide();
         }
+       
         /*-------------------------------------------CANCELAR------------------------------------------------*/
         private void button2_Click(object sender, EventArgs e)
         {
@@ -164,6 +154,15 @@ namespace ClinicaFrba.Pedir_Turno
         private void FormConfirmarTurno_Load(object sender, EventArgs e)
         {
 
+        }
+        
+        /*-------------------------------------------DÍAS DE ATENCION EN EL MES--------------------------------*/
+        private void DiasDeAtencion_Click(object sender, EventArgs e)
+        {
+            SelectionRange fecha = Calendario.SelectionRange;
+            string mes = fecha.Start.Month.ToString();
+            string anio = fecha.Start.Year.ToString();
+            this.cargar_dias_disponibles_del_mes(mes, anio);
         }
       
     }

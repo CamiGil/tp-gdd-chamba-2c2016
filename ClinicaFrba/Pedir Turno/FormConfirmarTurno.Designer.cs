@@ -37,6 +37,7 @@
             this.Horarios_disponibles = new System.Windows.Forms.Button();
             this.Nombre_del_profesional = new System.Windows.Forms.Label();
             this.Especialidad_del_profesional = new System.Windows.Forms.Label();
+            this.DiasDeAtencion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Info)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,11 +100,11 @@
             // 
             // Horarios_disponibles
             // 
-            this.Horarios_disponibles.Location = new System.Drawing.Point(29, 257);
+            this.Horarios_disponibles.Location = new System.Drawing.Point(16, 247);
             this.Horarios_disponibles.Name = "Horarios_disponibles";
-            this.Horarios_disponibles.Size = new System.Drawing.Size(158, 23);
+            this.Horarios_disponibles.Size = new System.Drawing.Size(192, 23);
             this.Horarios_disponibles.TabIndex = 6;
-            this.Horarios_disponibles.Text = "Ver horarios disponibles";
+            this.Horarios_disponibles.Text = "Ver horarios disponibles del día";
             this.Horarios_disponibles.UseVisualStyleBackColor = true;
             this.Horarios_disponibles.Click += new System.EventHandler(this.Horarios_disponibles_Click);
             // 
@@ -123,12 +124,23 @@
             this.Especialidad_del_profesional.Size = new System.Drawing.Size(0, 13);
             this.Especialidad_del_profesional.TabIndex = 8;
             // 
+            // DiasDeAtencion
+            // 
+            this.DiasDeAtencion.Location = new System.Drawing.Point(16, 276);
+            this.DiasDeAtencion.Name = "DiasDeAtencion";
+            this.DiasDeAtencion.Size = new System.Drawing.Size(192, 51);
+            this.DiasDeAtencion.TabIndex = 9;
+            this.DiasDeAtencion.Text = "Ver días de atención en el mes seleccionado";
+            this.DiasDeAtencion.UseVisualStyleBackColor = true;
+            this.DiasDeAtencion.Click += new System.EventHandler(this.DiasDeAtencion_Click);
+            // 
             // FormConfirmarTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(634, 410);
+            this.Controls.Add(this.DiasDeAtencion);
             this.Controls.Add(this.Especialidad_del_profesional);
             this.Controls.Add(this.Nombre_del_profesional);
             this.Controls.Add(this.Horarios_disponibles);
@@ -158,5 +170,6 @@
         private System.Windows.Forms.Button Horarios_disponibles;
         private System.Windows.Forms.Label Nombre_del_profesional;
         private System.Windows.Forms.Label Especialidad_del_profesional;
+        private System.Windows.Forms.Button DiasDeAtencion;
     }
 }

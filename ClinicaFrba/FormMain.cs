@@ -111,6 +111,8 @@ namespace ClinicaFrba
                     break;
                 case 4:
                     //ABRIR PEDIDO DE TURNOS
+                    Pedir_Turno.FormIngresarBono form4 = new Pedir_Turno.FormIngresarBono();
+                    form4.ShowDialog();
                     break;
                 case 5:
                     //ABRIR REGISTRO DE LLEGADA
@@ -135,6 +137,11 @@ namespace ClinicaFrba
         {            
             Configuraciones.formLogin.Show();
             this.Close();
+        }
+
+        private void panelControles_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
     }

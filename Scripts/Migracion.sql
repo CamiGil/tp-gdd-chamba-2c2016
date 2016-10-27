@@ -57,8 +57,6 @@ WHERE Especialidad_Codigo IS NOT NULL
 
 /* MIGRACION DE TIPOS DE ESPECIALIDAD */
 
-DECLARE @Temp numeric(18,0)
-
 INSERT INTO CHAMBA.Tipo_Especialidad (Tipo_Espe_Codigo, Tipo_Espe_Descripcion, Tipo_Espe_Especialidad)
 SELECT CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0)), Tipo_Especialidad_Descripcion, Especialidad_Codigo 
 FROM gd_esquema.Maestra
@@ -163,27 +161,6 @@ WHERE Tipo_Especialidad_Codigo IS NOT NULL) AS S1
 
 
 /* MIGRACION DE AGENDA Y TURNOS */
-/*DECLARE @Fecha datetime, @Profesional numeric(18,0), 
-@Paciente numeric(18,0), @TipoEspecialidad numeric(18,0),
-@TurnoNumero numeric(18,0)
-
-DECLARE cursorAgenda CURSOR FOR SELECT DISTINCT Turno_Numero, Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Paciente_DNI), (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), CAST(CAST(Especialidad_Codigo AS VARCHAR(18)) + CAST(Tipo_Especialidad_Codigo AS VARCHAR(18)) AS NUMERIC(18,0))
-FROM gd_esquema.Maestra
-WHERE Turno_Numero IS NOT NULL
-
-OPEN cursorAgenda
-FETCH NEXT FROM cursorAgenda INTO @TurnoNumero, @Fecha, @Paciente, @Profesional, @TipoEspecialidad
-WHILE @@FETCH_STATUS=0
-BEGIN
-
-INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Tipo_Especialidad) VALUES (@Fecha, @Profesional, @TipoEspecialidad)
-INSERT INTO CHAMBA.Turnos (Turn_Numero, Turn_Paciente, Turn_Agenda) VALUES (@TurnoNumero, @Paciente, @@IDENTITY)
-
-FETCH NEXT FROM cursorAgenda INTO @TurnoNumero, @Fecha, @Paciente, @Profesional, @TipoEspecialidad
-END
-CLOSE cursorAgenda
-DEALLOCATE cursorAgenda*/
-
 
 INSERT INTO CHAMBA.Agenda (Agen_Fecha, Agen_Profesional, Agen_Especialidad)
 SELECT DISTINCT Turno_Fecha, (SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_DNI = Medico_DNI), Especialidad_Codigo

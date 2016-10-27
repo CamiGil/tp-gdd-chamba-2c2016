@@ -66,8 +66,7 @@ namespace ClinicaFrba.Pedir_Turno
         private void iniciar_seleccion_del_profesional()
         {
             FormSeleccionProf seleccion_de_profesional = new FormSeleccionProf();
-            seleccion_de_profesional.obtener_datos(numAfiliado.Text.ToString(), numBono.Text.ToString());
-            seleccion_de_profesional.Show();
+            seleccion_de_profesional.ShowDialog();
             this.Hide();
         }
 

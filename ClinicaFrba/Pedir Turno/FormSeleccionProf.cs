@@ -14,8 +14,6 @@ namespace ClinicaFrba.Pedir_Turno
     public partial class FormSeleccionProf : Form
     {
         /*-------------------------------------------ATRIBUTOS-----------------------------------------------*/
-        private string afiliado;
-        private string bono;
         private SqlConnection conexion;
         private string tipo_busqueda;
 
@@ -24,15 +22,13 @@ namespace ClinicaFrba.Pedir_Turno
         {
             InitializeComponent();
             this.conexion = new SqlConnection(@Configuraciones.datosConexion);
-            this.FormClosed += Configuraciones.validarCierreVentana;
             rellenar_scroll_especialidades();
         }
 
         /*-------------------------------------------ACEPTAR-------------------------------------------------*/
         private void button1_Click(object sender, EventArgs e)
         {
-            modificar_estado_labels(false);
-            if (Info.SelectedRows  == null)
+            if (Info.SelectedRows == null)
             {
                 MessageBox.Show("Seleccione la fila que contiene los datos requeridos");
             }
@@ -55,7 +51,7 @@ namespace ClinicaFrba.Pedir_Turno
                 string nombre_profesional = row.Cells[1].Value.ToString();
                 string apellido_profesional = row.Cells[2].Value.ToString();
                 string nombre_y_apellido = nombre_profesional + ' ' + apellido_profesional;
-                confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad,nombre_y_apellido,Especialidades_profesional.SelectedItem.ToString());
+                confirmacion.obtener_datos(id_profesional, especialidad,nombre_y_apellido,Especialidades_profesional.SelectedItem.ToString());
                 
             }
             else
@@ -63,25 +59,21 @@ namespace ClinicaFrba.Pedir_Turno
                 string nombre_y_apellido = Nombre_profesional.Text.ToString() + ' '+ Apellido_profesional.Text.ToString();
                 if (tipo_busqueda == "con_datos_y_especialidad")
                 {
-                    confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad, nombre_y_apellido, Especialidades_profesional.SelectedItem.ToString());
+                    confirmacion.obtener_datos(id_profesional, especialidad, nombre_y_apellido, Especialidades_profesional.SelectedItem.ToString());
                 }
                 else
                 {
                     string especialidad_descipcion = row.Cells[4].Value.ToString();
-                    confirmacion.obtener_datos(this.afiliado, this.bono, id_profesional, especialidad, nombre_y_apellido, especialidad_descipcion);
+                    confirmacion.obtener_datos(id_profesional, especialidad, nombre_y_apellido, especialidad_descipcion);
                 }
                 
             }
 
-            confirmacion.Show();
-            this.Hide();
-        }
-
-        
-        private void modificar_estado_labels(Boolean estado)
-        {
-            Nombre_profesional.Enabled = estado;
-            Apellido_profesional.Enabled = estado;
+            confirmacion.ShowDialog();
+            if (confirmacion.DialogResult == DialogResult.OK)
+            {
+                this.Close();
+            }            
         }
 
         private bool validar_labels_vacios()
@@ -98,7 +90,6 @@ namespace ClinicaFrba.Pedir_Turno
         /*-------------------------------------------BUSCAR--------------------------------------------------*/
         private void Buscar_Click(object sender, EventArgs e)
         {
-            this.modificarEstadoControles(false);
 
            if (Especialidades_profesional.SelectedItem == null)
            {
@@ -135,8 +126,6 @@ namespace ClinicaFrba.Pedir_Turno
             SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
             rellenar_tabla_informacion(adapter);
 
-            this.modificarEstadoControles(true);
-
             conexion.Close();
         }
 
@@ -157,7 +146,6 @@ namespace ClinicaFrba.Pedir_Turno
             SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
 
             rellenar_tabla_informacion(adapter);
-            this.modificarEstadoControles(true);
             conexion.Close();
         }
 
@@ -176,7 +164,6 @@ namespace ClinicaFrba.Pedir_Turno
             SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
 
             rellenar_tabla_informacion(adapter);
-            this.modificarEstadoControles(true);
             conexion.Close();
         }
 
@@ -196,24 +183,20 @@ namespace ClinicaFrba.Pedir_Turno
             return false;
         }
 
-        private void modificarEstadoControles(Boolean estado)
-        {
-            Nombre_profesional.Enabled = estado;
-            Apellido_profesional.Enabled = estado;
-        }
-
         /*-------------------------------------------SCROLL ESPECIALIDADES------------------------------------*/
         private void rellenar_scroll_especialidades()
         {
             conexion.Open();
 
-            String query = "SELECT DISTINCT(e.Espe_Descripcion) as 'Tipo' FROM CHAMBA.Especialidades e";
+            String query = "SELECT e.Espe_Descripcion as 'Tipo' FROM CHAMBA.Especialidades e ORDER BY e.Espe_Descripcion";
             SqlCommand listar = new SqlCommand(query, conexion);
 
             DataTable tabla = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = listar;
             adapter.Fill(tabla);
+
+
 
             int indeeex = 0;
             while (indeeex < tabla.Rows.Count)
@@ -242,15 +225,8 @@ namespace ClinicaFrba.Pedir_Turno
         {
             Nombre_profesional.Clear();
             Apellido_profesional.Clear();
-            this.modificarEstadoControles(true);
         }
         /*-------------------------------------------NO RELEVANTES--------------------------------------------*/
-        public void obtener_datos(string numero_afiliado, string numero_bono)
-        {
-            this.afiliado = numero_afiliado;
-            this.bono = numero_bono;
-        }
-
         private void lblNombre_Click(object sender, EventArgs e)
         {
 
@@ -269,9 +245,12 @@ namespace ClinicaFrba.Pedir_Turno
         /*-------------------------------------------CANCELAR---------------------------------------------*/
         private void button2_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
-       
+        private void FormSeleccionProf_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

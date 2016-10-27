@@ -19,65 +19,61 @@ namespace ClinicaFrba.Pedir_Turno
         private string nombre_profesional;
         private string nombre_especialidad;
         private decimal especialidad;
-        private decimal afiliado;
-        private string bono;
 
         /*-------------------------------------------CONSTRUCTOR---------------------------------------------*/
         public FormConfirmarTurno()
         {
             InitializeComponent();
             this.conexion = new SqlConnection(@Configuraciones.datosConexion);
-            this.FormClosed += Configuraciones.validarCierreVentana;
+        }
+
+        private void FormConfirmarTurno_Load(object sender, EventArgs e)
+        {
+            Calendario.TodayDate = Configuraciones.fecha;
+            Calendario.MinDate = Configuraciones.fecha;
+            Calendario.SelectionStart = Configuraciones.fecha;
+
+            conexion.Open();
+
+            SqlCommand busqueda_dias = new SqlCommand("CHAMBA.DIAS_DISPONIBLES_PROFESIONAL_POR_ESPECIALIDAD", conexion);
+
+            busqueda_dias.CommandType = CommandType.StoredProcedure;
+            busqueda_dias.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
+            busqueda_dias.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
+            busqueda_dias.Parameters.Add("@FechaInicio", SqlDbType.DateTime).Value = Configuraciones.fecha;
+
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(busqueda_dias);
+            adapter.Fill(tabla);
+
+            int i;
+            for (i = 0; i < tabla.Rows.Count; i++)
+            {
+                Calendario.AddBoldedDate((DateTime)tabla.Rows[i]["Agen_Fecha"]);
+            }
+
+            Calendario.UpdateBoldedDates();
+
+            conexion.Close();
 
         }
 
         /*-------------------------------------------INICIALIES----------------------------------------------*/
-        public void obtener_datos(string afiliado, string numero_bono,string id_profesional, string id_especialidad, string nombre_profesional, string especialidad)
+        public void obtener_datos(string id_profesional, string id_especialidad, string nombre_profesional, string especialidad)
         {
 
             this.profesional = decimal.Parse(id_profesional);
             this.nombre_profesional = nombre_profesional;
             this.nombre_especialidad = especialidad;
             this.especialidad = decimal.Parse(id_especialidad);
-            this.afiliado = decimal.Parse(afiliado);
-            this.bono = numero_bono;
 
             mostrar_datos_del_profesional();
-            mostrar_dias_disponibles_iniciales();
         }
 
         private void mostrar_datos_del_profesional()
         {
             Nombre_del_profesional.Text = this.nombre_profesional;
             Especialidad_del_profesional.Text = this.nombre_especialidad;
-        }
-
-        private void mostrar_dias_disponibles_iniciales()
-        {
-            SelectionRange fecha = Calendario.SelectionRange;
-            string mes = fecha.Start.Month.ToString();
-            string anio = fecha.Start.Year.ToString();
-            cargar_dias_disponibles_del_mes(mes,anio);
-        }
-
-        private void cargar_dias_disponibles_del_mes(string mes, string anio)
-        {
-            conexion.Open();
-
-            SqlCommand busqueda_profesional_especialidades = new SqlCommand("CHAMBA.DIAS_DISPONIBLES_PROFESIONAL_POR_ESPECIALDIAD", conexion);
-
-            busqueda_profesional_especialidades.CommandType = CommandType.StoredProcedure;
-            busqueda_profesional_especialidades.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
-            busqueda_profesional_especialidades.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
-            busqueda_profesional_especialidades.Parameters.Add("@Numero_mes", SqlDbType.Int).Value = int.Parse(mes);
-            busqueda_profesional_especialidades.Parameters.Add("@Anio", SqlDbType.Int).Value = int.Parse(anio);
-
-            SqlDataAdapter adapter = new SqlDataAdapter(busqueda_profesional_especialidades);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            Info.DataSource = table;
-
-            conexion.Close();
         }
 
         /*-------------------------------------------CARGAR HORARIOS DISPONIBLES-------------------------------*/
@@ -116,54 +112,43 @@ namespace ClinicaFrba.Pedir_Turno
         /*-------------------------------------------ACEPTAR--------------------------------------------------*/
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Info.SelectedRows.Count > 0) { 
 
-            DataGridViewRow row = Info.SelectedRows[0];
-            string id_agenda= row.Cells[2].Value.ToString(); // <-- la tercera columna es la correspondiente al ID_Agenda
+                DataGridViewRow row = Info.SelectedRows[0];
 
-            /* OPERACION */
-            conexion.Open();
+                /* OPERACION */
+                conexion.Open();
 
-            SqlCommand reserva = new SqlCommand("CHAMBA.RESERVA_DE_TURNO", conexion);
+                SqlCommand reserva = new SqlCommand("CHAMBA.RESERVA_DE_TURNO", conexion);
 
-            reserva.CommandType = CommandType.StoredProcedure;
-            reserva.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = this.afiliado;
-            reserva.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
-            reserva.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
-            reserva.Parameters.Add("@Agenda_id", SqlDbType.Decimal).Value = decimal.Parse(id_agenda);
+                reserva.CommandType = CommandType.StoredProcedure;
+                reserva.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = Configuraciones.usuario;
+                reserva.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
+                reserva.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
+                reserva.Parameters.Add("@Agenda_id", SqlDbType.Decimal).Value = decimal.Parse(row.Cells[1].Value.ToString());
 
-            reserva.ExecuteNonQuery();
+                reserva.ExecuteNonQuery();
 
-            conexion.Close();
+                conexion.Close();
 
-            MessageBox.Show("Turno reservado con éxito");
-            this.Hide();
+                MessageBox.Show("Turno reservado con éxito");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }else{
+                MessageBox.Show("Seleccione un horarios");
+            }
         }
        
         /*-------------------------------------------CANCELAR------------------------------------------------*/
         private void button2_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         /*-------------------------------------------NO RELEVANTES--------------------------------------------*/
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void FormConfirmarTurno_Load(object sender, EventArgs e)
-        {
-
-        }
-        
-        /*-------------------------------------------DÍAS DE ATENCION EN EL MES--------------------------------*/
-        private void DiasDeAtencion_Click(object sender, EventArgs e)
-        {
-            SelectionRange fecha = Calendario.SelectionRange;
-            string mes = fecha.Start.Month.ToString();
-            string anio = fecha.Start.Year.ToString();
-            this.cargar_dias_disponibles_del_mes(mes, anio);
-        }
-      
+        }        
     }
 }

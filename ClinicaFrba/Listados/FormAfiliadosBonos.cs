@@ -32,6 +32,7 @@ namespace ClinicaFrba.Listados
                 conexion.Open();
                 SqlCommand cargar = new SqlCommand("CHAMBA.AfiliadosBonos", conexion);
                 cargar.CommandType = CommandType.StoredProcedure;
+                cargar.Parameters.Add("@Semestre", SqlDbType.Int).Value = cboSemestre.Text;
                 cargar.Parameters.Add("@Mes", SqlDbType.Int).Value = cboMes.SelectedValue;
                 cargar.Parameters.Add("@Año", SqlDbType.VarChar).Value = cboAño.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(cargar);
@@ -58,8 +59,8 @@ namespace ClinicaFrba.Listados
                 meses.Add(3, "Marzo");
                 meses.Add(4, "Abril");
                 meses.Add(5, "Mayo");
-                meses.Add(6, "Junio");
-                
+                meses.Add(6, "Junio");      
+
             }
             else
             {
@@ -70,6 +71,7 @@ namespace ClinicaFrba.Listados
                 meses.Add(11, "Noviembre");
                 meses.Add(12, "Diciembre");
             }
+            meses.Add(0, "Todos");
             cboMes.DataSource = new BindingSource(meses, null);
             cboMes.DisplayMember = "Value";
             cboMes.ValueMember = "Key";

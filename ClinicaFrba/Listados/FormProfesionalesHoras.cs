@@ -22,14 +22,13 @@ namespace ClinicaFrba.Listados
 
         private void FormProfesionalesHoras_Load(object sender, EventArgs e)
         {
-            SqlCommand cargar = new SqlCommand("SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades ORDER BY Espe_Descripcion", conexion);
+            SqlCommand cargar = new SqlCommand("SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades UNION SELECT 'Todas', 0", conexion);
             SqlDataAdapter adapter = new SqlDataAdapter(cargar);
             DataTable table = new DataTable();
             adapter.Fill(table);
             cboEspecialidad.DataSource = table;
             cboEspecialidad.DisplayMember = "Espe_Descripcion";
             cboEspecialidad.ValueMember = "Espe_Codigo";
-
             conexion.Close();
         }
 
@@ -41,6 +40,7 @@ namespace ClinicaFrba.Listados
                 SqlCommand cargar = new SqlCommand("CHAMBA.ProfesionalesHoras", conexion);
                 cargar.CommandType = CommandType.StoredProcedure;
                 cargar.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = cboEspecialidad.SelectedValue;
+                cargar.Parameters.Add("@Semestre", SqlDbType.Int).Value = cboSemestre.Text;
                 cargar.Parameters.Add("@Mes", SqlDbType.Int).Value = cboMes.SelectedValue;
                 cargar.Parameters.Add("@Año", SqlDbType.VarChar).Value = cboAño.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(cargar);
@@ -79,6 +79,7 @@ namespace ClinicaFrba.Listados
                 meses.Add(11, "Noviembre");
                 meses.Add(12, "Diciembre");
             }
+            meses.Add(0, "Todos");
             cboMes.DataSource = new BindingSource(meses, null);
             cboMes.DisplayMember = "Value";
             cboMes.ValueMember = "Key";

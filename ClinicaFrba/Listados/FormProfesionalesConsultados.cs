@@ -23,7 +23,7 @@ namespace ClinicaFrba.Listados
         private void FormProfesionalesConsultados_Load(object sender, EventArgs e)
         {
             conexion.Open();
-            SqlCommand cargar = new SqlCommand("SELECT Plan_Descripcion, Plan_Codigo FROM CHAMBA.Planes", conexion);
+            SqlCommand cargar = new SqlCommand("SELECT Plan_Descripcion, Plan_Codigo FROM CHAMBA.Planes UNION SELECT 'Todos', 0", conexion);
             SqlDataAdapter adapter = new SqlDataAdapter(cargar);
             DataTable table = new DataTable();
             adapter.Fill(table);
@@ -32,7 +32,7 @@ namespace ClinicaFrba.Listados
             cboPlan.ValueMember = "Plan_Codigo";
 
 
-            cargar = new SqlCommand("SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades ORDER BY Espe_Descripcion", conexion);
+            cargar = new SqlCommand("SELECT Espe_Descripcion, Espe_Codigo FROM CHAMBA.Especialidades UNION SELECT 'Todas', 0", conexion);
             adapter = new SqlDataAdapter(cargar);
             table = new DataTable();
             adapter.Fill(table);
@@ -52,6 +52,7 @@ namespace ClinicaFrba.Listados
                 cargar.CommandType = CommandType.StoredProcedure;
                 cargar.Parameters.Add("@Plan", SqlDbType.Decimal).Value = cboPlan.SelectedValue;
                 cargar.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = cboEspecialidad.SelectedValue;
+                cargar.Parameters.Add("@Semestre", SqlDbType.Int).Value = int.Parse(cboSemestre.Text);
                 cargar.Parameters.Add("@Mes", SqlDbType.Int).Value = cboMes.SelectedValue;
                 cargar.Parameters.Add("@Año", SqlDbType.VarChar).Value = cboAño.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(cargar);
@@ -95,6 +96,7 @@ namespace ClinicaFrba.Listados
                 meses.Add(11, "Noviembre");
                 meses.Add(12, "Diciembre");
             }
+            meses.Add(0, "Todos");
             cboMes.DataSource = new BindingSource(meses, null);
             cboMes.DisplayMember = "Value";
             cboMes.ValueMember = "Key";

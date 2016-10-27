@@ -49,7 +49,8 @@
             this.cboDe.FormattingEnabled = true;
             this.cboDe.Items.AddRange(new object[] {
             "Afiliados",
-            "Profesionales"});
+            "Profesionales",
+            "Todos"});
             this.cboDe.Location = new System.Drawing.Point(169, 12);
             this.cboDe.Name = "cboDe";
             this.cboDe.Size = new System.Drawing.Size(160, 24);

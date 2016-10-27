@@ -28,6 +28,7 @@ namespace ClinicaFrba.Listados
                 SqlCommand cargar = new SqlCommand("CHAMBA.EspecialidadesCanceladas", conexion);
                 cargar.CommandType = CommandType.StoredProcedure;
                 cargar.Parameters.Add("@De", SqlDbType.VarChar).Value = cboDe.Text;
+                cargar.Parameters.Add("@Semestre", SqlDbType.Int).Value = cboSemestre.Text;
                 cargar.Parameters.Add("@Mes", SqlDbType.Int).Value = cboMes.SelectedValue;
                 cargar.Parameters.Add("@Año", SqlDbType.VarChar).Value = cboAño.Text;
                 SqlDataAdapter adapter = new SqlDataAdapter(cargar);
@@ -70,6 +71,7 @@ namespace ClinicaFrba.Listados
                 meses.Add(11, "Noviembre");
                 meses.Add(12, "Diciembre");
             }
+            meses.Add(0, "Todos");
             cboMes.DataSource = new BindingSource(meses, null);
             cboMes.DisplayMember = "Value";
             cboMes.ValueMember = "Key";

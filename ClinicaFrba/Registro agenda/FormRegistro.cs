@@ -58,9 +58,51 @@ namespace ClinicaFrba.Registro_agenda
                 }
                 else
                 {
-                    MessageBox.Show(totalHoras.ToString());
+                    conexion.Open();
+                    DateTime fecha = dtpDesde.Value;
+                    while (fecha <= dtpHasta.Value)
+                    {
+                        ListViewItem registro = obtenerRegistroParaFecha(fecha);
+                        
+
+                        if (registro != null) {
+                            DateTime horarioInicio = new DateTime(fecha.Year,fecha.Month,fecha.Day, int.Parse(registro.SubItems[1].Text), int.Parse(registro.SubItems[2].Text),0);
+                            DateTime horarioFin = new DateTime(fecha.Year, fecha.Month, fecha.Day, int.Parse(registro.SubItems[3].Text), int.Parse(registro.SubItems[4].Text),0);
+
+                            while (horarioInicio <= horarioFin)
+                            {
+                                SqlCommand crearAgenda = new SqlCommand("CHAMBA.AGREGAR_DISPONIBILIDAD_EN_AGENDA", conexion);
+
+                                crearAgenda.CommandType = CommandType.StoredProcedure;
+                                crearAgenda.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
+                                crearAgenda.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = decimal.Parse(registro.SubItems[5].Tag.ToString());
+                                crearAgenda.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = horarioInicio;
+
+                                crearAgenda.ExecuteNonQuery();
+                                horarioInicio = horarioInicio.AddMinutes(30);
+                            }                            
+                        }
+
+                        fecha = fecha.AddDays(1);
+                    }
+                    conexion.Close();
+                    MessageBox.Show("Agenda registrada exitosamente");
                 }
             }
+        }
+
+        private ListViewItem obtenerRegistroParaFecha(DateTime fecha)
+        {
+
+            for(int i = 0; i < lstRangos.Items.Count; i++)
+            {
+                if (int.Parse(lstRangos.Items[i].Tag.ToString()) == (int)fecha.DayOfWeek)
+                {
+                    return lstRangos.Items[i];
+                }
+            }
+            return null;
+
         }
     }
 }

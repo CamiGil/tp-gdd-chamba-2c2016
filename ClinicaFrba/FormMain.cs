@@ -130,6 +130,11 @@ namespace ClinicaFrba
                     Listados.FormEstadisticas form8 = new Listados.FormEstadisticas();
                     form8.ShowDialog();
                     break;
+                case 9:
+                    //ABRIR REGISTRO DE AGENDA
+                    Registro_agenda.FormRegistro form9 = new Registro_agenda.FormRegistro();
+                    form9.ShowDialog();
+                    break;
             }
         }
 

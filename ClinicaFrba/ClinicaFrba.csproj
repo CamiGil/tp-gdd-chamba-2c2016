@@ -191,6 +191,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro agenda\FormRango.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro agenda\FormRango.Designer.cs">
+      <DependentUpon>FormRango.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro agenda\FormRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro agenda\FormRegistro.Designer.cs">
+      <DependentUpon>FormRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Llegada\FormSeleccionarBono.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -311,6 +323,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro agenda\FormRango.resx">
+      <DependentUpon>FormRango.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro agenda\FormRegistro.resx">
+      <DependentUpon>FormRegistro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada\FormRegistroLlegada.resx">
       <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
     </EmbeddedResource>

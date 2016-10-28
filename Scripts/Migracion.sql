@@ -35,7 +35,7 @@ INSERT INTO CHAMBA.Usuarios (Usua_Usuario, Usua_Clave, Usua_Nombre, Usua_Intento
 INSERT INTO CHAMBA.Rol_X_Usuario(Rol_X_Usua_Usuario, Rol_X_Usua_Rol) VALUES ((SELECT Usua_Id FROM CHAMBA.Usuarios WHERE Usua_Usuario = 'admin'), (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo'))
 
 /* CREACION DE FUNCIONALIDADES */
-INSERT INTO CHAMBA.Funcionalidades (Func_Id, Func_Descripcion) VALUES (1, 'Gestionar roles'), (2, 'Gestionar afiliados'), (3, 'Comprar bonos'), (4, 'Pedir turnos'), (5, 'Registrar llegada para atencion'), (6, 'Registrar resultado de atencion'), (7, 'Cancelar turnos'), (8, 'Estadisticas')
+INSERT INTO CHAMBA.Funcionalidades (Func_Id, Func_Descripcion) VALUES (1, 'Gestionar roles'), (2, 'Gestionar afiliados'), (3, 'Comprar bonos'), (4, 'Pedir turnos'), (5, 'Registrar llegada para atencion'), (6, 'Registrar resultado de atencion'), (7, 'Cancelar turnos'), (8, 'Estadisticas'), (9, 'Registrar agenda')
 
 /* ASIGNACION DE FUNCIONALIDADES A ROLES*/
 DECLARE @Rol numeric(18,0) = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo')
@@ -43,7 +43,7 @@ DECLARE @Rol numeric(18,0) = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre =
 INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 3), (@Rol, 5), (@Rol, 8)
 
 SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Profesional')
-INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 6), (@Rol, 7)
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 6), (@Rol, 7), (@Rol, 9)
 
 SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Afiliado')
 INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 3), (@Rol, 4), (@Rol, 7)

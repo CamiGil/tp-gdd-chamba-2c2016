@@ -51,6 +51,7 @@
             this.button4.TabIndex = 41;
             this.button4.Text = "Quitar";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // listBox2
             // 
@@ -81,6 +82,7 @@
             this.button3.TabIndex = 38;
             this.button3.Text = "Añadir";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // label2
             // 
@@ -104,6 +106,7 @@
             this.button2.TabIndex = 36;
             this.button2.Text = "Crear Rol";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -116,6 +119,7 @@
             this.button1.TabIndex = 35;
             this.button1.Text = "Volver";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 

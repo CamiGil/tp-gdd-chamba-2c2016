@@ -242,6 +242,7 @@
             this.Controls.Add(this.label2);
             this.Name = "FormModif";
             this.Text = "FormModif";
+            this.Load += new System.EventHandler(this.FormModif_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

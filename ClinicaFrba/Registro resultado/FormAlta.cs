@@ -21,5 +21,10 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         {
 
         }
+
+        private void cboPlan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

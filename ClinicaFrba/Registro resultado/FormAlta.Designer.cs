@@ -67,6 +67,7 @@
             this.cboPlan.Name = "cboPlan";
             this.cboPlan.Size = new System.Drawing.Size(361, 31);
             this.cboPlan.TabIndex = 2;
+            this.cboPlan.SelectedIndexChanged += new System.EventHandler(this.cboPlan_SelectedIndexChanged);
             // 
             // label3
             // 

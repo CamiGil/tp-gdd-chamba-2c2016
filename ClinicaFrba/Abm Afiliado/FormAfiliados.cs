@@ -120,5 +120,10 @@ namespace ClinicaFrba.Abm_Afiliado
             form.cargarDatos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
             form.ShowDialog();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

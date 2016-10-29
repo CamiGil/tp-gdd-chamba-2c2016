@@ -98,6 +98,8 @@ namespace ClinicaFrba
             {
                 case 1:
                     //ABRIR ABM ROLES
+                    AbmRol.FormMenu form1 = new AbmRol.FormMenu();
+                    form1.ShowDialog();
                     break;
                 case 2:
                     //ABRIR ABM AFILIADOS

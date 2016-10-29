@@ -59,7 +59,7 @@ namespace ClinicaFrba.AbmRol
                 conexion.Open();
                 existeRol = new SqlCommand("CHAMBA.ExisteRol", conexion);
                 existeRol.CommandType = CommandType.StoredProcedure;
-                existeRol.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = textBox1.Text;
+                existeRol.Parameters.Add("@nombre", SqlDbType.VarChar).Value = textBox1.Text;
                 var resultado = existeRol.Parameters.Add("@Valor", SqlDbType.Int);
                 resultado.Direction = ParameterDirection.ReturnValue;
                 data = existeRol.ExecuteReader(); 

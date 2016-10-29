@@ -29,21 +29,21 @@ namespace ClinicaFrba.AbmRol
         private void button1_Click(object sender, EventArgs e)
         {
 
-            crearRol.Show();
+            crearRol.ShowDialog();
             this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
-            modificarRol.Show();
+            modificarRol.ShowDialog();
             this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            eliminarRol.Show();
+            eliminarRol.ShowDialog();
             this.Close();
         }
     }

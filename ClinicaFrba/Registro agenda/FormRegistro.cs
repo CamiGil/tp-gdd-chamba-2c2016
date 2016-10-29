@@ -87,6 +87,7 @@ namespace ClinicaFrba.Registro_agenda
                     }
                     conexion.Close();
                     MessageBox.Show("Agenda registrada exitosamente");
+                    this.Close();
                 }
             }
         }

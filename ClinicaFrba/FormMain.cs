@@ -111,7 +111,7 @@ namespace ClinicaFrba
                     break;
                 case 4:
                     //ABRIR PEDIDO DE TURNOS
-                    Pedir_Turno.FormIngresarBono form4 = new Pedir_Turno.FormIngresarBono();
+                    Pedir_Turno.FormSeleccionProf form4 = new Pedir_Turno.FormSeleccionProf();
                     form4.ShowDialog();
                     break;
                 case 5:

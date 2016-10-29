@@ -59,13 +59,13 @@ namespace ClinicaFrba.Pedir_Turno
         }
 
         /*-------------------------------------------INICIALIES----------------------------------------------*/
-        public void obtener_datos(string id_profesional, string id_especialidad, string nombre_profesional, string especialidad)
+        public void obtener_datos(decimal id_profesional, decimal id_especialidad, string nombre_profesional, string especialidad)
         {
 
-            this.profesional = decimal.Parse(id_profesional);
+            this.profesional = id_profesional;
             this.nombre_profesional = nombre_profesional;
             this.nombre_especialidad = especialidad;
-            this.especialidad = decimal.Parse(id_especialidad);
+            this.especialidad = id_especialidad;
 
             mostrar_datos_del_profesional();
         }
@@ -123,8 +123,6 @@ namespace ClinicaFrba.Pedir_Turno
 
                 reserva.CommandType = CommandType.StoredProcedure;
                 reserva.Parameters.Add("@Afiliado", SqlDbType.Decimal).Value = Configuraciones.usuario;
-                reserva.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = this.profesional;
-                reserva.Parameters.Add("@Especialidad", SqlDbType.Decimal).Value = this.especialidad;
                 reserva.Parameters.Add("@Agenda_id", SqlDbType.Decimal).Value = decimal.Parse(row.Cells[1].Value.ToString());
 
                 reserva.ExecuteNonQuery();
@@ -135,7 +133,7 @@ namespace ClinicaFrba.Pedir_Turno
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }else{
-                MessageBox.Show("Seleccione un horarios");
+                MessageBox.Show("Seleccione un horario");
             }
         }
        

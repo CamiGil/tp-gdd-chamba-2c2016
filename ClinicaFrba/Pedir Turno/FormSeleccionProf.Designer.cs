@@ -83,6 +83,7 @@
             this.Nombre_profesional.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Nombre_profesional.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nombre_profesional.Location = new System.Drawing.Point(199, 56);
+            this.Nombre_profesional.MaxLength = 255;
             this.Nombre_profesional.Name = "Nombre_profesional";
             this.Nombre_profesional.Size = new System.Drawing.Size(182, 23);
             this.Nombre_profesional.TabIndex = 1;
@@ -92,6 +93,7 @@
             this.Apellido_profesional.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.Apellido_profesional.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Apellido_profesional.Location = new System.Drawing.Point(199, 94);
+            this.Apellido_profesional.MaxLength = 255;
             this.Apellido_profesional.Name = "Apellido_profesional";
             this.Apellido_profesional.Size = new System.Drawing.Size(182, 23);
             this.Apellido_profesional.TabIndex = 2;

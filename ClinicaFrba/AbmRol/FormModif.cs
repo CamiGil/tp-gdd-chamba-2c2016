@@ -48,9 +48,9 @@ namespace ClinicaFrba.AbmRol
             rol = comboBox2.Text.ToString();
             int habilitado = estaHabilitado(rol);
             if (habilitado == 0)
-                button6.Visible = true;
+            button6.Visible = true;
             else
-                button6.Visible = false;
+            button6.Visible = false;
             label3.Visible = true;
             label6.Visible = true;
             textBox1.Visible = true;
@@ -296,7 +296,27 @@ namespace ClinicaFrba.AbmRol
         private void button2_Click(object sender, EventArgs e)
         {
             validarCampos();
+            cleanForm();
         }
+
+        private void cleanForm()
+        {
+            comboBox2.SelectedIndex = -1;
+            button6.Visible = false;
+            button6.Visible = false;
+            label3.Visible = false;
+            label6.Visible = false;
+            textBox1.Clear();
+            textBox1.Visible = false;
+            listBox1.Visible = false;
+            listBox2.Items.Clear();
+            listBox2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button2.Visible = false;
+
+        }
+
 
 
     }

@@ -23,11 +23,11 @@ namespace ClinicaFrba.AbmRol
         {
             conexion = new SqlConnection(@Configuraciones.datosConexion);
             InitializeComponent();
-            conexion.Open();
         }
 
         private void FormCrear_Load(object sender, EventArgs e)
         {
+            conexion.Open();
             cargarFuncionalidades = new SqlCommand("CHAMBA.CargarFuncionalidades", conexion);
             cargarFuncionalidades.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter adapter = new SqlDataAdapter(cargarFuncionalidades);
@@ -148,6 +148,13 @@ namespace ClinicaFrba.AbmRol
         private void button2_Click(object sender, EventArgs e)
         {
             validarCampos(); /*creo rol en validarCampos */
+            cleanForm();
+        }
+
+        private void cleanForm()
+        {
+            textBox1.Clear();
+            listBox2.Items.Clear();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
@@ -175,7 +182,7 @@ namespace ClinicaFrba.AbmRol
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-                string text = listBox2.GetItemText(listBox2.SelectedItem);
+            string text = listBox2.GetItemText(listBox2.SelectedItem);
             listBox2.Items.Remove(listBox2.SelectedItem);
 
             funcion.Remove(text);

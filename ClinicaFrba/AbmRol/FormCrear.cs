@@ -131,8 +131,8 @@ namespace ClinicaFrba.AbmRol
                 conexion.Open();
                 asignarFunc = new SqlCommand("CHAMBA.AsignarFuncionalidad", conexion);
                 asignarFunc.CommandType = CommandType.StoredProcedure;
-                asignarFunc.Parameters.Add("@idRol", SqlDbType.VarChar).Value = rol;
-                asignarFunc.Parameters.Add("@idFunc", SqlDbType.Int).Value = ids.ElementAt(i);
+                asignarFunc.Parameters.Add("@idRol", SqlDbType.Decimal).Value = rol;
+                asignarFunc.Parameters.Add("@idFunc", SqlDbType.Decimal).Value = ids.ElementAt(i);
                 asignarFunc.ExecuteNonQuery();
                 conexion.Close();
 

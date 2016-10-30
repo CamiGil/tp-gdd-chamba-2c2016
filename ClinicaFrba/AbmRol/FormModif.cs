@@ -177,17 +177,17 @@ namespace ClinicaFrba.AbmRol
             data = idRol.ExecuteReader();
 
 
-            var codi = resultado.Value;
-            int codigo = (int)codi;
+            var idResult = resultado.Value;
+            int id = (int)idResult;
             data.Close();
 
             eliminarFunc = new SqlCommand("CHAMBA.EliminarFuncionalidades", conexion);
             eliminarFunc.CommandType = CommandType.StoredProcedure;
-            eliminarFunc.Parameters.Add("@rol", SqlDbType.Int).Value = codigo;
+            eliminarFunc.Parameters.Add("@rol", SqlDbType.Int).Value = id;
             eliminarFunc.ExecuteNonQuery();
             conexion.Close();
 
-            List<int> codigos = new List<int>();
+            List<int> ids = new List<int>();
 
 
             for (int i = 0; i < funcion.Count(); i++)
@@ -199,22 +199,22 @@ namespace ClinicaFrba.AbmRol
                 var resultado2 = idFunc.Parameters.Add("@Valor", SqlDbType.Int);
                 resultado2.Direction = ParameterDirection.ReturnValue;
                 data = idFunc.ExecuteReader();
-                var codigo2 = resultado2.Value;
-                int aniadir = (int)codigo2;
-                codigos.Add(aniadir);
+                var id2 = resultado2.Value;
+                int aniadir = (int)id2;
+                ids.Add(aniadir);
                 data.Close();
                 conexion.Close();
             }
 
 
-            for (int i = 0; i < codigos.Count(); i++)
+            for (int i = 0; i < ids.Count(); i++)
             {
 
                 conexion.Open();
                 asignarFunc = new SqlCommand("CHAMBA.AsignarFuncionalidad", conexion);
                 asignarFunc.CommandType = CommandType.StoredProcedure;
-                asignarFunc.Parameters.Add("@idRol", SqlDbType.VarChar).Value = codigo;
-                asignarFunc.Parameters.Add("@idFunc", SqlDbType.Int).Value = codigos.ElementAt(i);
+                asignarFunc.Parameters.Add("@idRol", SqlDbType.Decimal).Value = id;
+                asignarFunc.Parameters.Add("@idFunc", SqlDbType.Decimal).Value = ids.ElementAt(i);
                 asignarFunc.ExecuteNonQuery();
                 conexion.Close();
 

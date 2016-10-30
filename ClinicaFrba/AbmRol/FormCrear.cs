@@ -42,8 +42,6 @@ namespace ClinicaFrba.AbmRol
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            AbmRol.FormMenu formMenu = new AbmRol.FormMenu();
-            formMenu.Show();
         }
 
         private void validarCampos()
@@ -142,8 +140,6 @@ namespace ClinicaFrba.AbmRol
             String mensaje = "El rol se ha creado exitosamente";
             String caption = "Rol creado";
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
-            AbmRol.FormMenu form1 = new AbmRol.FormMenu();
-            form1.Show();
             this.Close();
 
         }

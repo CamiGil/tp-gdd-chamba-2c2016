@@ -48,9 +48,9 @@ namespace ClinicaFrba.AbmRol
             rol = comboBox2.Text.ToString();
             int habilitado = estaHabilitado(rol);
             if (habilitado == 0)
-            button6.Visible = true;
+                button6.Visible = true;
             else
-            button6.Visible = false;
+                button6.Visible = false;
             label3.Visible = true;
             label6.Visible = true;
             textBox1.Visible = true;
@@ -225,8 +225,6 @@ namespace ClinicaFrba.AbmRol
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
 
             this.Close();
-            AbmRol.FormMenu formMenu = new AbmRol.FormMenu();
-            formMenu.Show();
 
         }
 
@@ -287,13 +285,12 @@ namespace ClinicaFrba.AbmRol
             String mensaje = "El rol ha sido habilitado";
             String caption = "Rol modificado";
             MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
+            button6.Visible = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();
-            AbmRol.FormMenu formMenu = new AbmRol.FormMenu();
-            formMenu.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

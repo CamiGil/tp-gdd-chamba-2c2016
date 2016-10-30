@@ -44,11 +44,11 @@
             // 
             this.button4.BackColor = System.Drawing.Color.MintCream;
             this.button4.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(466, 366);
+            this.button4.Location = new System.Drawing.Point(477, 366);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(113, 34);
-            this.button4.TabIndex = 41;
+            this.button4.TabIndex = 4;
             this.button4.Text = "Quitar";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
@@ -60,7 +60,7 @@
             this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(246, 186);
-            this.listBox2.TabIndex = 40;
+            this.listBox2.TabIndex = 2;
             // 
             // listBox1
             // 
@@ -69,7 +69,7 @@
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(246, 186);
-            this.listBox1.TabIndex = 39;
+            this.listBox1.TabIndex = 1;
             // 
             // button3
             // 
@@ -79,7 +79,7 @@
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(113, 34);
-            this.button3.TabIndex = 38;
+            this.button3.TabIndex = 3;
             this.button3.Text = "Añadir";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
@@ -102,8 +102,8 @@
             this.button2.Location = new System.Drawing.Point(410, 422);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(225, 44);
-            this.button2.TabIndex = 36;
+            this.button2.Size = new System.Drawing.Size(246, 44);
+            this.button2.TabIndex = 6;
             this.button2.Text = "Crear Rol";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -112,11 +112,11 @@
             // 
             this.button1.BackColor = System.Drawing.Color.MintCream;
             this.button1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(110, 422);
+            this.button1.Location = new System.Drawing.Point(89, 422);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(225, 44);
-            this.button1.TabIndex = 35;
+            this.button1.Size = new System.Drawing.Size(246, 44);
+            this.button1.TabIndex = 5;
             this.button1.Text = "Volver";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -125,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 117);
+            this.label1.Location = new System.Drawing.Point(263, 126);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(219, 29);
@@ -136,17 +136,18 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(337, 62);
+            this.textBox1.Location = new System.Drawing.Point(378, 64);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.MaxLength = 255;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(242, 29);
-            this.textBox1.TabIndex = 33;
+            this.textBox1.TabIndex = 0;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(84, 62);
+            this.label6.Location = new System.Drawing.Point(125, 62);
             this.label6.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(210, 29);
@@ -170,7 +171,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label6);
             this.Name = "FormCrear";
-            this.Text = "Form1";
+            this.Text = "Hospital - Roles";
             this.Load += new System.EventHandler(this.FormCrear_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

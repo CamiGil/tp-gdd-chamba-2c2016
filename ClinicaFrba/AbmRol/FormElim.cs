@@ -43,8 +43,6 @@ namespace ClinicaFrba.AbmRol
         {
    
             this.Close();
-            AbmRol.FormMenu form1 = new AbmRol.FormMenu();
-            form1.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,8 +81,6 @@ namespace ClinicaFrba.AbmRol
                 MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
 
                 this.Close();
-                AbmRol.FormMenu form1 = new AbmRol.FormMenu();
-                form1.Show();
             }
         }
     }

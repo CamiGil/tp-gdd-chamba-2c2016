@@ -37,7 +37,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -49,11 +48,11 @@
             // 
             this.button4.BackColor = System.Drawing.Color.MintCream;
             this.button4.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(525, 389);
+            this.button4.Location = new System.Drawing.Point(528, 380);
             this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(113, 34);
-            this.button4.TabIndex = 94;
+            this.button4.TabIndex = 6;
             this.button4.Text = "Quitar";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Visible = false;
@@ -66,7 +65,7 @@
             this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(246, 186);
-            this.listBox2.TabIndex = 93;
+            this.listBox2.TabIndex = 4;
             this.listBox2.Visible = false;
             // 
             // listBox1
@@ -76,7 +75,7 @@
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(246, 186);
-            this.listBox1.TabIndex = 92;
+            this.listBox1.TabIndex = 3;
             this.listBox1.Visible = false;
             // 
             // button3
@@ -87,7 +86,7 @@
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(113, 34);
-            this.button3.TabIndex = 91;
+            this.button3.TabIndex = 5;
             this.button3.Text = "Añadir";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Visible = false;
@@ -113,7 +112,7 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(242, 29);
-            this.textBox1.TabIndex = 89;
+            this.textBox1.TabIndex = 2;
             this.textBox1.Visible = false;
             // 
             // label6
@@ -136,7 +135,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(32, 24);
-            this.button1.TabIndex = 87;
+            this.button1.TabIndex = 1;
             this.button1.Text = "✓";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -150,17 +149,7 @@
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(242, 31);
-            this.comboBox2.TabIndex = 86;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(490, 176);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(1, 21);
-            this.comboBox1.TabIndex = 85;
-            this.comboBox1.Visible = false;
+            this.comboBox2.TabIndex = 0;
             // 
             // label1
             // 
@@ -192,7 +181,7 @@
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(225, 44);
-            this.button6.TabIndex = 97;
+            this.button6.TabIndex = 8;
             this.button6.Text = "Habilitar rol";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Visible = false;
@@ -206,7 +195,7 @@
             this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(225, 44);
-            this.button2.TabIndex = 96;
+            this.button2.TabIndex = 9;
             this.button2.Text = "Modificar Rol";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Visible = false;
@@ -220,7 +209,7 @@
             this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(225, 44);
-            this.button5.TabIndex = 95;
+            this.button5.TabIndex = 7;
             this.button5.Text = "Volver";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -243,11 +232,10 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Name = "FormModif";
-            this.Text = "FormModif";
+            this.Text = "Hospital - Roles";
             this.Load += new System.EventHandler(this.FormModif_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -265,7 +253,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button6;

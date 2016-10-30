@@ -59,6 +59,7 @@
             this.button1.TabIndex = 88;
             this.button1.Text = "✓";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox2
             // 
@@ -106,6 +107,7 @@
             this.Controls.Add(this.label2);
             this.Name = "FormElim";
             this.Text = "FormElim";
+            this.Load += new System.EventHandler(this.FormElim_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

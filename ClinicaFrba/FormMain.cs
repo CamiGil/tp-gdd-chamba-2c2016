@@ -142,8 +142,7 @@ namespace ClinicaFrba
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {            
-            Configuraciones.formLogin.Show();
-            this.Close();
+            Application.Restart();
         }
 
         private void panelControles_Paint(object sender, PaintEventArgs e)

@@ -16,7 +16,7 @@ namespace ClinicaFrba.AbmRol
         SqlConnection conexion;
         SqlCommand cargarFuncionalidades, existeRol, crearRolNuevo, RolId, FuncId, asignarFunc;
         SqlDataReader data;
-        int rol = 0;
+        decimal rol = 0;
         List<String> funcion = new List<String>();
 
         public FormCrear()
@@ -90,13 +90,13 @@ namespace ClinicaFrba.AbmRol
             RolId = new SqlCommand("CHAMBA.ObtenerRolId", conexion);
             RolId.CommandType = CommandType.StoredProcedure;
             RolId.Parameters.Add("@nombre", SqlDbType.VarChar).Value = textBox1.Text;
-            var resultado = RolId.Parameters.Add("@Valor", SqlDbType.Int);
+            var resultado = RolId.Parameters.Add("@Valor", SqlDbType.Decimal);
             resultado.Direction = ParameterDirection.ReturnValue;
             data = RolId.ExecuteReader(); 
             conexion.Close();
 
             var idRol = resultado.Value;
-            rol = (int)idRol;
+            rol = decimal.Parse(idRol.ToString());
             data.Close(); 
 
             crearFuncionalidades();
@@ -106,7 +106,7 @@ namespace ClinicaFrba.AbmRol
         private void crearFuncionalidades()
         {
 
-            List<int> ids = new List<int>();
+            List<decimal> ids = new List<decimal>();
 
 
             for (int i = 0; i < funcion.Count(); i++)
@@ -115,11 +115,11 @@ namespace ClinicaFrba.AbmRol
                 FuncId = new SqlCommand("CHAMBA.ObtenerFuncionalidadId", conexion);
                 FuncId.CommandType = CommandType.StoredProcedure;
                 FuncId.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = funcion.ElementAt(i).ToString();
-                var resultado = FuncId.Parameters.Add("@Valor", SqlDbType.Int);
+                var resultado = FuncId.Parameters.Add("@Valor", SqlDbType.Decimal);
                 resultado.Direction = ParameterDirection.ReturnValue;
                 data = FuncId.ExecuteReader();
                 var id = resultado.Value;
-                int aniadir = (int)id;
+                decimal aniadir = decimal.Parse(id.ToString());
                 ids.Add(aniadir);
                 data.Close();
                 conexion.Close();

@@ -115,6 +115,7 @@
             this.lblResultado.Size = new System.Drawing.Size(712, 29);
             this.lblResultado.TabIndex = 36;
             this.lblResultado.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblResultado.Click += new System.EventHandler(this.lblResultado_Click);
             // 
             // FormLogin
             // 

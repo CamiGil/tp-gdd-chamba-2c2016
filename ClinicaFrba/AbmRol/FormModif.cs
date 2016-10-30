@@ -172,22 +172,22 @@ namespace ClinicaFrba.AbmRol
             idRol = new SqlCommand("CHAMBA.ObtenerRolId", conexion);
             idRol.CommandType = CommandType.StoredProcedure;
             idRol.Parameters.Add("@nombre", SqlDbType.VarChar).Value = textBox1.Text;
-            var resultado = idRol.Parameters.Add("@Valor", SqlDbType.Int);
+            var resultado = idRol.Parameters.Add("@Valor", SqlDbType.Decimal);
             resultado.Direction = ParameterDirection.ReturnValue;
             data = idRol.ExecuteReader();
 
 
             var idResult = resultado.Value;
-            int id = (int)idResult;
+            decimal id = (decimal.Parse(idResult.ToString()));
             data.Close();
 
             eliminarFunc = new SqlCommand("CHAMBA.EliminarFuncionalidades", conexion);
             eliminarFunc.CommandType = CommandType.StoredProcedure;
-            eliminarFunc.Parameters.Add("@rol", SqlDbType.Int).Value = id;
+            eliminarFunc.Parameters.Add("@rol", SqlDbType.Decimal).Value = id;
             eliminarFunc.ExecuteNonQuery();
             conexion.Close();
 
-            List<int> ids = new List<int>();
+            List<decimal> ids = new List<decimal>();
 
 
             for (int i = 0; i < funcion.Count(); i++)
@@ -196,11 +196,11 @@ namespace ClinicaFrba.AbmRol
                 idFunc = new SqlCommand("CHAMBA.ObtenerFuncionalidadId", conexion);
                 idFunc.CommandType = CommandType.StoredProcedure;
                 idFunc.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = funcion.ElementAt(i).ToString();
-                var resultado2 = idFunc.Parameters.Add("@Valor", SqlDbType.Int);
+                var resultado2 = idFunc.Parameters.Add("@Valor", SqlDbType.Decimal);
                 resultado2.Direction = ParameterDirection.ReturnValue;
                 data = idFunc.ExecuteReader();
                 var id2 = resultado2.Value;
-                int aniadir = (int)id2;
+                decimal aniadir = decimal.Parse(id2.ToString());
                 ids.Add(aniadir);
                 data.Close();
                 conexion.Close();

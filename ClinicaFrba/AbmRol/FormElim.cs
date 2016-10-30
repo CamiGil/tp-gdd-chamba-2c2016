@@ -16,7 +16,7 @@ namespace ClinicaFrba.AbmRol
         SqlConnection conexion;
         SqlCommand cargarRoles, idRol, inhabilitar, inhabilitarPorUsuario;
         SqlDataReader data;
-        AbmRol.FormMenu form1 = new AbmRol.FormMenu();
+      
         public FormElim()
         {
             InitializeComponent();
@@ -43,6 +43,7 @@ namespace ClinicaFrba.AbmRol
         {
    
             this.Close();
+            AbmRol.FormMenu form1 = new AbmRol.FormMenu();
             form1.Show();
         }
 
@@ -82,6 +83,7 @@ namespace ClinicaFrba.AbmRol
                 MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
 
                 this.Close();
+                AbmRol.FormMenu form1 = new AbmRol.FormMenu();
                 form1.Show();
             }
         }

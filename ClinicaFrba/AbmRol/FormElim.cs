@@ -56,23 +56,23 @@ namespace ClinicaFrba.AbmRol
                 idRol = new SqlCommand("CHAMBA.ObtenerRolId", conexion);
                 idRol.CommandType = CommandType.StoredProcedure;
                 idRol.Parameters.Add("@nombre", SqlDbType.VarChar).Value = nombre;
-                var resultado = idRol.Parameters.Add("@Valor", SqlDbType.Int);
+                var resultado = idRol.Parameters.Add("@Valor", SqlDbType.Decimal);
                 resultado.Direction = ParameterDirection.ReturnValue;
                 data = idRol.ExecuteReader();
 
                 var id = resultado.Value;
-                int rol = (int)id;
+                decimal rol = decimal.Parse(id.ToString());
                 data.Close();
                 //inhabilitar rol
 
                 inhabilitar = new SqlCommand("CHAMBA.InhabilitarRol", conexion);
                 inhabilitar.CommandType = CommandType.StoredProcedure;
-                inhabilitar.Parameters.Add("@id", SqlDbType.Int).Value = rol;
+                inhabilitar.Parameters.Add("@id", SqlDbType.Decimal).Value = rol;
                 inhabilitar.ExecuteNonQuery();
 
                 inhabilitarPorUsuario = new SqlCommand("CHAMBA.InhabilitarRolPorUsuario", conexion);
                 inhabilitarPorUsuario.CommandType = CommandType.StoredProcedure;
-                inhabilitarPorUsuario.Parameters.Add("@id", SqlDbType.Int).Value = rol;
+                inhabilitarPorUsuario.Parameters.Add("@id", SqlDbType.Decimal).Value = rol;
                 inhabilitarPorUsuario.ExecuteNonQuery();
                 conexion.Close();
 

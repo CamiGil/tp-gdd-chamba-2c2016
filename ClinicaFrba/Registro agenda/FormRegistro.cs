@@ -20,6 +20,8 @@ namespace ClinicaFrba.Registro_agenda
             conexion = new SqlConnection(@Configuraciones.datosConexion);
             dtpDesde.Value = Configuraciones.fecha;
             dtpHasta.Value = Configuraciones.fecha;
+            dtpDesde.MinDate = Configuraciones.fecha;
+            dtpHasta.MinDate = Configuraciones.fecha;
         }
 
         private void btnRango_Click(object sender, EventArgs e)
@@ -31,6 +33,7 @@ namespace ClinicaFrba.Registro_agenda
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (dtpDesde.Value > dtpHasta.Value)
+                
             {
                 MessageBox.Show("La fecha de inicio debe ser igual o menor a la de fin");
             }

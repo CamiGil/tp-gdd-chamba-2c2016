@@ -121,7 +121,7 @@ namespace ClinicaFrba.AbmRol
 
         }
 
-        private void validarCampos()
+        private Boolean validarCampos()
         {
 
             if (string.IsNullOrEmpty(textBox1.Text) || (int)listBox2.Items.Count == 0)
@@ -129,7 +129,7 @@ namespace ClinicaFrba.AbmRol
                 String mensaje = "Los campos nombre y funcionalidades son obligatorios";
                 String caption = "Error al modificar el rol";
                 MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
-
+                return false;
             }
 
             else
@@ -150,10 +150,10 @@ namespace ClinicaFrba.AbmRol
                     String mensaje = "El rol ya existe, ingrese otro nombre";
                     String caption = "Error al modificar el rol";
                     MessageBox.Show(mensaje, caption, MessageBoxButtons.OK);
+                    return false;
                 }
                 else
-                    modificarRol();
-
+                    return true;
             }
 
         }
@@ -295,8 +295,11 @@ namespace ClinicaFrba.AbmRol
 
         private void button2_Click(object sender, EventArgs e)
         {
-            validarCampos();
-            cleanForm();
+            if (validarCampos())
+            {
+                modificarRol();
+                cleanForm();
+            }
         }
 
         private void cleanForm()

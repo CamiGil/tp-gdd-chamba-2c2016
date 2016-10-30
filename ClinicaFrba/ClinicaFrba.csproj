@@ -203,6 +203,12 @@
     <Compile Include="Registro Llegada\FormSeleccionarBono.Designer.cs">
       <DependentUpon>FormSeleccionarBono.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro resultado\FormEliminar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro resultado\FormEliminar.Designer.cs">
+      <DependentUpon>FormEliminar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro resultado\FormModificación.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada\FormSeleccionarBono.resx">
       <DependentUpon>FormSeleccionarBono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro resultado\FormEliminar.resx">
+      <DependentUpon>FormEliminar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro resultado\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>

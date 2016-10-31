@@ -24,29 +24,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         private void label1_Click(object sender, EventArgs e)
         {
 
-            conexion.Open();
-
-            consultarFecha();
-
-            conexion.Close();
-
-        }
-
-        private void consultarFecha()
-        {
-            String query = "SELECT Turn_Fecha FROM CHAMBA.Turnos t JOIN CHAMBA.Pacientes P ON "+
-                           "(p.Paci_Numero = t.Turn_Paciente) "
-                           +" WHERE pr.Paci_Numero = "+ Configuraciones.usuario;
-
-            SqlCommand listar = new SqlCommand(query, conexion);
-
-            DataTable tabla = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.SelectCommand = listar;
-            adapter.Fill(tabla);
-
-            comboBox2.DataSource = tabla;
-            comboBox2.DisplayMember = "Turn_Fecha";
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -66,12 +43,30 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-
+            conexion.Open();
+            SqlCommand cargar = new SqlCommand("CHAMBA.PacienteCancelaTurno", conexion);
+            cargar.CommandType = CommandType.StoredProcedure;
+            cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
+            cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = comboBox2.ValueMember;
+            conexion.Close();
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+           conexion.Open();
+           SqlCommand cargar = new SqlCommand("CHAMBA.TurnosCancelablesPorPaciente", conexion);
+           cargar.CommandType = CommandType.StoredProcedure;
+           cargar.Parameters.Add("@Paciente", SqlDbType.Decimal).Value = Configuraciones.usuario;
+           SqlDataAdapter adapter = new SqlDataAdapter(cargar);
+           DataTable table = new DataTable();
+           adapter.Fill(table);
 
+           comboBox2.DataSource = table;
+            comboBox2.ValueMember = "Turn_Numero";
+            comboBox2.DisplayMember = "Agen_Fecha";
+
+
+            conexion.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

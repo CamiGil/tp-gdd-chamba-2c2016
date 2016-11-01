@@ -49,7 +49,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                     guardar.CommandText = "ProfesionalCancelaTurno";
                     guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = dateTimePicker1.Value;
                     guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = dtpDesde.Value;
-                    guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = comboBox3.SelectedIndex;
+                    guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = decimal.Parse(comboBox3.SelectedValue.ToString());
                     guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
                     conexion.Close();
                     MessageBox.Show("Datos guardados exitosamente");

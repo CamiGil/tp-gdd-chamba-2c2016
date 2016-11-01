@@ -37,13 +37,9 @@ namespace ClinicaFrba.Registro_resultado
             {
                 MessageBox.Show("Seleccione el paciente");
             }
-            else if (textBox1.Text == "")
+            else if (textBox1.Text == "" && textBox2.Text == "")
             {
-                MessageBox.Show("Ingrese los sintomas");
-            }else if (textBox2.Text == "")
-            {
-                MessageBox.Show("Ingrese el diagnostico");
-
+                MessageBox.Show("Ingrese los sintomas o el diagnostico");
             }
             else
             {
@@ -51,7 +47,7 @@ namespace ClinicaFrba.Registro_resultado
                 SqlCommand guardarAtencion = new SqlCommand("CHAMBA.RegistrarAtencion", conexion);
                 guardarAtencion.CommandType = CommandType.StoredProcedure;
 
-                guardarAtencion.Parameters.Add("@IdTurno", SqlDbType.Decimal).Value = cboPlan.SelectedValue;
+                guardarAtencion.Parameters.Add("@IdTurno", SqlDbType.Decimal).Value = decimal.Parse(cboPlan.SelectedValue.ToString());
                 guardarAtencion.Parameters.Add("@Sintomas", SqlDbType.VarChar).Value = textBox1.Text;
                 guardarAtencion.Parameters.Add("@Diagnostico", SqlDbType.VarChar).Value = textBox2.Text;
 

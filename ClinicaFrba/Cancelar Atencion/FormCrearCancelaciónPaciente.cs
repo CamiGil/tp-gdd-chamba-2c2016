@@ -65,7 +65,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                     SqlCommand cargar = new SqlCommand("CHAMBA.PacienteCancelaTurno", conexion);
                     cargar.CommandType = CommandType.StoredProcedure;
                     cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
-                    cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = comboBox2.SelectedValue;
+                    cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = decimal.Parse(comboBox2.SelectedValue.ToString());
                     conexion.Close();
                     MessageBox.Show("Datos guardados exitosamente");
                     this.Close();

@@ -37,6 +37,7 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btnIniciar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,6 +111,7 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(209, 31);
             this.comboBox3.TabIndex = 95;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // textBox2
             // 
@@ -127,11 +129,25 @@
             this.textBox3.Size = new System.Drawing.Size(209, 30);
             this.textBox3.TabIndex = 97;
             // 
+            // btnIniciar
+            // 
+            this.btnIniciar.BackColor = System.Drawing.Color.MintCream;
+            this.btnIniciar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciar.Location = new System.Drawing.Point(155, 411);
+            this.btnIniciar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(190, 62);
+            this.btnIniciar.TabIndex = 98;
+            this.btnIniciar.Text = "Aceptar";
+            this.btnIniciar.UseVisualStyleBackColor = false;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
             // FormCrearCancelaciónProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 418);
+            this.ClientSize = new System.Drawing.Size(460, 484);
+            this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.comboBox3);
@@ -159,5 +175,6 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btnIniciar;
     }
 }

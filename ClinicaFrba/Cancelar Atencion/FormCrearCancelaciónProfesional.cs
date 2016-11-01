@@ -13,6 +13,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 {
     public partial class FormCrearCancelaciónProfesional : Form
     {
+        SqlConnection conexion;
         public FormCrearCancelaciónProfesional()
         {
             InitializeComponent();
@@ -44,7 +45,8 @@ namespace ClinicaFrba.Cancelar_Atencion
                 MessageBox.Show("Complete la fecha final");
             else
             {
-
+                conexion.Open();
+                conexion = new SqlConnection(@Configuraciones.datosConexion);
                 SqlCommand guardar;
                 guardar = new SqlCommand();
                 guardar.CommandType = CommandType.StoredProcedure;
@@ -54,6 +56,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                 guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = textBox3.Text;
                 guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = comboBox3.DataSource;
                 guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
+                conexion.Close();
             }
         }
     }

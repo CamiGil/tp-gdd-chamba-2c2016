@@ -44,6 +44,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             conexion.Open();
+            conexion = new SqlConnection(@Configuraciones.datosConexion);
             SqlCommand cargar = new SqlCommand("CHAMBA.PacienteCancelaTurno", conexion);
             cargar.CommandType = CommandType.StoredProcedure;
             cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
@@ -54,6 +55,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
            conexion.Open();
+           conexion = new SqlConnection(@Configuraciones.datosConexion);
            SqlCommand cargar = new SqlCommand("CHAMBA.TurnosCancelablesPorPaciente", conexion);
            cargar.CommandType = CommandType.StoredProcedure;
            cargar.Parameters.Add("@Paciente", SqlDbType.Decimal).Value = Configuraciones.usuario;

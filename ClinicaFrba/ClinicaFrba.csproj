@@ -203,12 +203,6 @@
     <Compile Include="Registro Llegada\FormSeleccionarBono.Designer.cs">
       <DependentUpon>FormSeleccionarBono.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro resultado\FormModificación.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro resultado\FormModificación.Designer.cs">
-      <DependentUpon>FormModificación.cs</DependentUpon>
-    </Compile>
     <Compile Include="Registro resultado\FormAlta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,9 +321,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registro resultado\FormAlta.resx">
       <DependentUpon>FormAlta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Registro resultado\FormModificación.resx">
-      <DependentUpon>FormModificación.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

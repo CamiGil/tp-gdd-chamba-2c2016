@@ -47,6 +47,7 @@ namespace ClinicaFrba.Registro_resultado
                 SqlCommand guardarAtencion = new SqlCommand("CHAMBA.RegistrarAtencion", conexion);
                 guardarAtencion.CommandType = CommandType.StoredProcedure;
 
+               MessageBox.Show(cboPlan.SelectedValue.ToString());
                 guardarAtencion.Parameters.Add("@IdTurno", SqlDbType.Decimal).Value = decimal.Parse(cboPlan.SelectedValue.ToString());
                 guardarAtencion.Parameters.Add("@Sintomas", SqlDbType.VarChar).Value = textBox1.Text;
                 guardarAtencion.Parameters.Add("@Diagnostico", SqlDbType.VarChar).Value = textBox2.Text;

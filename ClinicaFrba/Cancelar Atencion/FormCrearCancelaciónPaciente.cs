@@ -18,7 +18,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             InitializeComponent();
             conexion = new SqlConnection(@Configuraciones.datosConexion);
-            this.FormClosed += Configuraciones.validarCierreVentana;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -39,7 +38,6 @@ namespace ClinicaFrba.Cancelar_Atencion
         private void FormCrearCancelaciónPaciente_Load(object sender, EventArgs e)
         {
 
-            conexion = new SqlConnection(@Configuraciones.datosConexion);
             conexion.Open();
             
             SqlCommand cargar = new SqlCommand("CHAMBA.TurnosCancelablesPorPaciente", conexion);
@@ -59,12 +57,28 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            conexion.Open();
-            SqlCommand cargar = new SqlCommand("CHAMBA.PacienteCancelaTurno", conexion);
-            cargar.CommandType = CommandType.StoredProcedure;
-            cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
-            cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = comboBox2.ValueMember;
-            conexion.Close();
+            if (comboBox2.Text != "")
+            {
+                if (textBox1.Text != "")
+                {
+                    conexion.Open();
+                    SqlCommand cargar = new SqlCommand("CHAMBA.PacienteCancelaTurno", conexion);
+                    cargar.CommandType = CommandType.StoredProcedure;
+                    cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
+                    cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = comboBox2.SelectedValue;
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados exitosamente");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un motivo");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un turno");
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)

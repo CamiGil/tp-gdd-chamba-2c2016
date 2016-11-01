@@ -123,9 +123,37 @@ namespace ClinicaFrba
                     break;
                 case 6:
                     //ABRIR REGISTRO DE RESULTADOS
+                    Registro_resultado.FormAlta form6 = new Registro_resultado.FormAlta();
+                    form6.ShowDialog();
                     break;
                 case 7:
                     //ABRIR CANCELACION DE TURNOS
+                    conexion.Open();
+
+                    SqlCommand verificarPrivilegios = new SqlCommand("CHAMBA.EsAfiliado", conexion);
+
+                    verificarPrivilegios.CommandType = CommandType.StoredProcedure;
+                    verificarPrivilegios.Parameters.Add("@Usuario", SqlDbType.Decimal).Value = Configuraciones.usuario;
+                    verificarPrivilegios.Parameters.Add("@Rol", SqlDbType.Decimal).Value = Configuraciones.rol;
+
+                    var resultado = verificarPrivilegios.Parameters.Add("@Resultado", SqlDbType.Int);
+                    resultado.Direction = ParameterDirection.Output;
+
+                    SqlDataReader data = verificarPrivilegios.ExecuteReader();
+                    data.Close();
+
+                    if (int.Parse(resultado.Value.ToString()) == 1) // Es afiliado
+                    {
+                        Cancelar_Atencion.FormCrearCancelaciónPaciente form7 = new Cancelar_Atencion.FormCrearCancelaciónPaciente();
+                        form7.ShowDialog();
+                    }
+                    else
+                    {
+                        Cancelar_Atencion.FormCrearCancelaciónProfesional form7 = new Cancelar_Atencion.FormCrearCancelaciónProfesional();
+                        form7.ShowDialog();
+                    }
+
+                    conexion.Close();
                     break;
                 case 8:
                     //ABRIR ESTADISTICAS

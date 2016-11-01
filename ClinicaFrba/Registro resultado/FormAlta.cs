@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace ClinicaFrba.Registrar_Agenta_Medico
+namespace ClinicaFrba.Registro_resultado
 {
     public partial class FormAlta : Form
     {
@@ -33,15 +33,33 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            conexion.Open();
-            SqlCommand guardarAtencion = new SqlCommand("CHAMBA.RegistrarAtencion", conexion);
-            guardarAtencion.CommandType = CommandType.StoredProcedure;
+            if (cboPlan.Text == "")
+            {
+                MessageBox.Show("Seleccione el paciente");
+            }
+            else if (textBox1.Text == "")
+            {
+                MessageBox.Show("Ingrese los sintomas");
+            }else if (textBox2.Text == "")
+            {
+                MessageBox.Show("Ingrese el diagnostico");
 
-            guardarAtencion.Parameters.Add("@IdTurno", SqlDbType.Decimal).Value = cboPlan.ValueMember;
-            guardarAtencion.Parameters.Add("@Sintomas", SqlDbType.VarChar).Value = textBox1.Text;
-            guardarAtencion.Parameters.Add("@Diagnostico", SqlDbType.VarChar).Value = textBox2.Text;
+            }
+            else
+            {
+                conexion.Open();
+                SqlCommand guardarAtencion = new SqlCommand("CHAMBA.RegistrarAtencion", conexion);
+                guardarAtencion.CommandType = CommandType.StoredProcedure;
 
-            conexion.Close();
+                guardarAtencion.Parameters.Add("@IdTurno", SqlDbType.Decimal).Value = cboPlan.SelectedValue;
+                guardarAtencion.Parameters.Add("@Sintomas", SqlDbType.VarChar).Value = textBox1.Text;
+                guardarAtencion.Parameters.Add("@Diagnostico", SqlDbType.VarChar).Value = textBox2.Text;
+
+                conexion.Close();
+                MessageBox.Show("Datos guardados exitosamente");
+                this.Close();
+            }
+            
         }
 
         private void FormAlta_Load(object sender, EventArgs e)

@@ -17,6 +17,7 @@ namespace ClinicaFrba.Cancelar_Atencion
         public FormCrearCancelaciónProfesional()
         {
             InitializeComponent();
+            conexion = new SqlConnection(@Configuraciones.datosConexion);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -29,33 +30,49 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<Decimal> numeros = new List<Decimal>();
-            numeros.Add(0);
-            numeros.Add(1);
-            comboBox3.DataSource = numeros;
-        }
-
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-                conexion.Open();
-                conexion = new SqlConnection(@Configuraciones.datosConexion);
-                SqlCommand guardar;
-                guardar = new SqlCommand();
-                guardar.CommandType = CommandType.StoredProcedure;
+            if (comboBox3.Text != "")
+            {
+                if (textBox1.Text == "")
+                {
+                    MessageBox.Show("Ingrese un motivo");
+                }
+                else
+                {
+                    conexion.Open();
 
-                guardar.CommandText = "ProfesionalCancelaTurno";
-                guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = dateTimePicker1.Value.GetDateTimeFormats();
-                guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = dtpDesde.Value.GetDateTimeFormats();
-                guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = comboBox3.DataSource;
-                guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
-                conexion.Close();
+                    SqlCommand guardar;
+                    guardar = new SqlCommand();
+                    guardar.CommandType = CommandType.StoredProcedure;
+
+                    guardar.CommandText = "ProfesionalCancelaTurno";
+                    guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = dateTimePicker1.Value;
+                    guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = dtpDesde.Value;
+                    guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = comboBox3.SelectedIndex;
+                    guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
+                    conexion.Close();
+                    MessageBox.Show("Datos guardados exitosamente");
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione el tipo");
+            }
         }
 
         private void Calendario_DateChanged(object sender, DateRangeEventArgs e)
         {
 
+        }
+
+        private void FormCrearCancelaciónProfesional_Load(object sender, EventArgs e)
+        {
+            dtpDesde.MinDate = Configuraciones.fecha;
+            dtpDesde.Value = Configuraciones.fecha;
+            dateTimePicker1.MinDate = Configuraciones.fecha;
+            dateTimePicker1.Value = Configuraciones.fecha;
         }
     }
 }

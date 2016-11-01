@@ -102,34 +102,27 @@ namespace ClinicaFrba.Registro_Llegada
                 adapter.Fill(table);
                 dataGridView1.DataSource = table;
                 conexion.Close();
-
-                habilitarBotones();
             }
         }
 
-        private void habilitarBotones()
-        {
-            if (dataGridView1.SelectedRows.Count == 1)
-            {
-                btnRegistrar.Enabled = true;
-            }
-            else
-            {
-                btnRegistrar.Enabled = false;
-            }
-        }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            FormSeleccionarBono form = new FormSeleccionarBono();            
-            form.cargarBonos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));            
-            if (form.DialogResult == DialogResult.OK)
-                cargarTurnos();
+            if (dataGridView1.SelectedRows.Count == 1)
+            {
+                FormSeleccionarBono form = new FormSeleccionarBono();
+                form.cargarBonos(decimal.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+                if (form.DialogResult == DialogResult.OK)
+                    cargarTurnos();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un turno");
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            habilitarBotones();
         }
     }
 }

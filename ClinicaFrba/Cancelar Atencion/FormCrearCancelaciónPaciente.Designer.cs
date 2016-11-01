@@ -66,8 +66,8 @@
             this.comboBox2.Location = new System.Drawing.Point(160, 56);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(265, 31);
-            this.comboBox2.TabIndex = 87;
+            this.comboBox2.Size = new System.Drawing.Size(423, 31);
+            this.comboBox2.TabIndex = 0;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label5
@@ -84,21 +84,22 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(160, 123);
+            this.textBox1.MaxLength = 255;
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(423, 257);
-            this.textBox1.TabIndex = 93;
+            this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // btnIniciar
             // 
             this.btnIniciar.BackColor = System.Drawing.Color.MintCream;
             this.btnIniciar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciar.Location = new System.Drawing.Point(247, 424);
+            this.btnIniciar.Location = new System.Drawing.Point(217, 424);
             this.btnIniciar.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(190, 62);
-            this.btnIniciar.TabIndex = 94;
+            this.btnIniciar.TabIndex = 2;
             this.btnIniciar.Text = "Aceptar";
             this.btnIniciar.UseVisualStyleBackColor = false;
             this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
@@ -107,6 +108,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(625, 497);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.textBox1);

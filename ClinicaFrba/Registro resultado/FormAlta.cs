@@ -28,28 +28,12 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
 
         private void cboPlan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            conexion.Open();
-            conexion = new SqlConnection(@Configuraciones.datosConexion);
-            SqlCommand listarAfiliados = new SqlCommand("CHAMBA.PosiblesPacientes", conexion);
-            listarAfiliados.CommandType = CommandType.StoredProcedure;
-
-            listarAfiliados.Parameters.Add("@IdMedico",SqlDbType.Decimal).Value = Configuraciones.usuario;
-            listarAfiliados.Parameters.Add("@fecha",SqlDbType.DateTime).Value = Configuraciones.fecha;
-
-            SqlDataAdapter adapter = new SqlDataAdapter(listarAfiliados);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-
-            cboPlan.DataSource = table;
-            cboPlan.DisplayMember = "Usua_Nombre" + " , " + "Usua_apellido";
-            cboPlan.ValueMember = "Turn_Numero";
-            conexion.Close();
+            
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             conexion.Open();
-            conexion = new SqlConnection(@Configuraciones.datosConexion);
             SqlCommand guardarAtencion = new SqlCommand("CHAMBA.RegistrarAtencion", conexion);
             guardarAtencion.CommandType = CommandType.StoredProcedure;
 
@@ -57,6 +41,27 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             guardarAtencion.Parameters.Add("@Sintomas", SqlDbType.VarChar).Value = textBox1.Text;
             guardarAtencion.Parameters.Add("@Diagnostico", SqlDbType.VarChar).Value = textBox2.Text;
 
+            conexion.Close();
+        }
+
+        private void FormAlta_Load(object sender, EventArgs e)
+        {
+            conexion = new SqlConnection(@Configuraciones.datosConexion);
+            conexion.Open();
+
+            SqlCommand listarAfiliados = new SqlCommand("CHAMBA.PosiblesPacientes", conexion);
+            listarAfiliados.CommandType = CommandType.StoredProcedure;
+
+            listarAfiliados.Parameters.Add("@IdMedico", SqlDbType.Decimal).Value = Configuraciones.usuario;
+            listarAfiliados.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
+
+            SqlDataAdapter adapter = new SqlDataAdapter(listarAfiliados);
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            cboPlan.DataSource = table;
+            cboPlan.DisplayMember = "nombreUsuario";
+            cboPlan.ValueMember = "Turn_Numero";
             conexion.Close();
         }
     }

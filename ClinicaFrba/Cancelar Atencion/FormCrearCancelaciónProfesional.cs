@@ -39,12 +39,6 @@ namespace ClinicaFrba.Cancelar_Atencion
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            if(textBox2.Text== "")
-                MessageBox.Show("Complete la fecha inicial");
-            else if (textBox3.Text == "")
-                MessageBox.Show("Complete la fecha final");
-            else
-            {
                 conexion.Open();
                 conexion = new SqlConnection(@Configuraciones.datosConexion);
                 SqlCommand guardar;
@@ -52,12 +46,16 @@ namespace ClinicaFrba.Cancelar_Atencion
                 guardar.CommandType = CommandType.StoredProcedure;
 
                 guardar.CommandText = "ProfesionalCancelaTurno";
-                guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = textBox2.Text;
-                guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = textBox3.Text;
+                guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = dateTimePicker1.Value.GetDateTimeFormats();
+                guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = dtpDesde.Value.GetDateTimeFormats();
                 guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = comboBox3.DataSource;
                 guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
                 conexion.Close();
-            }
+        }
+
+        private void Calendario_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
         }
     }
 }

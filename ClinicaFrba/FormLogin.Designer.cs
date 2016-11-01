@@ -40,22 +40,22 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(281, 25);
+            this.label6.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(227, 25);
             this.label6.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(171, 39);
+            this.label6.Size = new System.Drawing.Size(173, 35);
             this.label6.TabIndex = 33;
-            this.label6.Text = "Bienvenido";
+            this.label6.Text = "Clínica FRBA";
             // 
             // btnIniciar
             // 
             this.btnIniciar.BackColor = System.Drawing.Color.MintCream;
             this.btnIniciar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciar.Location = new System.Drawing.Point(230, 257);
+            this.btnIniciar.Location = new System.Drawing.Point(198, 257);
             this.btnIniciar.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(272, 62);
+            this.btnIniciar.Size = new System.Drawing.Size(230, 58);
             this.btnIniciar.TabIndex = 2;
             this.btnIniciar.Text = "Iniciar sesion";
             this.btnIniciar.UseVisualStyleBackColor = false;
@@ -64,7 +64,7 @@
             // txtClave
             // 
             this.txtClave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtClave.Location = new System.Drawing.Point(318, 164);
+            this.txtClave.Location = new System.Drawing.Point(242, 164);
             this.txtClave.Margin = new System.Windows.Forms.Padding(2);
             this.txtClave.MaxLength = 255;
             this.txtClave.Name = "txtClave";
@@ -75,7 +75,7 @@
             // txtUsuario
             // 
             this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsuario.Location = new System.Drawing.Point(318, 100);
+            this.txtUsuario.Location = new System.Drawing.Point(242, 100);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsuario.MaxLength = 255;
             this.txtUsuario.Name = "txtUsuario";
@@ -86,23 +86,23 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(162, 159);
+            this.label3.Location = new System.Drawing.Point(131, 164);
             this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 29);
+            this.label3.Size = new System.Drawing.Size(70, 29);
             this.label3.TabIndex = 28;
-            this.label3.Text = "Password";
+            this.label3.Text = "Clave";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(162, 95);
+            this.label2.Location = new System.Drawing.Point(131, 100);
             this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 29);
+            this.label2.Size = new System.Drawing.Size(69, 29);
             this.label2.TabIndex = 27;
-            this.label2.Text = "Username";
+            this.label2.Text = "Email";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblResultado
@@ -112,7 +112,7 @@
             this.lblResultado.Location = new System.Drawing.Point(10, 212);
             this.lblResultado.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(712, 29);
+            this.lblResultado.Size = new System.Drawing.Size(607, 29);
             this.lblResultado.TabIndex = 36;
             this.lblResultado.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblResultado.Click += new System.EventHandler(this.lblResultado_Click);
@@ -123,7 +123,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(732, 345);
+            this.ClientSize = new System.Drawing.Size(627, 345);
             this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnIniciar);

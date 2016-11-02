@@ -43,6 +43,7 @@ namespace ClinicaFrba.Cancelar_Atencion
             SqlCommand cargar = new SqlCommand("CHAMBA.TurnosCancelablesPorPaciente", conexion);
             cargar.CommandType = CommandType.StoredProcedure;
             cargar.Parameters.Add("@Paciente", SqlDbType.Decimal).Value = Configuraciones.usuario;
+            cargar.Parameters.Add("@Fecha", SqlDbType.DateTime).Value = Configuraciones.fecha;
             SqlDataAdapter adapter = new SqlDataAdapter(cargar);
             DataTable table = new DataTable();
             adapter.Fill(table);
@@ -66,6 +67,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                     cargar.CommandType = CommandType.StoredProcedure;
                     cargar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
                     cargar.Parameters.Add("@Turno", SqlDbType.Decimal).Value = decimal.Parse(comboBox2.SelectedValue.ToString());
+                    cargar.ExecuteNonQuery();
                     conexion.Close();
                     MessageBox.Show("Datos guardados exitosamente");
                     this.Close();

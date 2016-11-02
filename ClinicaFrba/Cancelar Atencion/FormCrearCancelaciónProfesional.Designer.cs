@@ -54,7 +54,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label2.Location = new System.Drawing.Point(2, 42);
+            this.label2.Location = new System.Drawing.Point(2, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 33);
             this.label2.TabIndex = 4;
@@ -65,7 +65,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label3.Location = new System.Drawing.Point(2, 80);
+            this.label3.Location = new System.Drawing.Point(2, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(148, 33);
             this.label3.TabIndex = 5;
@@ -76,7 +76,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label4.Location = new System.Drawing.Point(2, 118);
+            this.label4.Location = new System.Drawing.Point(2, 144);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 33);
             this.label4.TabIndex = 91;
@@ -86,7 +86,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label5.Location = new System.Drawing.Point(2, 167);
+            this.label5.Location = new System.Drawing.Point(2, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 33);
             this.label5.TabIndex = 92;
@@ -95,11 +95,11 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(182, 154);
+            this.textBox1.Location = new System.Drawing.Point(182, 196);
             this.textBox1.MaxLength = 255;
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(182, 285);
+            this.textBox1.Size = new System.Drawing.Size(182, 231);
             this.textBox1.TabIndex = 3;
             // 
             // comboBox3
@@ -108,10 +108,10 @@
             this.comboBox3.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.comboBox3.Location = new System.Drawing.Point(182, 118);
+            "Personal",
+            "Programada",
+            "Vacaciones"});
+            this.comboBox3.Location = new System.Drawing.Point(182, 149);
             this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(182, 31);
@@ -121,10 +121,10 @@
             // 
             this.btnIniciar.BackColor = System.Drawing.Color.MintCream;
             this.btnIniciar.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciar.Location = new System.Drawing.Point(95, 453);
+            this.btnIniciar.Location = new System.Drawing.Point(95, 466);
             this.btnIniciar.Margin = new System.Windows.Forms.Padding(2);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(190, 62);
+            this.btnIniciar.Size = new System.Drawing.Size(190, 49);
             this.btnIniciar.TabIndex = 4;
             this.btnIniciar.Text = "Aceptar";
             this.btnIniciar.UseVisualStyleBackColor = false;
@@ -134,7 +134,7 @@
             // 
             this.dtpDesde.CalendarFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(182, 90);
+            this.dtpDesde.Location = new System.Drawing.Point(182, 116);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(182, 20);
             this.dtpDesde.TabIndex = 1;
@@ -143,7 +143,7 @@
             // 
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(182, 52);
+            this.dateTimePicker1.Location = new System.Drawing.Point(182, 78);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(182, 20);
             this.dateTimePicker1.TabIndex = 0;

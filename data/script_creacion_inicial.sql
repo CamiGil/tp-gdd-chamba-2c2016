@@ -1243,7 +1243,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [CHAMBA].[Bonos](
 	[Bono_Numero] [numeric](18, 0) NOT NULL,
-	[Bono_Estado] [numeric](3, 0) NULL,
 	[Bono_Paciente_Uso] [numeric](18, 0) NULL,
 	[Bono_Turno_Uso] [numeric](18, 0) NULL,
 	[Bono_Compra] [numeric](18, 0) NULL,

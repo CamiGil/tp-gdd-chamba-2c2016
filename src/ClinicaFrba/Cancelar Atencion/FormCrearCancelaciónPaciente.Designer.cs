@@ -34,6 +34,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnIniciar = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +76,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label5.Location = new System.Drawing.Point(28, 123);
+            this.label5.Location = new System.Drawing.Point(28, 151);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 33);
             this.label5.TabIndex = 91;
@@ -83,11 +85,11 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(160, 123);
+            this.textBox1.Location = new System.Drawing.Point(160, 156);
             this.textBox1.MaxLength = 255;
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(423, 257);
+            this.textBox1.Size = new System.Drawing.Size(423, 224);
             this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -104,12 +106,39 @@
             this.btnIniciar.UseVisualStyleBackColor = false;
             this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
             // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "Personal",
+            "Programada",
+            "Vacaciones"});
+            this.comboBox3.Location = new System.Drawing.Point(160, 107);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(423, 31);
+            this.comboBox3.TabIndex = 92;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 20F);
+            this.label4.Location = new System.Drawing.Point(28, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 33);
+            this.label4.TabIndex = 93;
+            this.label4.Text = "Tipo : ";
+            // 
             // FormCrearCancelaciónPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(625, 497);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
@@ -132,5 +161,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label4;
     }
 }

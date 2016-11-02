@@ -140,7 +140,7 @@ namespace ClinicaFrba.Pedir_Turno
             Nombre_profesional.Clear();
             Apellido_profesional.Clear();
         }
-        /*-------------------------------------------NO RELEVANTES--------------------------------------------*/
+
         private void lblNombre_Click(object sender, EventArgs e)
         {
 

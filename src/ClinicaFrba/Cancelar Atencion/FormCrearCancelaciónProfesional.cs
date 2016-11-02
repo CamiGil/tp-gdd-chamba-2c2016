@@ -52,7 +52,7 @@ namespace ClinicaFrba.Cancelar_Atencion
                     guardar.CommandType = CommandType.StoredProcedure;
                     guardar.Parameters.Add("@FechaInicial", SqlDbType.DateTime).Value = dateTimePicker1.Value;
                     guardar.Parameters.Add("@FechaFinal", SqlDbType.DateTime).Value = dtpDesde.Value;
-                    guardar.Parameters.Add("@Tipo", SqlDbType.Decimal).Value = decimal.Parse(comboBox3.SelectedIndex.ToString());
+                    guardar.Parameters.Add("@Tipo", SqlDbType.Int).Value = comboBox3.SelectedIndex;
                     guardar.Parameters.Add("@Profesional", SqlDbType.Decimal).Value = Configuraciones.usuario;
                     guardar.Parameters.Add("@Motivo", SqlDbType.VarChar).Value = textBox1.Text;
                     guardar.ExecuteNonQuery();

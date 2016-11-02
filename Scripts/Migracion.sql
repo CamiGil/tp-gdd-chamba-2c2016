@@ -1,30 +1,7 @@
-DELETE FROM CHAMBA.Bonos
-DELETE FROM CHAMBA.Cambio_Plan
-DELETE FROM CHAMBA.Compra_Bonos
-DBCC CHECKIDENT ('CHAMBA.Compra_Bonos', RESEED, 0)
-GO
-DELETE FROM CHAMBA.Consultas
-DELETE FROM CHAMBA.Funcionalidad_X_Rol
-DELETE FROM CHAMBA.Funcionalidades
-DELETE FROM CHAMBA.Rol_X_Usuario
-DELETE FROM CHAMBA.Roles
-DBCC CHECKIDENT ('CHAMBA.Roles', RESEED, 0)
-GO
-DELETE FROM CHAMBA.Tipo_Especialidad_X_Profesional
-DELETE FROM CHAMBA.Turnos
-DELETE FROM CHAMBA.Agenda
-DBCC CHECKIDENT ('CHAMBA.Agenda', RESEED, 0)
-GO
-DELETE FROM CHAMBA.Cancelaciones
-DELETE FROM CHAMBA.Pacientes
-DELETE FROM CHAMBA.Profesionales
-DELETE FROM CHAMBA.Planes
-DELETE FROM CHAMBA.Usuarios
-DBCC CHECKIDENT ('CHAMBA.Usuarios', RESEED, 0)
-GO
-DELETE FROM CHAMBA.Tipo_Especialidad
-DELETE FROM CHAMBA.Especialidades
+CREATE PROCEDURE CHAMBA.Migracion 
 
+AS
+BEGIN
 
 /* CREACION DE ROLES */
 
@@ -40,7 +17,7 @@ INSERT INTO CHAMBA.Funcionalidades (Func_Id, Func_Descripcion) VALUES (1, 'Gesti
 /* ASIGNACION DE FUNCIONALIDADES A ROLES*/
 DECLARE @Rol numeric(18,0) = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Administrativo')
 
-INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 3), (@Rol, 5), (@Rol, 8)
+INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 1), (@Rol, 2), (@Rol, 3), (@Rol, 4), (@Rol, 5), (@Rol, 6), (@Rol, 7), (@Rol, 8), (@Rol, 9)
 
 SET @Rol = (SELECT Rol_Id FROM CHAMBA.Roles WHERE Rol_Nombre = 'Profesional')
 INSERT INTO CHAMBA.Funcionalidad_X_Rol (Func_X_Rol_Rol, Func_X_Rol_Funcionalidad) VALUES (@Rol, 6), (@Rol, 7), (@Rol, 9)
@@ -200,3 +177,7 @@ UPDATE CHAMBA.Bonos SET Bono_Turno_Uso = i.Turno_Numero, Bono_Paciente_Uso = (SE
 FROM 
 	(SELECT Turno_Numero, Paciente_DNI, Bono_Consulta_Numero FROM gd_esquema.Maestra) AS i 
 WHERE CHAMBA.Bonos.Bono_Numero = i.Bono_Consulta_Numero 
+
+END
+GO
+EXEC CHAMBA.Migracion

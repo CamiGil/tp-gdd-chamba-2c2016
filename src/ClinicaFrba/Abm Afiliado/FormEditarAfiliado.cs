@@ -130,15 +130,45 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (camposCompletos())
             {
-                this.DialogResult = DialogResult.OK;
-                if (this.Tag.ToString() != "Hijo" && this.Tag.ToString() != "Conyuge")
+
+                if (existeEmail())
                 {
-                    guardarDatos();
-                    MessageBox.Show("Datos guardados exitosamente");
-                    this.Close();
+                    MessageBox.Show("El email ya se encuentra en uso por otro usuario");
+                }
+                else
+                { 
+
+                    this.DialogResult = DialogResult.OK;
+                    if (this.Tag.ToString() != "Hijo" && this.Tag.ToString() != "Conyuge")
+                    {
+                        guardarDatos();
+                        MessageBox.Show("Datos guardados exitosamente");
+                        this.Close();
+                    }
                 }
                 
             }
+        }
+
+        private bool existeEmail()
+        {
+            conexion.Open();
+            String query = "SELECT Usua_Id FROM CHAMBA.Usuarios JOIN CHAMBA.Pacientes ON Paci_Usuario = Usua_Id WHERE Usua_Mail = '" + txtEmail.Text + "' AND Paci_Numero <> '"+ afiliado +"'";
+
+            SqlCommand listar = new SqlCommand(query, conexion);
+
+            DataTable tabla = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = listar;
+            adapter.Fill(tabla);
+            conexion.Close();
+            if (tabla.Rows.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+
         }
 
         public SqlCommand generarComandoSQL()

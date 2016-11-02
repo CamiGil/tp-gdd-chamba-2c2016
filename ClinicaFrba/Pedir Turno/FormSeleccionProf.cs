@@ -28,7 +28,7 @@ namespace ClinicaFrba.Pedir_Turno
         /*-------------------------------------------ACEPTAR-------------------------------------------------*/
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Info.SelectedRows == null)
+            if (Info.SelectedRows.Count != 1)
             {
                 MessageBox.Show("Seleccione la fila que contiene los datos requeridos");
             }

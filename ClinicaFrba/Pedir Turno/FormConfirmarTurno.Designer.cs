@@ -67,6 +67,7 @@
             this.Calendario.MaxSelectionCount = 1;
             this.Calendario.Name = "Calendario";
             this.Calendario.TabIndex = 0;
+            this.Calendario.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.Calendario_DateChanged);
             // 
             // Aceptar
             // 

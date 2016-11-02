@@ -142,11 +142,15 @@ namespace ClinicaFrba.Pedir_Turno
         {
             this.Close();
         }
-
-        /*-------------------------------------------NO RELEVANTES--------------------------------------------*/
+        
         private void label1_Click(object sender, EventArgs e)
         {
 
-        }        
+        }
+
+        private void Calendario_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            Info.DataSource = null;
+        }
     }
 }

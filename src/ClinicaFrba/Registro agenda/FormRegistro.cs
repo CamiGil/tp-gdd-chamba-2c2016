@@ -62,6 +62,7 @@ namespace ClinicaFrba.Registro_agenda
                 else
                 {
                     conexion.Open();
+                    int i = 0;
                     DateTime fecha = dtpDesde.Value;
                     while (fecha <= dtpHasta.Value)
                     {
@@ -72,7 +73,7 @@ namespace ClinicaFrba.Registro_agenda
                             DateTime horarioInicio = new DateTime(fecha.Year,fecha.Month,fecha.Day, int.Parse(registro.SubItems[1].Text), int.Parse(registro.SubItems[2].Text),0);
                             DateTime horarioFin = new DateTime(fecha.Year, fecha.Month, fecha.Day, int.Parse(registro.SubItems[3].Text), int.Parse(registro.SubItems[4].Text),0);
 
-                            while (horarioInicio <= horarioFin)
+                            while (horarioInicio < horarioFin)
                             {
                                 SqlCommand crearAgenda = new SqlCommand("CHAMBA.AGREGAR_DISPONIBILIDAD_EN_AGENDA", conexion);
 
@@ -83,13 +84,14 @@ namespace ClinicaFrba.Registro_agenda
 
                                 crearAgenda.ExecuteNonQuery();
                                 horarioInicio = horarioInicio.AddMinutes(30);
+                                i++;
                             }                            
                         }
 
                         fecha = fecha.AddDays(1);
                     }
                     conexion.Close();
-                    MessageBox.Show("Agenda registrada exitosamente");
+                    MessageBox.Show("Agenda registrada exitosamente. Turnos agregados: "+i);
                     this.Close();
                 }
             }

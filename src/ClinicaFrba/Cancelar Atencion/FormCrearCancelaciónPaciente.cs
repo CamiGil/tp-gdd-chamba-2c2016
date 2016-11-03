@@ -50,7 +50,7 @@ namespace ClinicaFrba.Cancelar_Atencion
 
             comboBox2.DataSource = table;
             comboBox2.ValueMember = "Turn_Numero";
-            comboBox2.DisplayMember = "Agen_Fecha";
+            comboBox2.DisplayMember = "Turno";
 
 
             conexion.Close();

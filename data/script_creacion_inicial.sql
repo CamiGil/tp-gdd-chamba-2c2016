@@ -201,7 +201,7 @@ IF (@Profesional = 0)
 	LEFT JOIN CHAMBA.Consultas ON Cons_Turno = Turn_Numero
 	WHERE DAY(Agen_Fecha) = DAY(@Fecha) AND MONTH(Agen_Fecha) = MONTH(@Fecha) AND YEAR(Agen_Fecha) = YEAR(@Fecha) 
 	AND Turn_Cancelado IS NULL
-	And Agen_Cancelado IS NOT NULL
+	AND Agen_Cancelado IS NULL
 	AND Agen_Especialidad = @Especialidad
 	AND Turn_Fecha_Llegada IS NULL
 	AND Cons_Sintoma IS NULL AND Cons_Diagnostico IS NULL
@@ -221,7 +221,7 @@ ELSE
 	LEFT JOIN CHAMBA.Consultas ON Cons_Turno = Turn_Numero
 	WHERE DAY(Agen_Fecha) = DAY(@Fecha) AND MONTH(Agen_Fecha) = MONTH(@Fecha) AND YEAR(Agen_Fecha) = YEAR(@Fecha) 
 	AND Turn_Cancelado IS NULL
-	And Agen_Cancelado IS NOT NULL
+	AND Agen_Cancelado IS NULL
 	AND Agen_Especialidad = @Especialidad
 	AND Turn_Fecha_Llegada IS NULL
 	AND Agen_Profesional = @Profesional
@@ -1166,11 +1166,12 @@ GO
 CREATE PROCEDURE [CHAMBA].[TurnosCancelablesPorPaciente] ( @Paciente numeric (18,0), @Fecha datetime)
 AS
 BEGIN
-	SELECT A.Agen_Fecha, T.Turn_Numero
+	SELECT CONVERT(varchar(10), A.Agen_Fecha, 103) + ' ' + CONVERT(varchar(5), A.Agen_Fecha, 108) + ' - ' + Espe_Descripcion AS Turno, T.Turn_Numero
 	FROM CHAMBA.Turnos T 
 	JOIN CHAMBA.Agenda A ON(A.Agen_Id = T.Turn_Agenda)
+	JOIN CHAMBA.Especialidades ON Espe_Codigo = A.Agen_Especialidad
 	WHERE T.Turn_Paciente = @Paciente
-	AND dateadd(DAY, 1, A.Agen_Fecha) > @Fecha
+	AND dateadd(DAY, -1, A.Agen_Fecha) >= @Fecha
 	And T.Turn_Cancelado IS NULL
 	And A.Agen_Cancelado IS NULL
 	ORDER BY A.Agen_Fecha

@@ -13,7 +13,7 @@ namespace ClinicaFrba.Abm_Afiliado
 {
     public partial class FormEditarAfiliado : Form
     {
-
+        Validacion v = new Validacion();
         SqlConnection conexion;
         decimal afiliado;
         List<FormEditarAfiliado> afiliadosAsociados = new List<FormEditarAfiliado>();
@@ -370,6 +370,41 @@ namespace ClinicaFrba.Abm_Afiliado
         private void btnCancelar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
+        }
+
+        private void txtDocumento_KeyUp(object sender, KeyEventArgs e)
+        {
+       
+        }
+
+        private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloNumeros(e);
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloNumeros(e);
         }
     }
 }

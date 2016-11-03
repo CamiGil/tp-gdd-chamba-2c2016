@@ -14,6 +14,8 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class FormAfiliados : Form
     {
         SqlConnection conexion;
+        Validacion v = new Validacion();
+
         public FormAfiliados()
         {
             InitializeComponent();
@@ -125,5 +127,40 @@ namespace ClinicaFrba.Abm_Afiliado
         {
 
         }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
+        }
+
+        private void txtAfiliado_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtAfiliado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloNumeros(e);
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloNumeros(e);
+        }
+
     }
 }

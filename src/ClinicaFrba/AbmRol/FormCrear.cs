@@ -13,6 +13,7 @@ namespace ClinicaFrba.AbmRol
 {
     public partial class FormCrear : Form
     {
+        Validacion v = new Validacion();
         SqlConnection conexion;
         SqlCommand cargarFuncionalidades, existeRol, crearRolNuevo, RolId, FuncId, asignarFunc;
         SqlDataReader data;
@@ -191,6 +192,16 @@ namespace ClinicaFrba.AbmRol
             listBox2.Items.Remove(listBox2.SelectedItem);
 
             funcion.Remove(text);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
         }
     }
 }

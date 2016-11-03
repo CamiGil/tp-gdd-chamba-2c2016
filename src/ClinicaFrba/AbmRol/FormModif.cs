@@ -13,6 +13,7 @@ namespace ClinicaFrba.AbmRol
 {
     public partial class FormModif : Form
     {
+        Validacion v = new Validacion();
         SqlConnection conexion;
         SqlCommand cargarRoles, habilitado, funcPorRol, existeRol, cambiarNombre, idRol, idFunc, eliminarFunc, asignarFunc, cargarFunc, habilitar;
         SqlDataReader data;
@@ -318,6 +319,16 @@ namespace ClinicaFrba.AbmRol
             button4.Visible = false;
             button2.Visible = false;
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+  
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
         }
 
 

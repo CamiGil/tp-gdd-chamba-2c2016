@@ -215,6 +215,7 @@
     <Compile Include="Registro Llegada\FormRegistroLlegada.Designer.cs">
       <DependentUpon>FormRegistroLlegada.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validacion.cs" />
     <EmbeddedResource Include="Abm Afiliado\FormAfiliados.resx">
       <DependentUpon>FormAfiliados.cs</DependentUpon>
       <SubType>Designer</SubType>

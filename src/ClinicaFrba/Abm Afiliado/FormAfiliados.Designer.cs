@@ -102,6 +102,8 @@
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(182, 23);
             this.txtDni.TabIndex = 4;
+            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
+            this.txtDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDni_KeyPress);
             // 
             // label1
             // 
@@ -123,6 +125,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(182, 23);
             this.txtApellido.TabIndex = 1;
+            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // txtAfiliado
             // 
@@ -133,6 +136,8 @@
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.Size = new System.Drawing.Size(182, 23);
             this.txtAfiliado.TabIndex = 2;
+            this.txtAfiliado.TextChanged += new System.EventHandler(this.txtAfiliado_TextChanged);
+            this.txtAfiliado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAfiliado_KeyPress);
             // 
             // txtNombre
             // 
@@ -143,6 +148,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(182, 23);
             this.txtNombre.TabIndex = 0;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // label2
             // 

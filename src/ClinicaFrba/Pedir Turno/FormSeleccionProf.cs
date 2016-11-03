@@ -14,8 +14,9 @@ namespace ClinicaFrba.Pedir_Turno
     public partial class FormSeleccionProf : Form
     {
         /*-------------------------------------------ATRIBUTOS-----------------------------------------------*/
+        Validacion v = new Validacion();
         private SqlConnection conexion;
-        private string tipo_busqueda;
+       /* private string tipo_busqueda;*/
 
         /*-------------------------------------------CONSTRUCTOR---------------------------------------------*/
         public FormSeleccionProf()
@@ -165,6 +166,16 @@ namespace ClinicaFrba.Pedir_Turno
         private void FormSeleccionProf_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Nombre_profesional_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
+        }
+
+        private void Apellido_profesional_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloLetras(e);
         }
     }
 }

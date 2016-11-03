@@ -87,6 +87,7 @@
             this.Nombre_profesional.Name = "Nombre_profesional";
             this.Nombre_profesional.Size = new System.Drawing.Size(182, 23);
             this.Nombre_profesional.TabIndex = 1;
+            this.Nombre_profesional.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Nombre_profesional_KeyPress);
             // 
             // Apellido_profesional
             // 
@@ -97,6 +98,7 @@
             this.Apellido_profesional.Name = "Apellido_profesional";
             this.Apellido_profesional.Size = new System.Drawing.Size(182, 23);
             this.Apellido_profesional.TabIndex = 2;
+            this.Apellido_profesional.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Apellido_profesional_KeyPress);
             // 
             // Especialidades_profesional
             // 

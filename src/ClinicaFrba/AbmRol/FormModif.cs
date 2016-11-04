@@ -17,8 +17,8 @@ namespace ClinicaFrba.AbmRol
         SqlConnection conexion;
         SqlCommand cargarRoles, habilitado, funcPorRol, existeRol, cambiarNombre, idRol, idFunc, eliminarFunc, asignarFunc, cargarFunc, habilitar;
         SqlDataReader data;
-        List<String> funcion = new List<String>();
-        List<String> funcionesViejas = new List<String>();
+        List<String> funcionalidades = new List<String>();
+        List<String> funcionalidadesViejas = new List<String>();
         string rol;
 
         public FormModif()
@@ -30,7 +30,7 @@ namespace ClinicaFrba.AbmRol
         {
             conexion = new SqlConnection(@Configuraciones.datosConexion);
             conexion.Open();
-
+            /*Cargo los roles existentes*/
             cargarRoles = new SqlCommand("CHAMBA.CargarRoles", conexion);
             cargarRoles.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter adapter = new SqlDataAdapter(cargarRoles);
@@ -46,6 +46,7 @@ namespace ClinicaFrba.AbmRol
 
         private void button1_Click(object sender, EventArgs e)
         {
+            /*Una vez elegido el rol, muestro componentes*/
             rol = comboBox2.Text.ToString();
             int habilitado = estaHabilitado(rol);
             if (habilitado == 0)
@@ -65,6 +66,8 @@ namespace ClinicaFrba.AbmRol
             cargarFuncionalidadesPorRol(rol);
         }
 
+        /*Funcion que recibe el nombre de un rol y retorna si su estado es 1 o 0
+         * Siendo 1 habilitado, 0 deshabilitado*/
         private int estaHabilitado(String rol)
         {
             conexion.Open();
@@ -83,12 +86,11 @@ namespace ClinicaFrba.AbmRol
 
         private void cargarFuncionalidadesPorRol(String rol)
         {
-
+            /*Cargo las funcionalidades*/
             List<String> funcionalidades = new List<string>();
             listBox2.Items.Clear();
-            funcionesViejas.Clear();
+            funcionalidadesViejas.Clear();
             funcionalidades.Clear();
-            funcion.Clear();
             conexion.Open();
             funcPorRol = new SqlCommand("CHAMBA.FuncionalidadesPorRol", conexion);
 
@@ -104,20 +106,16 @@ namespace ClinicaFrba.AbmRol
             }
 
 
-
             listBox2.Items.AddRange(funcionalidades.ToArray());
             reader.Close();
-
             listBox2.DisplayMember = "Func_Descripcion";
             conexion.Close();
 
             for (int i = 0; i < listBox2.Items.Count; i++)
             {
-
                 string text = listBox2.GetItemText(listBox2.Items[i]);
-
-                funcion.Add(text);
-                funcionesViejas.Add(text);
+                funcionalidades.Add(text);
+                funcionalidadesViejas.Add(text);
             }
 
         }
@@ -135,6 +133,7 @@ namespace ClinicaFrba.AbmRol
 
             else
             {
+                /*Verifico nombre repetido*/
                 conexion.Open();
                 existeRol = new SqlCommand("CHAMBA.ExisteRol", conexion);
                 existeRol.CommandType = CommandType.StoredProcedure;
@@ -161,7 +160,7 @@ namespace ClinicaFrba.AbmRol
 
         private void modificarRol()
         {
-
+            /* Hago un update a la base de datos con las modificaciones*/
             conexion.Open();
             cambiarNombre = new SqlCommand("Chamba.ModificarNombreRol", conexion);
             cambiarNombre.CommandType = CommandType.StoredProcedure;
@@ -191,12 +190,12 @@ namespace ClinicaFrba.AbmRol
             List<decimal> ids = new List<decimal>();
 
 
-            for (int i = 0; i < funcion.Count(); i++)
+            for (int i = 0; i < funcionalidades.Count(); i++)
             {
                 conexion.Open();
                 idFunc = new SqlCommand("CHAMBA.ObtenerFuncionalidadId", conexion);
                 idFunc.CommandType = CommandType.StoredProcedure;
-                idFunc.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = funcion.ElementAt(i).ToString();
+                idFunc.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = funcionalidades.ElementAt(i).ToString();
                 var resultado2 = idFunc.Parameters.Add("@Valor", SqlDbType.Decimal);
                 resultado2.Direction = ParameterDirection.ReturnValue;
                 data = idFunc.ExecuteReader();
@@ -231,6 +230,7 @@ namespace ClinicaFrba.AbmRol
 
         private void cargarFuncionalidades()
         {
+            /*Listo las funcionaliades disponibles en el listbox1*/
             conexion.Open();
             cargarFunc = new SqlCommand("CHAMBA.CargarFuncionalidades", conexion);
             cargarFunc.CommandType = CommandType.StoredProcedure;
@@ -246,8 +246,8 @@ namespace ClinicaFrba.AbmRol
         private void button3_Click(object sender, EventArgs e)
         {
             string text = listBox1.GetItemText(listBox1.SelectedItem);
-
-            if (funcion.Contains(text))
+            /*Valido func repetidas*/
+            if (funcionalidades.Contains(text))
             {
 
                 String mensaje = "Esta funcionalidad ya ha sido ingresada";
@@ -261,7 +261,7 @@ namespace ClinicaFrba.AbmRol
                 listBox2.DisplayMember = "Func_Descripcion";
                 listBox2.Items.Add((DataRowView)listBox1.SelectedItem);
 
-                funcion.Add(text);
+                funcionalidades.Add(text);
 
             }
         }
@@ -271,9 +271,11 @@ namespace ClinicaFrba.AbmRol
             string text = listBox2.GetItemText(listBox2.SelectedItem);
             listBox2.Items.Remove(listBox2.SelectedItem);
 
-            funcion.Remove(text);
+            funcionalidades.Remove(text);
         }
 
+        /*Boton Habilitar
+         * Cambia el estado de un rol a activo (1)*/
         private void button6_Click(object sender, EventArgs e)
         {
             conexion.Open();

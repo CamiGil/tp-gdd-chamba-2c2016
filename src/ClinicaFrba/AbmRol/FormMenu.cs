@@ -12,10 +12,10 @@ namespace ClinicaFrba.AbmRol
 {
     public partial class FormMenu : Form
     {
+        /*Formulario principal para navegar*/
         AbmRol.FormCrear crearRol = new AbmRol.FormCrear();
         AbmRol.FormModif modificarRol = new AbmRol.FormModif();
-        AbmRol.FormElim eliminarRol = new AbmRol.FormElim();
-
+       
         public FormMenu()
         {
             InitializeComponent();
@@ -41,6 +41,7 @@ namespace ClinicaFrba.AbmRol
         private void button2_Click(object sender, EventArgs e)
         {
 
+            AbmRol.FormElim eliminarRol = new AbmRol.FormElim(); 
             eliminarRol.ShowDialog();
         }
     }

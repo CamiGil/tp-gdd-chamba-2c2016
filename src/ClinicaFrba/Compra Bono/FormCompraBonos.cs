@@ -15,6 +15,7 @@ namespace ClinicaFrba.Compra_Bono
     {
 
         SqlConnection conexion;
+        Validacion v = new Validacion();
         public FormCompraBonos()
         {
             InitializeComponent();
@@ -99,6 +100,11 @@ namespace ClinicaFrba.Compra_Bono
             adapter.Fill(tabla);
 
             return tabla.Rows[0]["Paci_Numero"].ToString();
+        }
+
+        private void txtAfiliado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            v.soloNumeros(e);
         }
     }
 }

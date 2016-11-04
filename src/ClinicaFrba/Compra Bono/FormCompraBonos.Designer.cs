@@ -78,6 +78,7 @@
             this.txtAfiliado.Name = "txtAfiliado";
             this.txtAfiliado.Size = new System.Drawing.Size(182, 23);
             this.txtAfiliado.TabIndex = 0;
+            this.txtAfiliado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAfiliado_KeyPress);
             // 
             // lblNombre
             // 
@@ -85,9 +86,9 @@
             this.lblNombre.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombre.Location = new System.Drawing.Point(18, 12);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(69, 19);
+            this.lblNombre.Size = new System.Drawing.Size(105, 19);
             this.lblNombre.TabIndex = 22;
-            this.lblNombre.Text = "Afiliado:";
+            this.lblNombre.Text = "Nro. Afiliado:";
             // 
             // btnCancelar
             // 
